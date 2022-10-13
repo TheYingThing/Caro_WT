@@ -8,16 +8,11 @@ scalaVersion := "2.13.10"
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 libraryDependencies += guice
-libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
-libraryDependencies += "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.11.1"
-
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "htwg-konstanz.de.controllers._"
 
 // Adds additional packages into conf/routes
 // play.sbt.routes.RoutesKeys.routesImport += "htwg-konstanz.de.binders._"
 
-assemblyMergeStrategy in assembly := {
-  case PathList("reference.conf") => MergeStrategy.concat
-}
 

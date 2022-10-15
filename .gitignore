@@ -1,5 +1,8 @@
 logs
 target
+null
+board.xml
+board.json
 /.bsp
 /.idea
 /.idea_modules

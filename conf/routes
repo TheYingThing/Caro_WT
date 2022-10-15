@@ -5,6 +5,13 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index()
-
+GET     /first/:color               controllers.HomeController.put(color, row: Int ?= 9, col: Int ?=9)
+GET     /put/:color/:row/:col       controllers.HomeController.put(color: String,row: Int,col: Int)
+GET     /undo                       controllers.HomeController.undo()
+GET     /redo                       controllers.HomeController.redo()
+GET     /save                       controllers.HomeController.save()
+GET     /load                       controllers.HomeController.load()
+GET     /player1/:name              controllers.HomeController.player1(name)
+GET     /player2/:name              controllers.HomeController.player2(name)
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

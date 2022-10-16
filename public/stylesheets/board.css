@@ -1,0 +1,23 @@
+* {
+    background-color: #303030;
+    color: white;
+    font-family: Tahoma, Arial, sans-serif;
+}
+.board-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.header {
+    text-align: center;
+}
+
+.tile-combo {
+    padding: 5px;
+}
+
+.player {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 20%;
+}

@@ -23,7 +23,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    * a path of `/`.
    */
   def index(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok(controller.boardToString)
+    Ok(views.html.caro.board(this))
   }
 
   /**
@@ -34,8 +34,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    * @return
    */
   def put(color: String, row: Int, col: Int): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    controller.putCell(row, col, color)
-    Ok(controller.boardToString)
+    controller.putCell(row + 2 , col + 2, color)
+    Ok(views.html.caro.board(this))
   }
 
   /**
@@ -44,7 +44,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    */
   def undo(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     controller.undo()
-    Ok(controller.boardToString)
+    Ok(views.html.caro.board(this))
   }
 
   /**
@@ -53,7 +53,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    */
   def redo(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     controller.redo()
-    Ok(controller.boardToString)
+    Ok(views.html.caro.board(this))
   }
 
   /**
@@ -71,7 +71,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    */
   def load(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     controller.load()
-    Ok(controller.boardToString)
+    Ok(views.html.caro.board(this))
   }
 
   /**
@@ -81,7 +81,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    */
   def player1(name: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     controller.newBoard(name, controller.getPlayerTwoName)
-    Ok(controller.boardToString)
+    Ok(views.html.caro.board(this))
   }
 
   /**
@@ -91,10 +91,16 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    */
   def player2(name: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     controller.newBoard(controller.getPlayerOneName, name)
-    Ok(controller.boardToString)
+    Ok(views.html.caro.board(this))
   }
 
   def rules(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.caro.rules())
   }
+
+  def board(): Action[AnyContent] = Action {
+    Ok(views.html.caro.board(this))
+  }
+
+
 }

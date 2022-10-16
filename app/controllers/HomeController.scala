@@ -93,4 +93,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     controller.newBoard(controller.getPlayerOneName, name)
     Ok(controller.boardToString)
   }
+
+  def rules(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    Ok(views.html.caro.rules())
+  }
 }

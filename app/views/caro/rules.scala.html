@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>Caro</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/rules.css")">
+    </head>
+    <body>
+        <div class="rule-body">
+            <div>
+                <h1>Welcome to caro</h1>
+                <p>Caro is a multiplayer strategy board game. This implementation allows for two players.</p>
+            </div>
+            <div>
+                <div>
+                    <h2>How to play</h2>
+                    <p>The rules and point-distribution are explained in the following section</p>
+                    <div>
+                        <h3>Rules</h3>
+                        <p>The following rules are applied:</p>
+                        <ul>
+                            <li>Same color tiles may not be placed next to each other</li>
+                            <li>No more than three tiles of the same color may be placed diagonally</li>
+                            <li>No more than two neighboring tiles may be of the same color</li>
+                            <li>Placed tiles may not exceed 6x6 in dimensions</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Points</h3>
+                        <p>The following tile combinations yield the following points:</p>
+                        <div class="tile-combo">
+                            <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                            <span>:     10 points</span>
+                        </div>
+                        <div class="tile-combo">
+                            <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                            <span>:     8 points</span>
+                        </div>
+                        <div class="tile-combo">
+                            <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                            <span>:     6 points</span>
+                        </div>
+                        <div class="tile-combo">
+                            <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                            <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                            <span>:     4 points</span>
+                        </div>
+                        <div class="tile-combo">
+                            <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                            <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                            <span>:     2 points</span>
+                        </div>
+                        <div class="tile-combo">
+                            <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                            <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                            <span>:     1 points</span>
+                        </div>
+                        <p>Furthermore, the following circumstances grant special points: </p>
+                        <ul>
+                            <li><b>10 points</b> will be granted when placing the first tile of the game</li>
+                            <li><b>10 points</b> will be subtracted upon breaking a rule</li>
+                            <li><b>Double points</b> will be granted when a player places the last tile of one of their colors</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

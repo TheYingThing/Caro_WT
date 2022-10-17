@@ -3,11 +3,21 @@
     color: white;
     font-family: Tahoma, Arial, sans-serif;
 }
-
-.rule-body {
+.board-body {
     padding: 20px;
+    text-align: center;
+}
+
+.header {
+    text-align: center;
 }
 
 .tile-combo {
     padding: 5px;
+}
+
+.player {
+  display: inline-block;
+  box-sizing: border-box;
+  width: 20%;
 }

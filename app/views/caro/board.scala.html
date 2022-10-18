@@ -37,79 +37,82 @@
                 </div>
             }
             </div>
-            <div class="player">
-                @if(controller.controller.getMoves % 2 == 0) {
-                    <h3 class="highlight">@controller.controller.getPlayerOneName</h3>
-                }else{
-                    <h3>@controller.controller.getPlayerOneName</h3>
-                }
-                <h4>@controller.controller.getBoard.getPlayerOne.getPoints</h4>
-                <div class="tile-combo">
+            <div class="row">
+                <div class="player col">
+                    @if(controller.controller.getMoves % 2 == 0) {
+                        <h3 class="highlight">@controller.controller.getPlayerOneName</h3>
+                    }else{
+                        <h3>@controller.controller.getPlayerOneName</h3>
+                    }
+                    <h4>@controller.controller.getBoard.getPlayerOne.getPoints</h4>
+                    <div class="tile-combo">
                     @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("red")) {
-                    <span class="tile-combo">
+                        <span class="tile-combo">
                             <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
-                    </span>
+                        </span>
                     }
-                </div>
-                <div class="tile-combo">
+                    </div>
+                    <div class="tile-combo">
                     @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("black")) {
-                    <span class="tile-combo">
+                        <span class="tile-combo">
                             <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-                    </span>
+                        </span>
                     }
-                </div>
-                <div class="tile-combo">
+                    </div>
+                    <div class="tile-combo">
                     @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("grey")) {
-                    <span class="tile-combo">
+                        <span class="tile-combo">
                             <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
-                    </span>
+                        </span>
                     }
-                </div>
-                <div class="tile-combo">
+                    </div>
+                    <div class="tile-combo">
                     @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("white")) {
-                    <span class="tile-combo">
+                        <span class="tile-combo">
                             <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
-                    </span>
+                        </span>
                     }
+                    </div>
                 </div>
-            </div>
-            <div class="game-status">@controller.controller.getBoardStatus</div>
-            <div class="player">
-                @if(controller.controller.getMoves % 2 != 0) {
-                    <h3 class="highlight">@controller.controller.getPlayerTwoName</h3>
-                }else{
-                    <h3>@controller.controller.getPlayerTwoName</h3>
-                }
-                <h4>@controller.controller.getBoard.getPlayerTwo.getPoints</h4>
-                <div class="tile-combo">
+                <div class="game-status col">@controller.controller.getBoardStatus</div>
+                <div class="player col">
+                    @if(controller.controller.getMoves % 2 != 0) {
+                        <h3 class="highlight">@controller.controller.getPlayerTwoName</h3>
+                    }else{
+                        <h3>@controller.controller.getPlayerTwoName</h3>
+                    }
+                    <h4>@controller.controller.getBoard.getPlayerTwo.getPoints</h4>
+                    <div class="tile-combo">
                     @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("red")) {
-                    <span class="tile-combo">
-                        <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
-                    </span>
+                        <span class="tile-combo">
+                            <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                        </span>
                     }
-                </div>
-                <div class="tile-combo">
+                    </div>
+                    <div class="tile-combo">
                     @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("black")) {
-                    <span class="tile-combo">
-                        <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-                    </span>
+                        <span class="tile-combo">
+                            <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                        </span>
                     }
-                </div>
-                <div class="tile-combo"class="tile-combo">
+                    </div>
+                    <div class="tile-combo"class="tile-combo">
                     @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("grey")) {
-                    <span class="tile-combo">
-                        <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
-                    </span>
+                        <span class="tile-combo">
+                            <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                        </span>
                     }
-                </div>
-                <div class="tile-combo">
+                    </div>
+                    <div class="tile-combo">
                     @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("white")) {
-                    <span class="tile-combo">
-                        <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
-                    </span>
+                        <span class="tile-combo">
+                            <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                        </span>
                     }
+                    </div>
                 </div>
             </div>
+
     </div>
 </body>
 </html>

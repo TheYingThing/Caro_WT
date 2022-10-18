@@ -17,18 +17,27 @@
 }
 
 .player {
-  display: inline-block;
-  box-sizing: border-box;
-  width: 30%;
+    box-sizing: border-box;
+    width: 50px
 }
 
 .game-status {
-    display: inline-block;
+    margin: 19px 0;
     box-sizing: border-box;
-    width: 20%;
     text-align: center;
+    width: 50px;
 }
 
 .highlight {
-    text-shadow: 2px 2px 5px red;
+    text-shadow: 3px 3px 5px #A0A0A0;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.col {
+    flex: 0 0 20%;
+    padding: 1em;
 }

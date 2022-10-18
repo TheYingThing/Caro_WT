@@ -5,7 +5,7 @@ version := "1.0-SNAPSHOT"
 
 scalaVersion := "2.13.10"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+lazy val root = (project in file(".")).enablePlugins(PlayScala).enablePlugins(SbtWeb)
 
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0" % Test
@@ -14,5 +14,7 @@ libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.1.0
 
 // Adds additional packages into conf/routes
 // play.sbt.routes.RoutesKeys.routesImport += "htwg-konstanz.de.binders._"
+
+includeFilter in (Assets, LessKeys.less) := "*.less"
 
 

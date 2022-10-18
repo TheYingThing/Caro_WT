@@ -19,5 +19,16 @@
 .player {
   display: inline-block;
   box-sizing: border-box;
-  width: 20%;
+  width: 30%;
+}
+
+.game-status {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 20%;
+    text-align: center;
+}
+
+.highlight {
+    text-shadow: 2px 2px 5px red;
 }

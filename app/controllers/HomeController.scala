@@ -1,8 +1,8 @@
 package controllers
 
-import com.google.inject.Inject
 import caro.Caro
 import caro.controller.controllerComponent.ControllerInterface
+import com.google.inject.Inject
 import play.api.mvc._
 
 import javax.inject._
@@ -23,7 +23,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    * a path of `/`.
    */
   def index(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.caro.board(this))
+    Ok(views.html.caro.welcome())
   }
 
   /**
@@ -62,7 +62,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    */
   def save(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     controller.save()
-    Ok("board was saved")
+    Ok(views.html.caro.board(this))
   }
 
   /**
@@ -102,5 +102,12 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     Ok(views.html.caro.board(this))
   }
 
+  def score(): Action[AnyContent] = Action {
+    Ok(views.html.caro.score(this))
+  }
 
+  def newGame(): Action[AnyContent] = Action {
+    controller.newBoard(controller.getPlayerOneName, controller.getPlayerTwoName)
+    Ok(views.html.caro.board(this))
+  }
 }

@@ -13,8 +13,10 @@ GET     /save                       controllers.HomeController.save()
 GET     /load                       controllers.HomeController.load()
 GET     /player1/:name              controllers.HomeController.player1(name)
 GET     /player2/:name              controllers.HomeController.player2(name)
+GET     /newGame                    controllers.HomeController.newGame()
 
 GET     /rules                      controllers.HomeController.rules()
 GET     /board                      controllers.HomeController.board()
+GET     /score                      controllers.HomeController.score()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

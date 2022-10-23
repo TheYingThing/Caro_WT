@@ -1,0 +1,24 @@
+@(controller: HomeController)
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <title>Caro Score</title>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+  </head>
+  <body>
+  <body class="body">
+  <div class="header">
+    Congratulations
+    @if(controller.controller.getBoard.getPlayerOne.getPoints > controller.controller.getBoard.getPlayerTwo.getPoints) {
+      @controller.controller.getPlayerOneName you won!
+    } else if(controller.controller.getBoard.getPlayerOne.getPoints < controller.controller.getBoard.getPlayerTwo.getPoints){
+      @controller.controller.getPlayerTwoName you won!
+    } else {
+      it's a tie!
+    }
+  </div>
+  <br>
+  <a href="http://localhost:9000" class="button div-button">Back to menu</a>
+  <a href="http://localhost:9000/board" class="button div-button">Continue Game</a>
+  </body>
+</html>

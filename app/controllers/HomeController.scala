@@ -23,7 +23,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    * a path of `/`.
    */
   def index(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Ok(views.html.caro.welcome())
+    Ok(views.html.index())
   }
 
   /**

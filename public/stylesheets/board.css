@@ -1,5 +1,5 @@
 * {
-    background-color: #303030;
+    background-color: #708090;
     color: white;
     font-family: Tahoma, Arial, sans-serif;
 }
@@ -61,4 +61,17 @@
   font-size: 16px;
   font-family: Tahoma, Arial, sans-serif;
   border-radius: 8px;
+}
+
+.img {
+    width: 30px;
+    height: 30px;
+}
+
+.opacity-allRules {
+    opacity: 0.9;
+}
+
+.opacity-noRules {
+    opacity: 0.2;
 }

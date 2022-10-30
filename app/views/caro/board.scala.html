@@ -19,28 +19,28 @@
                     <div class="tile-combo">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("red")) {
                         <span class="tile-combo">
-                            <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
                         </span>
                         }
                     </div>
                     <div class="tile-combo">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("black")) {
                         <span class="tile-combo">
-                            <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
                         </span>
                         }
                     </div>
                     <div class="tile-combo">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("grey")) {
                         <span class="tile-combo">
-                            <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
                         </span>
                         }
                     </div>
                     <div class="tile-combo">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("white")) {
                         <span class="tile-combo">
-                            <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
                         </span>
                         }
                     </div>
@@ -50,24 +50,31 @@
                     <div class="tile-combo">
                         @for(col <- 3 to 15) {
                         @if(controller.controller.getCellColor(row, col) == "none") {
-                        <span class="tile-combo">
-                            <img src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
-                        </span>
+                            @if(controller.controller.getBoard.allRules(row, col, "red") || controller.controller.getBoard.allRules(row, col, "black") ||
+                                controller.controller.getBoard.allRules(row, col, "grey") || controller.controller.getBoard.allRules(row, col, "white")) {
+                                <span class="tile-combo opacity-allRules">
+                                    <img class="img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
+                                </span>
+                            } else {
+                                <span class="tile-combo opacity-noRules">
+                                    <img class="img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
+                                </span>
+                            }
                         } else if(controller.controller.getCellColor(row, col) == "red") {
                         <span class="tile-combo">
-                            <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
                         </span>
                         } else if(controller.controller.getCellColor(row, col) == "black") {
                         <span class="tile-combo">
-                            <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
                         </span>
                         } else if(controller.controller.getCellColor(row, col) == "grey") {
                         <span class="tile-combo">
-                            <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
                         </span>
                         } else if(controller.controller.getCellColor(row, col) == "white") {
                         <span class="tile-combo">
-                            <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
                         </span>
                         }
                         }
@@ -84,28 +91,28 @@
                     <div class="tile-combo">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("red")) {
                         <span class="tile-combo">
-                            <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
                         </span>
                         }
                     </div>
                     <div class="tile-combo">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("black")) {
                         <span class="tile-combo">
-                            <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
                         </span>
                         }
                     </div>
                     <div class="tile-combo"class="tile-combo">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("grey")) {
                         <span class="tile-combo">
-                            <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
                         </span>
                         }
                     </div>
                     <div class="tile-combo">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("white")) {
                         <span class="tile-combo">
-                            <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
                         </span>
                         }
                     </div>

@@ -1,5 +1,5 @@
 * {
-    background-color: #303030;
+    background-color: #708090;
     color: white;
     font-family: Tahoma, Arial, sans-serif;;
 }
@@ -35,4 +35,12 @@
 
 .rules {
     padding: 30px;
+}
+
+.big-font {
+    font-size: 40ex;
+}
+
+.credits {
+    font-size: 1ex;
 }

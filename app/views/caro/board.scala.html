@@ -2,19 +2,34 @@
 
 @main("Welcome to Play") {
     <div class="board-body">
-        <h1 class="header">This is Caro!</h1>
-        <div class="row btn-toolbar" role="toolbar">
-            <div class="col-8 mx-auto">
-                <div class="btn-group mr-2" role="group">
-                    <a href="http://localhost:9000/save" class="btn btn-secondary" role="button">Save Game</a>
-                    <a href="http://localhost:9000/score" class="btn btn-secondary" role="button">End Game</a>
-                    <a href="http://localhost:9000/undo" class="btn btn-secondary" role="button">Undo</a>
-                    <a href="http://localhost:9000/redo" class="btn btn-secondary" role="button">Redo</a>
-                    <a href="http://localhost:9000/" class="btn btn-secondary" role="button">Back to menu</a>
-                    <a href="http://localhost:9000/rules" class="btn btn-secondary" role="button">Rules</a>
-                </div>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg ps-5">
+            <a class="navbar-brand navBrandFont" href="#">Caro</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:9000/">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:9000/rules">Rules</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Actions
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="http://localhost:9000/save">Save</a>
+                            <a class="dropdown-item" href="http://localhost:9000/undo">Undo</a>
+                            <a class="dropdown-item" href="http://localhost:9000/redo">Redo</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="http://localhost:9000/score">End Game</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </div>
+        </nav>
         <div class="row">
             <div class="player col-3">
                 @if(controller.controller.getMoves % 2 == 0) {
@@ -25,28 +40,28 @@
                 <h4>@controller.controller.getBoard.getPlayerOne.getPoints</h4>
                 <div class="tile-combo">
                 @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("red")) {
-                    <span class="tile-combo">
+                    <span class="tile-combo img">
                         <img src="@routes.Assets.versioned("images/redButton.png")" id="drag@tiles" alt="red tile" draggable="true" ondragstart="drag(event)">
                     </span>
                 }
                 </div>
                 <div class="tile-combo">
                 @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("black")) {
-                    <span class="tile-combo">
+                    <span class="tile-combo img">
                         <img src="@routes.Assets.versioned("images/blackButton.png")" class="draggable-element" alt="black tile" draggable="true">
                     </span>
                 }
                 </div>
                 <div class="tile-combo">
                 @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("grey")) {
-                    <span class="tile-combo">
+                    <span class="tile-combo img">
                         <img src="@routes.Assets.versioned("images/greyButton.png")" class="draggable-element" alt="grey tile" draggable="true">
                     </span>
                 }
                 </div>
                 <div class="tile-combo">
                 @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("white")) {
-                    <span class="tile-combo">
+                    <span class="tile-combo img">
                         <img src="@routes.Assets.versioned("images/whiteButton.png")" class="draggable-element" alt="white tile" draggable="true">
                     </span>
                 }
@@ -54,27 +69,34 @@
             </div>
             <div class="col-board col-6">
             @for(row <- 3 to 15) {
-                <div>
+                <div class="tile-combo">
                 @for(col <- 3 to 15) {
                     @if(controller.controller.getCellColor(row, col) == "none") {
-                        <span class="drop-spot" id="span@col" ondrop="drop(event)" ondragover="allowDrop(event)">
-
-                        </span>
+                        @if(controller.controller.getBoard.allRules(row, col, "red") || controller.controller.getBoard.allRules(row, col, "black") ||
+                            controller.controller.getBoard.allRules(row, col, "grey") || controller.controller.getBoard.allRules(row, col, "white")) {
+                                <span class="tile-combo opacity-allRules">
+                                    <img class="img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
+                                </span>
+                        } else {
+                            <span class="tile-combo opacity-noRules">
+                                <img class="img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
+                            </span>
+                        }
                     } else if(controller.controller.getCellColor(row, col) == "red") {
                     <span class="tile-combo">
-                        <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                        <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
                     </span>
                     } else if(controller.controller.getCellColor(row, col) == "black") {
                     <span class="tile-combo">
-                        <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                        <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
                     </span>
                     } else if(controller.controller.getCellColor(row, col) == "grey") {
                     <span class="tile-combo">
-                        <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                        <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
                     </span>
                     } else if(controller.controller.getCellColor(row, col) == "white") {
                     <span class="tile-combo">
-                        <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                        <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
                     </span>
                     }
                 }
@@ -90,28 +112,28 @@
                 <h4>@controller.controller.getBoard.getPlayerTwo.getPoints</h4>
                 <div class="tile-combo">
                 @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("red")) {
-                    <span class="tile-combo">
+                    <span class="tile-combo img">
                         <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile" draggable="true">
                     </span>
                 }
                 </div>
                 <div class="tile-combo">
                 @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("black")) {
-                    <span class="tile-combo">
+                    <span class="tile-combo img">
                         <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile" draggable="true">
                     </span>
                 }
                 </div>
                 <div class="tile-combo"class="tile-combo">
                 @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("grey")) {
-                    <span class="tile-combo">
+                    <span class="tile-combo img">
                         <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile" draggable="true">
                     </span>
                 }
                 </div>
                 <div class="tile-combo">
                 @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("white")) {
-                    <span class="tile-combo">
+                    <span class="tile-combo img">
                         <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile" draggable="true">
                     </span>
                 }

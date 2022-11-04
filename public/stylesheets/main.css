@@ -1,5 +1,5 @@
 * {
-    background-color: #303030;
+    background-color: #708090;
     color: white;
     font-family: Tahoma, Arial, sans-serif;;
 }
@@ -14,7 +14,7 @@
 }
 
 .header {
-    padding: 100px;
+    padding: 50px;
     text-align: center;
     font-size: 40px;
 }
@@ -48,6 +48,7 @@
 }
 
 .row {
+    padding-top: 50px;
     display: flex;
     justify-content: center;
 }
@@ -86,3 +87,33 @@
 .set-tile {
     vertical-align: inherit;
 }
+
+
+.img {
+    width: 30px;
+    height: 30px;
+}
+
+.opacity-allRules {
+    opacity: 0.9;
+}
+
+.opacity-noRules {
+    opacity: 0.2;
+}
+
+.navbar-brand {
+    font-size: 30px !important;
+    font-family: Tahoma, Arial, sans-serif !important;
+    background: rgba(0,0,0,0) !important;
+}
+
+.navbar-collapse, .nav-link, .nav-item, .navbar-nav, .collapse  {
+    background: rgba(0,0,0,0) !important;
+}
+
+.dropdown-item, .dropdown-menu {
+    background-color: #161616  !important;
+    color: white !important;
+}
+

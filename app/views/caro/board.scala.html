@@ -40,29 +40,29 @@
                 <h4>@controller.controller.getBoard.getPlayerOne.getPoints</h4>
                 <div class="tile-combo">
                 @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("red")) {
-                    <span class="tile-combo img">
-                        <img src="@routes.Assets.versioned("images/redButton.png")" id="drag@tiles" alt="red tile" draggable="true" ondragstart="drag(event)">
+                    <span class="tile-combo">
+                        <img src="@routes.Assets.versioned("images/redButton.png")" class="player-tile" id="redtile@tiles" alt="red tile" draggable="true">
                     </span>
                 }
                 </div>
                 <div class="tile-combo">
                 @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("black")) {
-                    <span class="tile-combo img">
-                        <img src="@routes.Assets.versioned("images/blackButton.png")" class="draggable-element" alt="black tile" draggable="true">
+                    <span class="tile-combo">
+                        <img src="@routes.Assets.versioned("images/blackButton.png")" class="player-tile" id="blacktile@tiles" alt="black tile" draggable="true">
                     </span>
                 }
                 </div>
                 <div class="tile-combo">
                 @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("grey")) {
-                    <span class="tile-combo img">
-                        <img src="@routes.Assets.versioned("images/greyButton.png")" class="draggable-element" alt="grey tile" draggable="true">
+                    <span class="tile-combo">
+                        <img src="@routes.Assets.versioned("images/greyButton.png")" class="player-tile" id="greytile@tiles" alt="grey tile" draggable="true">
                     </span>
                 }
                 </div>
                 <div class="tile-combo">
                 @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("white")) {
-                    <span class="tile-combo img">
-                        <img src="@routes.Assets.versioned("images/whiteButton.png")" class="draggable-element" alt="white tile" draggable="true">
+                    <span class="tile-combo">
+                        <img src="@routes.Assets.versioned("images/whiteButton.png")" class="player-tile" id="whitetile@tiles" alt="white tile" draggable="true">
                     </span>
                 }
                 </div>
@@ -72,6 +72,9 @@
                 <div class="tile-combo">
                 @for(col <- 3 to 15) {
                     @if(controller.controller.getCellColor(row, col) == "none") {
+                        <span class="drop-spot" id="span@col" >
+
+                        </span>
                         @if(controller.controller.getBoard.allRules(row, col, "red") || controller.controller.getBoard.allRules(row, col, "black") ||
                             controller.controller.getBoard.allRules(row, col, "grey") || controller.controller.getBoard.allRules(row, col, "white")) {
                                 <span class="tile-combo opacity-allRules">

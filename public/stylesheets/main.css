@@ -88,6 +88,14 @@
     vertical-align: inherit;
 }
 
+.big-font {
+    font-size: 40ex;
+}
+
+.credits {
+    font-size: 1ex;
+}
+
 
 .img {
     width: 30px;

@@ -72,9 +72,6 @@
                 <div class="tile-combo">
                 @for(col <- 3 to 15) {
                     @if(controller.controller.getCellColor(row, col) == "none") {
-                        <span class="drop-spot" id="span@col" >
-
-                        </span>
                         @if(controller.controller.getBoard.allRules(row, col, "red") || controller.controller.getBoard.allRules(row, col, "black") ||
                             controller.controller.getBoard.allRules(row, col, "grey") || controller.controller.getBoard.allRules(row, col, "white")) {
                                 <span class="tile-combo opacity-allRules">

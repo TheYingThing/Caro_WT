@@ -72,18 +72,66 @@
             </div>
             <div class="col-board col-6">
             @for(row <- 3 to 15) {
-                <div class="tile-combo">
+                <div>
                 @for(col <- 3 to 15) {
                     @if(controller.controller.getCellColor(row, col) == "none") {
                         @if(controller.controller.getBoard.allRules(row, col, "red") || controller.controller.getBoard.allRules(row, col, "black") ||
                             controller.controller.getBoard.allRules(row, col, "grey") || controller.controller.getBoard.allRules(row, col, "white")) {
-                                <span class="tile-combo opacity-allRules">
+                                <div class="btn-group tile-combo">
+                                    <span type="button" class="btn btn-secondary dropdown-toggle opacity-allRules shadow-none" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img class="img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
+                                    </span>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/red/@{row-2}/@{col-2}">
+                                            <span>
+                                                <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                                            </span>
+                                        </a>
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/black/@{row-2}/@{col-2}"">
+                                            <span>
+                                                <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                                            </span>
+                                        </a>
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/grey/@{row-2}/@{col-2}"">
+                                            <span>
+                                                <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                                            </span>
+                                        </a>
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/white/@{row-2}/@{col-2}"">
+                                            <span>
+                                                <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                        } else {
+                            <div class="btn-group tile-combo">
+                                <span type="button" class="btn btn-secondary dropdown-toggle opacity-noRules shadow-none" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img class="img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
                                 </span>
-                        } else {
-                            <span class="tile-combo opacity-noRules">
-                                <img class="img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
-                            </span>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item shadow-none" href="http://localhost:9000/put/red/@{row-2}/@{col-2}"">
+                                    <span>
+                                        <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                                    </span>
+                                </a>
+                                <a class="dropdown-item shadow-none" href="http://localhost:9000/put/black/@{row-2}/@{col-2}"">
+                                    <span>
+                                        <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                                    </span>
+                                </a>
+                                <a class="dropdown-item shadow-none" href="http://localhost:9000/put/grey/@{row-2}/@{col-2}"">
+                                    <span>
+                                        <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                                    </span>
+                                </a>
+                                <a class="dropdown-item shadow-none" href="http://localhost:9000/put/white/@{row-2}/@{col-2}"">
+                                    <span>
+                                        <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                                    </span>
+                                </a>
+                        </div>
+                    </div>
                         }
                     } else if(controller.controller.getCellColor(row, col) == "red") {
                     <span class="tile-combo">
@@ -143,8 +191,16 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            @if(controller.controller.getBoardStatus != "") {
+            <div class="alert alert-dark alert-dismissible" role="alert">
+                @controller.controller.getBoardStatus
+                <a style="text-decoration:none" type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                    <span class="alert-icon" aria-hidden="true">&times;</span></span>
+                </a>
+            </div>
+            }
+        </div>
+
     </div>
 }
-
-
-

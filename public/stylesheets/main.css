@@ -115,16 +115,39 @@
     background: rgba(0,0,0,0) !important;
 }
 
-.navbar-collapse, .nav-link, .nav-item, .navbar-nav, .collapse  {
+.navbar-collapse, .nav-link, .nav-item, .navbar-nav, .collapse, .close, .alert-icon, .a{
     background: rgba(0,0,0,0) !important;
 }
 
 .dropdown-item, .dropdown-menu {
     background-color: #161616  !important;
     color: white !important;
+    min-width: 0rem !important;
 }
 
 .topPadding {
     padding-top: 50px;
+}
+
+.alert {
+    width: 30% !important;
+    align: center;
+}
+
+.a {
+    color: rgba(0,0,0,0) !important;
+}
+
+.dropdown-toggle::after {
+    content: none !important;
+}
+
+.btn {
+    border: none !important;
+    padding: 0px !important;
+}
+
+.dropdown-item {
+
 }
 

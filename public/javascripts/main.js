@@ -25,18 +25,6 @@ for (let i = 0; i < droppabletiles.length ; i++) {
 for (let i = 0; i < tiles.length ; i++) {
     tiles[i].addEventListener('dragstart', drag, false)
 }
-if (navLink.length) {
-    navLink.forEach((navLink) => {
-        navLink.addEventListener('click', (e) => {
-          navLink.forEach((navItem) => {
-              navLink.classList.remove('active');
-          });
-          e.preventDefault();
-          navLink.classList.add('active');
-        });
-    });
-}
-
 
 
 

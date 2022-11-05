@@ -96,7 +96,6 @@
     font-size: 1ex;
 }
 
-
 .img {
     width: 30px;
     height: 30px;
@@ -123,5 +122,9 @@
 .dropdown-item, .dropdown-menu {
     background-color: #161616  !important;
     color: white !important;
+}
+
+.topPadding {
+    padding-top: 50px;
 }
 

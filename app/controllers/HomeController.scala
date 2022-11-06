@@ -33,7 +33,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
    * @param col col index as Int
    * @return
    */
-  def put(color: String, row: Int, col: Int): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+  def put(row: Int, col: Int, color: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     controller.putCell(row + 2 , col + 2, color)
     Ok(views.html.caro.board(this))
   }
@@ -109,5 +109,9 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   def newGame(): Action[AnyContent] = Action {
     controller.newBoard(controller.getPlayerOneName, controller.getPlayerTwoName)
     Ok(views.html.caro.board(this))
+  }
+
+  def allRules(row: Int, col: Int, color: String): Action[AnyContent] = Action {
+    Ok(controller.getBoard().allRules(row, col, color).toString)
   }
 }

@@ -5,11 +5,23 @@ let allowDrop = function(ev) {
     ev.preventDefault();
 };
 
-let drop = function(ev) {
-    ev.preventDefault();
-    let data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
-    document.getElementById(data).classList.add("set-tile");
+function checkRules(row, col, color) {
+    return $.ajax({
+        url:'/allRules/' + row + '/' + col + '/' + color,
+        type: 'GET'
+    });
+}
+let drop = async function(ev) {
+    console.log(ev.target.getAttribute("data-row"));
+    let row = ev.target.getAttribute("data-row");
+    let col = ev.target.getAttribute("data-column");
+    let tileID = ev.dataTransfer.getData("text");
+    let color = document.getElementById(tileID).getAttribute("data-color");
+    let valid = await checkRules(row, col, color)
+    $.ajax({
+        url:'/put/' + row + '/' + col + '/' + color,
+        type: 'GET'
+    });
 };
 
 let drag = function(ev) {

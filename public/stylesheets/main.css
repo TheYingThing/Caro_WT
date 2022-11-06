@@ -117,11 +117,13 @@
 
 .navbar-collapse, .nav-link, .nav-item, .navbar-nav, .collapse, .close, .alert-icon, .a{
     background: rgba(0,0,0,0) !important;
+    color: #4e5965 !important;
+
 }
 
 .dropdown-item, .dropdown-menu {
-    background-color: #161616  !important;
-    color: white !important;
+    background-color: #21262b  !important;
+    color: #4e5965 !important;
     min-width: 0rem !important;
 }
 
@@ -147,7 +149,24 @@
     padding: 0px !important;
 }
 
-.dropdown-item {
-
+.list {
+    text-align: left !important;
 }
 
+.rulesTab {
+    text-align: left !important;
+    padding-left: 140px;
+}
+
+.nav-pills {
+    background: #647382  !important;
+}
+
+.active {
+    color: white !important;
+    background: #21262b !important;
+}
+
+.tab-pane {
+    background: rgba(0,0,0,0) !important;
+}

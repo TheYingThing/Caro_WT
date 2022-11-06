@@ -40,34 +40,81 @@
                 }else{
                     <h3>@controller.controller.getPlayerOneName</h3>
                 }
-                <h4>@controller.controller.getBoard.getPlayerOne.getPoints</h4>
-                <div class="tile-combo">
-                @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("red")) {
-                    <span class="tile-combo">
-                        <img src="@routes.Assets.versioned("images/redButton.png")" class="player-tile" id="redtile@tiles" alt="red tile" draggable="true">
-                    </span>
-                }
-                </div>
-                <div class="tile-combo">
-                @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("black")) {
-                    <span class="tile-combo">
-                        <img src="@routes.Assets.versioned("images/blackButton.png")" class="player-tile" id="blacktile@tiles" alt="black tile" draggable="true">
-                    </span>
-                }
-                </div>
-                <div class="tile-combo">
-                @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("grey")) {
-                    <span class="tile-combo">
-                        <img src="@routes.Assets.versioned("images/greyButton.png")" class="player-tile" id="greytile@tiles" alt="grey tile" draggable="true">
-                    </span>
-                }
-                </div>
-                <div class="tile-combo">
-                @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("white")) {
-                    <span class="tile-combo">
-                        <img src="@routes.Assets.versioned("images/whiteButton.png")" class="player-tile" id="whitetile@tiles" alt="white tile" draggable="true">
-                    </span>
-                }
+                <nav class="topPadding">
+                    <div class="nav nav-pills nav-justified" id="nav-tab" role="tablist">
+                        <button class="nav-link active" id="nav-tiles-tab" data-bs-toggle="tab" data-bs-target="#nav-tiles" type="button" role="tab" aria-controls="nav-tiles" aria-selected="true">Tiles</button>
+                        <button class="nav-link" id="nav-scoring-tab" data-bs-toggle="tab" data-bs-target="#nav-scoring" type="button" role="tab" aria-controls="nav-scoring" aria-selected="false">Scoring rules</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active topPadding" id="nav-tiles" role="tabpanel" aria-labelledby="nav-tiles-tab">
+                        <h4>@controller.controller.getBoard.getPlayerOne.getPoints</h4>
+                        <div class="tile-combo">
+                            @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("red")) {
+                            <span class="tile-combo">
+                                <img class="img" src="@routes.Assets.versioned("images/redButton.png")" class="player-tile" id="redtile@tiles" alt="red tile" draggable="true">
+                             </span>
+                            }
+                        </div>
+                        <div class="tile-combo">
+                            @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("black")) {
+                            <span class="tile-combo">
+                                <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" class="player-tile" id="blacktile@tiles" alt="black tile" draggable="true">
+                            </span>
+                            }
+                        </div>
+                        <div class="tile-combo">
+                            @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("grey")) {
+                            <span class="tile-combo">
+                                <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" class="player-tile" id="greytile@tiles" alt="grey tile" draggable="true">
+                            </span>
+                            }
+                        </div>
+                        <div class="tile-combo">
+                            @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("white")) {
+                            <span class="tile-combo">
+                                <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" class="player-tile" id="whitetile@tiles" alt="white tile" draggable="true">
+                            </span>
+                            }
+                        </div>
+                    </div>
+                    <div class="tab-pane fade topPadding" id="nav-scoring" role="tabpanel" aria-labelledby="nav-scoring-tab">
+                        <div class="tile-combo rulesTab">
+                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                            <span>:     10 points</span>
+                        </div>
+                        <div class="tile-combo rulesTab">
+                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                            <span>:     8 points</span>
+                        </div>
+                        <div class="tile-combo rulesTab">
+                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                            <span>:     6 points</span>
+                        </div>
+                        <div class="tile-combo rulesTab">
+                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                            <span>:     4 points</span>
+                        </div>
+                        <div class="tile-combo rulesTab">
+                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                            <span>:     2 points</span>
+                        </div>
+                        <div class="tile-combo rulesTab">
+                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                            <span>:     1 points</span>
+                        </div>
+                        <ul class="topPadding list">
+                            <li><b>10 points</b> for the first tile of the game</li>
+                            <li><b>10 points</b> will be subtracted upon breaking a rule</li>
+                            <li><b>Double points</b> when the last tile of a color is placed</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="col-board col-6">
@@ -160,35 +207,83 @@
                 }else{
                     <h3>@controller.controller.getPlayerTwoName</h3>
                 }
-                <h4>@controller.controller.getBoard.getPlayerTwo.getPoints</h4>
-                <div class="tile-combo">
-                @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("red")) {
-                    <span class="tile-combo img">
-                        <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile" draggable="true">
-                    </span>
-                }
+                <nav class="topPadding">
+                    <div class="nav nav-pills nav-justified" id="nav-p2-tab" role="tablist">
+                        <button class="nav-link active" id="nav-tiles-p2-tab" data-bs-toggle="tab" data-bs-target="#nav-tiles-p2" type="button" role="tab" aria-controls="nav-tiles-p2" aria-selected="true">Tiles</button>
+                        <button class="nav-link" id="nav-scoring-p2-tab" data-bs-toggle="tab" data-bs-target="#nav-scoring-p2" type="button" role="tab" aria-controls="nav-scoring-p2" aria-selected="false">Scoring rules</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent-p2">
+                    <div class="tab-pane fade show active topPadding" id="nav-tiles-p2" role="tabpanel" aria-labelledby="nav-tiles-p2-tab">
+                        <h4>@controller.controller.getBoard.getPlayerOne.getPoints</h4>
+                        <div class="tile-combo">
+                            @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("red")) {
+                            <span class="tile-combo img">
+                                <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile" draggable="true">
+                            </span>
+                            }
+                        </div>
+                        <div class="tile-combo">
+                            @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("black")) {
+                            <span class="tile-combo img">
+                                <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile" draggable="true">
+                            </span>
+                            }
+                        </div>
+                        <div class="tile-combo"class="tile-combo">
+                            @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("grey")) {
+                            <span class="tile-combo img">
+                                <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile" draggable="true">
+                            </span>
+                            }
+                        </div>
+                        <div class="tile-combo">
+                            @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("white")) {
+                            <span class="tile-combo img">
+                                <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile" draggable="true">
+                            </span>
+                            }
+                        </div>
+                    </div>
+                    <div class="tab-pane fade topPadding" id="nav-scoring-p2" role="tabpanel" aria-labelledby="nav-scoring-p2-tab">
+                        <div class="tile-combo rulesTab">
+                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                            <span>:     10 points</span>
+                        </div>
+                        <div class="tile-combo rulesTab">
+                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                            <span>:     8 points</span>
+                        </div>
+                        <div class="tile-combo rulesTab">
+                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                            <span>:     6 points</span>
+                        </div>
+                        <div class="tile-combo rulesTab">
+                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                            <span>:     4 points</span>
+                        </div>
+                        <div class="tile-combo rulesTab">
+                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                            <span>:     2 points</span>
+                        </div>
+                        <div class="tile-combo rulesTab">
+                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                            <span>:     1 points</span>
+                        </div>
+                        <ul class="topPadding list">
+                            <li><b>10 points</b> for the first tile of the game</li>
+                            <li><b>10 points</b> will be subtracted upon breaking a rule</li>
+                            <li><b>Double points</b> when the last tile of a color is placed</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="tile-combo">
-                @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("black")) {
-                    <span class="tile-combo img">
-                        <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile" draggable="true">
-                    </span>
-                }
-                </div>
-                <div class="tile-combo"class="tile-combo">
-                @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("grey")) {
-                    <span class="tile-combo img">
-                        <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile" draggable="true">
-                    </span>
-                }
-                </div>
-                <div class="tile-combo">
-                @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("white")) {
-                    <span class="tile-combo img">
-                        <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile" draggable="true">
-                    </span>
-                }
-                </div>
+
             </div>
         </div>
         <div class="row">

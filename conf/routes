@@ -5,8 +5,8 @@
 
 # An example controller showing a sample home page
 GET     /                           controllers.HomeController.index()
-GET     /first/:color               controllers.HomeController.put(color, row: Int ?= 7, col: Int ?=7)
-GET     /put/:color/:row/:col       controllers.HomeController.put(color: String,row: Int,col: Int)
+GET     /first/:color               controllers.HomeController.put(row: Int ?= 7, col: Int ?=7, color)
+GET     /put/:row/:col/:color       controllers.HomeController.put(row: Int,col: Int, color: String)
 GET     /undo                       controllers.HomeController.undo()
 GET     /redo                       controllers.HomeController.redo()
 GET     /save                       controllers.HomeController.save()

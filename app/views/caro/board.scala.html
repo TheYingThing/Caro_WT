@@ -1,38 +1,8 @@
+@import views.html.caro.partials.quickrules
 @(controller: HomeController)
 
-@main("Welcome to Play") {
+@main("Welcome to Caro") {
     <div class="board-body">
-        <nav class="navbar navbar-dark bg-dark navbar-expand-lg ps-5">
-            <a class="navbar-brand navBrandFont" href="#">Caro</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:9000/">Menu</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="http://localhost:9000/board">Game</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:9000/rules">Rules</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Actions
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="http://localhost:9000/save">Save</a>
-                            <a class="dropdown-item" href="http://localhost:9000/undo">Undo</a>
-                            <a class="dropdown-item" href="http://localhost:9000/redo">Redo</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="http://localhost:9000/score">End Game</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
         <div class="row">
             <div class="player col-3">
                 @if(controller.controller.getMoves % 2 == 0) {
@@ -40,166 +10,138 @@
                 }else{
                     <h3>@controller.controller.getPlayerOneName</h3>
                 }
-                <nav class="topPadding">
+                <nav class="top-padding">
                     <div class="nav nav-pills nav-justified" id="nav-tab" role="tablist">
-                        <button class="nav-link active" id="nav-tiles-tab" data-bs-toggle="tab" data-bs-target="#nav-tiles" type="button" role="tab" aria-controls="nav-tiles" aria-selected="true">Tiles</button>
-                        <button class="nav-link" id="nav-scoring-tab" data-bs-toggle="tab" data-bs-target="#nav-scoring" type="button" role="tab" aria-controls="nav-scoring" aria-selected="false">Scoring rules</button>
+                        <button class="nav-link active" id="nav-tiles-tab-p1" data-bs-toggle="tab" data-bs-target="#nav-tiles-p1" type="button" role="tab" aria-controls="nav-tiles-p1" aria-selected="true">Tiles</button>
+                        <button class="nav-link" id="nav-scoring-tab-p1" data-bs-toggle="tab" data-bs-target="#nav-scoring-p1" type="button" role="tab" aria-controls="nav-scoring-p1" aria-selected="false">Scoring rules</button>
                     </div>
                 </nav>
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active topPadding" id="nav-tiles" role="tabpanel" aria-labelledby="nav-tiles-tab">
+                <div class="tab-content" id="nav-tabContent-p1">
+                    <div class="tab-pane fade show active top-padding" id="nav-tiles-p1" role="tabpanel" aria-labelledby="nav-tiles-tab-p1">
                         <h4>@controller.controller.getBoard.getPlayerOne.getPoints</h4>
-                        <div class="tile-combo">
+                        <div class="tile-padding">
                             @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("red")) {
-                            <span class="tile-combo">
-                                <img class="img" src="@routes.Assets.versioned("images/redButton.png")" class="player-tile" id="redtile@tiles" alt="red tile" draggable="true">
+                            <span class="tile-padding">
+                                <img src="@routes.Assets.versioned("images/redButton.png")" class="player-tile" id="redtile@tiles" alt="red tile" draggable="true">
                              </span>
                             }
                         </div>
-                        <div class="tile-combo">
+                        <div class="tile-padding">
                             @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("black")) {
-                            <span class="tile-combo">
-                                <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" class="player-tile" id="blacktile@tiles" alt="black tile" draggable="true">
+                            <span class="tile-padding">
+                                <img src="@routes.Assets.versioned("images/blackButton.png")" class="player-tile" id="blacktile@tiles" alt="black tile" draggable="true">
                             </span>
                             }
                         </div>
-                        <div class="tile-combo">
+                        <div class="tile-padding">
                             @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("grey")) {
-                            <span class="tile-combo">
-                                <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" class="player-tile" id="greytile@tiles" alt="grey tile" draggable="true">
+                            <span class="tile-padding">
+                                <img src="@routes.Assets.versioned("images/greyButton.png")" class="player-tile" id="greytile@tiles" alt="grey tile" draggable="true">
                             </span>
                             }
                         </div>
-                        <div class="tile-combo">
+                        <div class="tile-padding">
                             @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("white")) {
-                            <span class="tile-combo">
-                                <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" class="player-tile" id="whitetile@tiles" alt="white tile" draggable="true">
+                            <span class="tile-padding">
+                                <img src="@routes.Assets.versioned("images/whiteButton.png")" class="player-tile" id="whitetile@tiles" alt="white tile" draggable="true">
                             </span>
                             }
                         </div>
                     </div>
-                    <div class="tab-pane fade topPadding" id="nav-scoring" role="tabpanel" aria-labelledby="nav-scoring-tab">
-                        <div class="tile-combo rulesTab">
-                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
-                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-                            <span>:     10 points</span>
-                        </div>
-                        <div class="tile-combo rulesTab">
-                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
-                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
-                            <span>:     8 points</span>
-                        </div>
-                        <div class="tile-combo rulesTab">
-                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
-                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
-                            <span>:     6 points</span>
-                        </div>
-                        <div class="tile-combo rulesTab">
-                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
-                            <span>:     4 points</span>
-                        </div>
-                        <div class="tile-combo rulesTab">
-                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
-                            <span>:     2 points</span>
-                        </div>
-                        <div class="tile-combo rulesTab">
-                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
-                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
-                            <span>:     1 points</span>
-                        </div>
-                        <ul class="topPadding list">
-                            <li><b>10 points</b> for the first tile of the game</li>
-                            <li><b>10 points</b> will be subtracted upon breaking a rule</li>
-                            <li><b>Double points</b> when the last tile of a color is placed</li>
-                        </ul>
-                    </div>
+                    @quickrules("p1")
                 </div>
             </div>
-            <div class="col-board col-6">
-            @for(row <- 3 to 15) {
-                <div>
-                @for(col <- 3 to 15) {
-                    @if(controller.controller.getCellColor(row, col) == "none") {
-                        @if(controller.controller.getBoard.allRules(row, col, "red") || controller.controller.getBoard.allRules(row, col, "black") ||
-                            controller.controller.getBoard.allRules(row, col, "grey") || controller.controller.getBoard.allRules(row, col, "white")) {
-                                <div class="btn-group tile-combo">
-                                    <span type="button" class="btn btn-secondary dropdown-toggle opacity-allRules shadow-none" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img class="img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
+            <div class="col-6">
+                <div class="btn-group" role="group" >
+                    <a class="btn btn-secondary grey-button" type="button" href="http://localhost:9000/save">Save</a>
+                    <a class="btn btn-secondary grey-button" type="button" href="http://localhost:9000/undo">Undo</a>
+                    <a class="btn btn-secondary grey-button" type="button" href="http://localhost:9000/redo">Redo</a>
+                    <a class="btn btn-secondary grey-button" type="button" href="http://localhost:9000/score">End Game</a>
+                </div>
+                <div class="col-board">
+                @for(row <- 3 to 15) {
+                    <div class="btn-group">
+                    @for(col <- 3 to 15) {
+                        @if(controller.controller.getCellColor(row, col) == "none") {
+                            @if(controller.controller.getBoard.allRules(row, col, "red") || controller.controller.getBoard.allRules(row, col, "black") ||
+                                    controller.controller.getBoard.allRules(row, col, "grey") || controller.controller.getBoard.allRules(row, col, "white")) {
+                                <div class="board-tile-padding">
+                                    <span type="button" class="btn btn-secondary dropdown-toggle opacity-allRules shadow-none empty-tile" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img class="tile-img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
                                     </span>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/red/@{row-2}/@{col-2}">
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/@{row-2}/@{col-2}/red">
                                             <span>
-                                                <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                                                <img class="tile-img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
                                             </span>
                                         </a>
-                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/black/@{row-2}/@{col-2}"">
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/@{row-2}/@{col-2}/black">
                                             <span>
-                                                <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                                                <img class="tile-img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
                                             </span>
                                         </a>
-                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/grey/@{row-2}/@{col-2}"">
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/@{row-2}/@{col-2}/grey">
                                             <span>
-                                                <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                                                <img class="tile-img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
                                             </span>
                                         </a>
-                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/white/@{row-2}/@{col-2}"">
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/@{row-2}/@{col-2}/white">
                                             <span>
-                                                <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                                                <img class="tile-img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
                                             </span>
                                         </a>
                                     </div>
                                 </div>
-                        } else {
-                            <div class="btn-group tile-combo">
-                                <span type="button" class="btn btn-secondary dropdown-toggle opacity-noRules shadow-none" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img class="img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
-                                </span>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item shadow-none" href="http://localhost:9000/put/red/@{row-2}/@{col-2}"">
-                                    <span>
-                                        <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            } else {
+                                <div class="board-tile-padding">
+                                    <span type="button" class="btn btn-secondary dropdown-toggle opacity-noRules shadow-none empty-tile" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <img class="tile-img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
                                     </span>
-                                </a>
-                                <a class="dropdown-item shadow-none" href="http://localhost:9000/put/black/@{row-2}/@{col-2}"">
-                                    <span>
-                                        <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-                                    </span>
-                                </a>
-                                <a class="dropdown-item shadow-none" href="http://localhost:9000/put/grey/@{row-2}/@{col-2}"">
-                                    <span>
-                                        <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
-                                    </span>
-                                </a>
-                                <a class="dropdown-item shadow-none" href="http://localhost:9000/put/white/@{row-2}/@{col-2}"">
-                                    <span>
-                                        <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
-                                    </span>
-                                </a>
-                        </div>
-                    </div>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/@{row-2}/@{col-2}red/">
+                                            <span>
+                                                <img class="tile-img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                                            </span>
+                                        </a>
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/@{row-2}/@{col-2}/black">
+                                            <span>
+                                                <img class="tile-img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                                            </span>
+                                        </a>
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/@{row-2}/@{col-2}/grey">
+                                            <span>
+                                                <img class="tile-img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                                            </span>
+                                        </a>
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/@{row-2}/@{col-2}/white">
+                                            <span>
+                                                <img class="tile-img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        } else if(controller.controller.getCellColor(row, col) == "red") {
+                        <span class="tile-padding">
+                            <img class="tile-img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                        </span>
+                        } else if(controller.controller.getCellColor(row, col) == "black") {
+                        <span class="tile-padding">
+                            <img class="tile-img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                        </span>
+                        } else if(controller.controller.getCellColor(row, col) == "grey") {
+                        <span class="tile-padding">
+                            <img class="tile-img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                        </span>
+                        } else if(controller.controller.getCellColor(row, col) == "white") {
+                        <span class="tile-padding">
+                            <img class="tile-img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                        </span>
                         }
-                    } else if(controller.controller.getCellColor(row, col) == "red") {
-                    <span class="tile-combo">
-                        <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
-                    </span>
-                    } else if(controller.controller.getCellColor(row, col) == "black") {
-                    <span class="tile-combo">
-                        <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-                    </span>
-                    } else if(controller.controller.getCellColor(row, col) == "grey") {
-                    <span class="tile-combo">
-                        <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
-                    </span>
-                    } else if(controller.controller.getCellColor(row, col) == "white") {
-                    <span class="tile-combo">
-                        <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
-                    </span>
                     }
+                    </div>
                 }
                 </div>
-            }
             </div>
             <div class="player col-3">
                 @if(controller.controller.getMoves % 2 != 0) {
@@ -207,81 +149,45 @@
                 }else{
                     <h3>@controller.controller.getPlayerTwoName</h3>
                 }
-                <nav class="topPadding">
-                    <div class="nav nav-pills nav-justified" id="nav-p2-tab" role="tablist">
-                        <button class="nav-link active" id="nav-tiles-p2-tab" data-bs-toggle="tab" data-bs-target="#nav-tiles-p2" type="button" role="tab" aria-controls="nav-tiles-p2" aria-selected="true">Tiles</button>
-                        <button class="nav-link" id="nav-scoring-p2-tab" data-bs-toggle="tab" data-bs-target="#nav-scoring-p2" type="button" role="tab" aria-controls="nav-scoring-p2" aria-selected="false">Scoring rules</button>
+                <nav class="top-padding">
+                    <div class="nav nav-pills nav-justified" id="nav-tab-p2" role="tablist">
+                        <button class="nav-link active" id="nav-tiles-tab-p2" data-bs-toggle="tab" data-bs-target="#nav-tiles-p2" type="button" role="tab" aria-controls="nav-tiles-p2" aria-selected="true">Tiles</button>
+                        <button class="nav-link" id="nav-scoring-tab-p2" data-bs-toggle="tab" data-bs-target="#nav-scoring-p2" type="button" role="tab" aria-controls="nav-scoring-p2" aria-selected="false">Scoring rules</button>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent-p2">
-                    <div class="tab-pane fade show active topPadding" id="nav-tiles-p2" role="tabpanel" aria-labelledby="nav-tiles-p2-tab">
+                    <div class="tab-pane fade show active top-padding" id="nav-tiles-p2" role="tabpanel" aria-labelledby="nav-tiles-tab-p2">
                         <h4>@controller.controller.getBoard.getPlayerOne.getPoints</h4>
-                        <div class="tile-combo">
+                        <div class="tile-padding">
                             @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("red")) {
-                            <span class="tile-combo img">
-                                <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile" draggable="true">
+                            <span class="tile-padding tile-img">
+                                <img src="@routes.Assets.versioned("images/redButton.png")" class="player-tile" id="redtile@tiles" alt="red tile" draggable="true">
                             </span>
                             }
                         </div>
-                        <div class="tile-combo">
+                        <div class="tile-padding">
                             @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("black")) {
-                            <span class="tile-combo img">
-                                <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile" draggable="true">
+                            <span class="tile-padding tile-img">
+                                <img src="@routes.Assets.versioned("images/blackButton.png")" class="player-tile" id="blacktile@tiles" alt="black tile" draggable="true">
                             </span>
                             }
                         </div>
-                        <div class="tile-combo"class="tile-combo">
+                        <div class="tile-padding"class="tile-padding">
                             @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("grey")) {
-                            <span class="tile-combo img">
-                                <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile" draggable="true">
+                            <span class="tile-padding tile-img">
+                                <img src="@routes.Assets.versioned("images/greyButton.png")" class="player-tile" id="greytile@tiles"alt="grey tile" draggable="true">
                             </span>
                             }
                         </div>
-                        <div class="tile-combo">
+                        <div class="tile-padding">
                             @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("white")) {
-                            <span class="tile-combo img">
-                                <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile" draggable="true">
+                            <span class="tile-padding tile-img">
+                                <img src="@routes.Assets.versioned("images/whiteButton.png")" class="player-tile" id="whitetile@tiles" alt="white tile" draggable="true">
                             </span>
                             }
                         </div>
                     </div>
-                    <div class="tab-pane fade topPadding" id="nav-scoring-p2" role="tabpanel" aria-labelledby="nav-scoring-p2-tab">
-                        <div class="tile-combo rulesTab">
-                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
-                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-                            <span>:     10 points</span>
-                        </div>
-                        <div class="tile-combo rulesTab">
-                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
-                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
-                            <span>:     8 points</span>
-                        </div>
-                        <div class="tile-combo rulesTab">
-                            <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
-                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
-                            <span>:     6 points</span>
-                        </div>
-                        <div class="tile-combo rulesTab">
-                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
-                            <span>:     4 points</span>
-                        </div>
-                        <div class="tile-combo rulesTab">
-                            <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
-                            <span>:     2 points</span>
-                        </div>
-                        <div class="tile-combo rulesTab">
-                            <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
-                            <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
-                            <span>:     1 points</span>
-                        </div>
-                        <ul class="topPadding list">
-                            <li><b>10 points</b> for the first tile of the game</li>
-                            <li><b>10 points</b> will be subtracted upon breaking a rule</li>
-                            <li><b>Double points</b> when the last tile of a color is placed</li>
-                        </ul>
-                    </div>
+                    @quickrules("p2")
                 </div>
 
             </div>

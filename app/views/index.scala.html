@@ -1,50 +1,22 @@
 @()
 
-@main("Welcome to Play") {
+@main("Welcome to Caro") {
   <div>
-    <nav class="navbar navbar-dark bg-dark navbar-expand-lg ps-5">
-      <a class="navbar-brand navBrandFont" href="#">Caro</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="http://localhost:9000/">Menu</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:9000/board">Game</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost:9000/rules">Rules</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Actions
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="http://localhost:9000/save">Save</a>
-              <a class="dropdown-item" href="http://localhost:9000/undo">Undo</a>
-              <a class="dropdown-item" href="http://localhost:9000/redo">Redo</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="http://localhost:9000/score">End Game</a>
-            </div>
-          </li>
-        </ul>
+    <div class="menu-body">
+      <h1 class="top-padding">Welcome to Caro!</h1>
+      <h2>Choose your game:</h2>
+      <div class="padding-30">
+        <div class="btn-group-vertical" role="group">
+          <a href="http://localhost:9000/newGame" class="btn btn-secondary grey-button">New Game</a>
+          <a href="http://localhost:9000/board" class="btn btn-secondary grey-button">Continue Game</a>
+          <a href="http://localhost:9000/load" class="btn btn-secondary grey-button">Load Game</a>
+        </div>
+        <div class="padding-30">
+          <h3>If you want to have a look at the rules, click <a class="in-text-link" href="http://localhost:9000/rules">here!</a></h3>
+        </div>
       </div>
-    </nav>
-    <h1 class="topPadding">Welcome to Caro!</h1>
-    <h2>Choose your game:</h2>
-    <a href="http://localhost:9000/newGame" class="button">New Game</a>
-    <br>
-    <br>
-    <a href="http://localhost:9000/board" class="button">Continue Game</a>
-    <br>
-    <br>
-    <a href="http://localhost:9000/load" class="button">Load Game</a>
-    <div class="rules">
-      <h3>If you want to have a look at the rules, click <a href="http://localhost:9000/rules">here!</a></h3>
     </div>
+
   </div>
 
 }

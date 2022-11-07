@@ -4,27 +4,33 @@
     font-family: Tahoma, Arial, sans-serif;;
 }
 
-.body {
-    margin: 20px;
+.board-body, .menu-body, .score-body{
+    padding: 20px;
     text-align: center;
 }
 
 .rule-body {
+    padding: 20px;
     text-align: left;
+
 }
 
-.header {
+.score-result {
     padding: 50px;
     text-align: center;
     font-size: 40px;
 }
 
-.rules {
+.padding-30 {
     padding: 30px;
 }
 
-.tile-combo {
+.tile-padding {
     padding: 5px;
+}
+
+.board-tile-padding {
+    padding: 2px;
 }
 
 .player {
@@ -96,7 +102,7 @@
     font-size: 1ex;
 }
 
-.img {
+.tile-img {
     width: 30px;
     height: 30px;
 }
@@ -127,7 +133,7 @@
     min-width: 0rem !important;
 }
 
-.topPadding {
+.top-padding {
     padding-top: 50px;
 }
 
@@ -144,7 +150,7 @@
     content: none !important;
 }
 
-.btn {
+.empty-tile {
     border: none !important;
     padding: 0px !important;
 }
@@ -169,4 +175,42 @@
 
 .tab-pane {
     background: rgba(0,0,0,0) !important;
+}
+
+a.grey-button {
+    background-color: #21262b;
+}
+
+.medal-img {
+    height: 80px;
+    width: 80px;
+}
+
+.in-text-link {
+    color: #21262b;
+    text-decoration: none;
+    position: relative;
+}
+
+.in-text-link:hover {
+    color: #404347;
+}
+
+.in-text-link:after {
+    content: '';
+    width: 90%;
+    position: absolute;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #404347;
+    transform-origin: bottom left;
+    transition: transform 0.25s ease-in-out;
+}
+
+.in-text-link:hover:after {
+    color: #404347;
+    transform: scaleX(1);
+    transform-origin: bottom left;
 }

@@ -122,9 +122,6 @@
                 <div>
                 @for(col <- 3 to 15) {
                     @if(controller.controller.getCellColor(row, col) == "none") {
-                        <span class="drop-spot" id="field@row@col" data-row="@row" data-column="@col" >
-
-                        </span>
                         @if(controller.controller.getBoard.allRules(row, col, "red") || controller.controller.getBoard.allRules(row, col, "black") ||
                             controller.controller.getBoard.allRules(row, col, "grey") || controller.controller.getBoard.allRules(row, col, "white")) {
                                 <div class="btn-group tile-combo">
@@ -132,22 +129,22 @@
                                         <img class="img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
                                     </span>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/red/@{row-2}/@{col-2}">
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/@{row-2}/@{col-2}/red">
                                             <span>
                                                 <img class="img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
                                             </span>
                                         </a>
-                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/black/@{row-2}/@{col-2}"">
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/@{row-2}/@{col-2}/black">
                                             <span>
                                                 <img class="img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
                                             </span>
                                         </a>
-                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/grey/@{row-2}/@{col-2}"">
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/@{row-2}/@{col-2}/grey">
                                             <span>
                                                 <img class="img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
                                             </span>
                                         </a>
-                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/white/@{row-2}/@{col-2}"">
+                                        <a class="dropdown-item shadow-none" href="http://localhost:9000/put/@{row-2}/@{col-2}/white">
                                             <span>
                                                 <img class="img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
                                             </span>

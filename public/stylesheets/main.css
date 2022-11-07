@@ -14,7 +14,7 @@
 }
 
 .header {
-    padding: 100px;
+    padding: 50px;
     text-align: center;
     font-size: 40px;
 }
@@ -48,6 +48,7 @@
 }
 
 .row {
+    padding-top: 50px;
     display: flex;
     justify-content: center;
 }
@@ -93,4 +94,79 @@
 
 .credits {
     font-size: 1ex;
+}
+
+.img {
+    width: 30px;
+    height: 30px;
+}
+
+.opacity-allRules {
+    opacity: 0.9;
+}
+
+.opacity-noRules {
+    opacity: 0.2;
+}
+
+.navbar-brand {
+    font-size: 30px !important;
+    font-family: Tahoma, Arial, sans-serif !important;
+    background: rgba(0,0,0,0) !important;
+}
+
+.navbar-collapse, .nav-link, .nav-item, .navbar-nav, .collapse, .close, .alert-icon, .a{
+    background: rgba(0,0,0,0) !important;
+    color: #4e5965 !important;
+
+}
+
+.dropdown-item, .dropdown-menu {
+    background-color: #21262b  !important;
+    color: #4e5965 !important;
+    min-width: 0rem !important;
+}
+
+.topPadding {
+    padding-top: 50px;
+}
+
+.alert {
+    width: 30% !important;
+    align: center;
+}
+
+.a {
+    color: rgba(0,0,0,0) !important;
+}
+
+.dropdown-toggle::after {
+    content: none !important;
+}
+
+.btn {
+    border: none !important;
+    padding: 0px !important;
+}
+
+.list {
+    text-align: left !important;
+}
+
+.rulesTab {
+    text-align: left !important;
+    padding-left: 140px;
+}
+
+.nav-pills {
+    background: #647382  !important;
+}
+
+.active {
+    color: white !important;
+    background: #21262b !important;
+}
+
+.tab-pane {
+    background: rgba(0,0,0,0) !important;
 }

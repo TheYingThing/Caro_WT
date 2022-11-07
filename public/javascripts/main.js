@@ -1,5 +1,6 @@
 const droppabletiles = document.getElementsByClassName("drop-spot");
 const tiles = document.getElementsByClassName("player-tile");
+const navLink = document.querySelectorAll(".nav-link");
 
 let allowDrop = function(ev) {
     ev.preventDefault();

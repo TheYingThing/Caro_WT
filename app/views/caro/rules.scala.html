@@ -1,7 +1,38 @@
 
 @main("Welcome to Play") {
     <div class="rule-body">
-        <div>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg ps-5">
+            <a class="navbar-brand navBrandFont" href="#">Caro</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:9000/">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:9000/board">Game</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="http://localhost:9000/rules">Rules</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Actions
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="http://localhost:9000/save">Save</a>
+                            <a class="dropdown-item" href="http://localhost:9000/undo">Undo</a>
+                            <a class="dropdown-item" href="http://localhost:9000/redo">Redo</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="http://localhost:9000/score">End Game</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="topPadding">
             <h1>Welcome to caro</h1>
             <p>Caro is a multiplayer strategy board game. This implementation allows for two players.</p>
         </div>

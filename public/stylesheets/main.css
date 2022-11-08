@@ -115,22 +115,38 @@
     opacity: 0.2;
 }
 
-.navbar-brand {
-    font-size: 30px !important;
-    font-family: Tahoma, Arial, sans-serif !important;
-    background: rgba(0,0,0,0) !important;
+
+#caro-nav .navbar-brand {
+    font-size: 30px;
+    font-family: Tahoma, Arial, sans-serif;
+    background: rgba(0,0,0,0);
 }
 
-.navbar-collapse, .nav-link, .nav-item, .navbar-nav, .collapse, .close, .alert-icon, .a{
-    background: rgba(0,0,0,0) !important;
-    color: #4e5965 !important;
-
+#caro-nav .navbar-collapse,
+#caro-nav .nav-item,
+#caro-nav .navbar-nav,
+#caro-nav .collapse,
+#caro-nav .close,
+#caro-nav .alert-icon,
+#caro-nav .a ,
+#caro-nav .container-fluid{
+    background: rgba(0,0,0,0);
+    color: #4e5965;
 }
 
-.dropdown-item, .dropdown-menu {
-    background-color: #21262b  !important;
-    color: #4e5965 !important;
-    min-width: 0rem !important;
+.grey-link.nav-link {
+    background: rgba(0,0,0,0);
+    color: #4e5965;
+}
+
+.grey-link.nav-link:hover {
+    color: whitesmoke;
+}
+
+#board-grid-row .dropdown-item,#board-grid-row .dropdown-menu {
+    background-color: #21262b;
+    color: #4e5965;
+    min-width: 0;
 }
 
 .top-padding {
@@ -146,7 +162,7 @@
     color: rgba(0,0,0,0) !important;
 }
 
-.dropdown-toggle::after {
+#board-grid-row .dropdown-toggle::after {
     content: none !important;
 }
 
@@ -213,4 +229,8 @@ a.grey-button {
     color: #404347;
     transform: scaleX(1);
     transform-origin: bottom left;
+}
+
+@media (max-width: 480px) {
+
 }

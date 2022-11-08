@@ -122,19 +122,19 @@
                                 </div>
                             }
                         } else if(controller.controller.getCellColor(row, col) == "red") {
-                        <span class="tile-padding">
+                        <span class="board-tile-padding">
                             <img class="tile-img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
                         </span>
                         } else if(controller.controller.getCellColor(row, col) == "black") {
-                        <span class="tile-padding">
+                        <span class="board-tile-padding">
                             <img class="tile-img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
                         </span>
                         } else if(controller.controller.getCellColor(row, col) == "grey") {
-                        <span class="tile-padding">
+                        <span class="board-tile-padding">
                             <img class="tile-img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
                         </span>
                         } else if(controller.controller.getCellColor(row, col) == "white") {
-                        <span class="tile-padding">
+                        <span class="board-tile-padding">
                             <img class="tile-img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
                         </span>
                         }
@@ -157,7 +157,7 @@
                 </nav>
                 <div class="tab-content" id="nav-tabContent-p2">
                     <div class="tab-pane fade show active top-padding" id="nav-tiles-p2" role="tabpanel" aria-labelledby="nav-tiles-tab-p2">
-                        <h4>@controller.controller.getBoard.getPlayerOne.getPoints</h4>
+                        <h4>@controller.controller.getBoard.getPlayerTwo.getPoints</h4>
                         <div class="tile-padding">
                             @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("red")) {
                             <span class="tile-padding tile-img">

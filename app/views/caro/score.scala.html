@@ -2,9 +2,6 @@
 
 @main("Welcome to Caro") {
   <div class="score-body">
-    <div>
-      <img class="medal-img" src="@routes.Assets.versioned("images/medal.png")" alt="medal">
-    </div>
     <div class="score-result">
       Congratulations
       @if(controller.controller.getBoard.getPlayerOne.getPoints > controller.controller.getBoard.getPlayerTwo.getPoints) {

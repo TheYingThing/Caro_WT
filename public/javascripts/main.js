@@ -38,5 +38,12 @@ for (let i = 0; i < tiles.length ; i++) {
     tiles[i].addEventListener('dragstart', drag, false)
 }
 
+$(document).ready(function(){
+    $('#navbar-buttons .nav-link').click(function(){
+        console.log("bitch");
+        $('#navbar-buttons .nav-link').removeClass("active");
+        $(this).addClass("active");
+    });
+});
 
 

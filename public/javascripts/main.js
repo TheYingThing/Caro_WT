@@ -26,5 +26,24 @@ for (let i = 0; i < tiles.length ; i++) {
     tiles[i].addEventListener('dragstart', drag, false)
 }
 
+function startGame() {
+    const elements = document.getElementById("nameForm").elements;
+    let player1;
+    let player2;
+
+    if (elements.item(0).value == null || elements.item(0).value === "" ) {
+        player1 = "Player 1";
+    } else {
+        player1 = elements.item(0).value;
+    }
+
+    if (elements.item(1).value == null || elements.item(1).value === "" ) {
+        player2 = "Player 2";
+    } else {
+        player2 = elements.item(1).value;
+    }
+    window.location.href = "http://localhost:9000/game/" + player1 + "/" + player2;
+}
+
 
 

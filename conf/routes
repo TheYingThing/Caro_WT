@@ -14,6 +14,7 @@ GET     /load                       controllers.HomeController.load()
 GET     /player1/:name              controllers.HomeController.player1(name)
 GET     /player2/:name              controllers.HomeController.player2(name)
 GET     /newGame                    controllers.HomeController.newGame()
+GET     /game/:player1/:player2     controllers.HomeController.startGame(player1: String, player2: String)
 
 GET     /rules                      controllers.HomeController.rules()
 GET     /allRules/:row/:col/:color  controllers.HomeController.allRules(row: Int, col: Int, color: String)

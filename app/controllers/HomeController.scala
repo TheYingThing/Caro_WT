@@ -119,4 +119,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   def allRules(row: Int, col: Int, color: String): Action[AnyContent] = Action {
     Ok(controller.getBoard().allRules(row, col, color).toString)
   }
+
+  def helloWhaddup(): Action[AnyContent] = Action {
+    Ok(views.html.caro.partials.hoho())
+  }
 }

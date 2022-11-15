@@ -1,6 +1,7 @@
 const droppabletiles = document.getElementsByClassName("drop-spot");
 const tiles = document.getElementsByClassName("player-tile");
 const navLink = document.querySelectorAll(".nav-link");
+const menuButtons = document.getElementsByClassName("menu-button");
 
 let allowDrop = function(ev) {
     ev.preventDefault();
@@ -12,6 +13,19 @@ function checkRules(row, col, color) {
         type: 'GET'
     });
 }
+
+function ayowhaddap(path) {
+    return $.ajax({
+        url: "/" + path,
+        type: 'GET'
+    })
+}
+
+let load = async function(ev) {
+    let content = document.getElementById("page-content");
+    content.innerHTML = await ayowhaddap(ev.getAttribute("data-functionname"));
+}
+
 let drop = async function(ev) {
     console.log(ev.target.getAttribute("data-row"));
     let row = ev.target.getAttribute("data-row");
@@ -34,9 +48,19 @@ for (let i = 0; i < droppabletiles.length ; i++) {
     droppabletiles[i].addEventListener('dragover', allowDrop, false)
 }
 
+for (let i = 0; i < menuButtons.length ; i++) {
+    menuButtons[i].addEventListener('click', load, false)
+}
+
 for (let i = 0; i < tiles.length ; i++) {
     tiles[i].addEventListener('dragstart', drag, false)
 }
+$(document).ready(function(){
+    $('#navbar-buttons .nav-link').click(function(){
+        $('#navbar-buttons .nav-link').removeClass("active");
+        $(this).addClass("active");
+    });
+});
 
 function startGame() {
     const elements = document.getElementById("nameForm").elements;
@@ -59,10 +83,7 @@ function startGame() {
 
 $(document).ready(function(){
     $('#navbar-buttons .nav-link').click(function(){
-        console.log("bitch");
         $('#navbar-buttons .nav-link').removeClass("active");
         $(this).addClass("active");
     });
 });
-
-

@@ -2,21 +2,19 @@
 
 @main("Welcome to Caro") {
   <div>
-    <div class="menu-body">
+    <div class="content-body">
       <h1 class="top-padding">Welcome to Caro!</h1>
       <h2>Choose your game:</h2>
       <div class="padding-30">
         <div class="btn-group-vertical" role="group">
-          <a href="http://localhost:9000/newGame" class="btn btn-secondary grey-button">New Game</a>
-          <a href="http://localhost:9000/board" class="btn btn-secondary grey-button">Continue Game</a>
-          <a href="http://localhost:9000/load" class="btn btn-secondary grey-button">Load Game</a>
+          <button class="btn btn-secondary grey-button menu-button" data-viewname="newgame">New Game</button>
+          <button class="btn btn-secondary grey-button menu-button" data-viewname="board">Continue Game</button>
+          <button class="btn btn-secondary grey-button menu-button" data-viewname="board">Load Game</button>
         </div>
         <div class="padding-30">
           <h3>If you want to have a look at the rules, click <a class="in-text-link" href="http://localhost:9000/rules">here!</a></h3>
         </div>
       </div>
     </div>
-
   </div>
-
 }

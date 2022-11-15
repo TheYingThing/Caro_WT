@@ -22,28 +22,28 @@
          * the page content. *@
         <div>
             <nav class="navbar navbar-dark bg-dark navbar-expand-lg ps-5" id="caro-nav">
-                <div class="container-fluid">
-                    <a class="navbar-brand navBrandFont" href="#">Caro</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link grey-link" href="http://localhost:9000/">Menu</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link grey-link" href="http://localhost:9000/board">Game</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link grey-link" href="http://localhost:9000/rules">Rules</a>
-                            </li>
-                        </ul>
-                    </div>
+                <a class="navbar-brand navBrandFont" href="#">Caro</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-buttons" aria-controls="navbar-buttons" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div  id= "navbar-buttons" class="collapse navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="http://localhost:9000/">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://localhost:9000/board">Game</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://localhost:9000/rules">Rules</a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </div>
+        <div id="page-content">
         @content
+        </div>
         <script src="@routes.Assets.versioned("javascripts/main.js")" type="text/javascript"></script>
     </body>
 </html>

@@ -4,6 +4,7 @@ import caro.Caro
 import caro.controller.controllerComponent.ControllerInterface
 import com.google.inject.Inject
 import play.api.mvc._
+import play.api.libs.json._
 
 import javax.inject._
 /**
@@ -122,5 +123,15 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
 
   def helloWhaddup(): Action[AnyContent] = Action {
     Ok(views.html.caro.partials.hoho())
+  }
+
+  def putOnly( row: Int, col: Int, color: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    controller.putCell(row + 2 , col + 2, color)
+    val fieldColor: String = controller.getCellColor(row +2, col + 2)
+    val statusmessage: String = controller.getBoardStatus
+    Ok(Json.obj(
+      "color" -> fieldColor,
+      "status" -> statusmessage
+    ))
   }
 }

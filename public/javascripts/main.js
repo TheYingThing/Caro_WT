@@ -14,6 +14,19 @@ function checkRules(row, col, color) {
     });
 }
 
+function startGame(p1, p2) {
+    return $.ajax({
+        url:'/game/' + p1 + '/' + p2,
+        type: 'GET'
+    });
+}
+
+function putOnly(row, col, color) {
+    return $.ajax({
+        url:'/putOnly/' + row + '/' + col + '/' + color,
+        type: 'GET'
+    })
+}
 function ayowhaddap(path) {
     return $.ajax({
         url: "/" + path,
@@ -23,9 +36,17 @@ function ayowhaddap(path) {
 
 let load = async function(ev) {
     let content = document.getElementById("page-content");
-    content.innerHTML = await ayowhaddap(ev.getAttribute("data-functionname"));
+    content.innerHTML = await ayowhaddap(ev.target.getAttribute("data-viewname"));
 }
 
+let putTileOnly = async function(ev) {
+    let row = ev.target.parentNode.getAttribute("data-row");
+    let col = ev.target.parentNode.getAttribute("data-column");
+    let color = ev.target.getAttribute("data-color");
+    let result = await putOnly(row, col, color);
+    document.getElementById("tile" + row + col).firstChild.src = "@routes.Assets.versioned(\"images/" + color + "Button.png\")";
+
+}
 let drop = async function(ev) {
     console.log(ev.target.getAttribute("data-row"));
     let row = ev.target.getAttribute("data-row");
@@ -44,6 +65,7 @@ let drag = function(ev) {
 }
 
 for (let i = 0; i < droppabletiles.length ; i++) {
+    droppabletiles[i].addEventListener('click', putTileOnly, false)
     droppabletiles[i].addEventListener('drop', drop, false)
     droppabletiles[i].addEventListener('dragover', allowDrop, false)
 }
@@ -62,7 +84,7 @@ $(document).ready(function(){
     });
 });
 
-function startGame() {
+async function startGame()  {
     const elements = document.getElementById("nameForm").elements;
     let player1;
     let player2;
@@ -78,7 +100,8 @@ function startGame() {
     } else {
         player2 = elements.item(1).value;
     }
-    window.location.href = "http://localhost:9000/game/" + player1 + "/" + player2;
+    let content = document.getElementById("page-content");
+    content.innerHTML = await startGame(player1, player2);
 }
 
 $(document).ready(function(){

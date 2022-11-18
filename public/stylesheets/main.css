@@ -131,10 +131,14 @@
 #caro-nav .collapse,
 #caro-nav .close,
 #caro-nav .alert-icon,
-#caro-nav .a ,
+#caro-nav .a,
 #caro-nav .container-fluid{
     background: rgba(0,0,0,0);
     color: #4e5965;
+}
+
+#caro-nav .navbar-toggler-icon{
+    background-color: transparent;
 }
 
 .grey-link.nav-link {
@@ -267,4 +271,23 @@ a.grey-button {
     color: #404347;
     transform: scaleX(1);
     transform-origin: bottom left;
+}
+
+@media (max-width: 480px) {
+
+}
+
+.form-body {
+    padding-top: 10%;
+    width: 40%;
+    display: inline-block;
+}
+
+.form-input {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.label-padding {
+    padding-bottom: 5px;
 }

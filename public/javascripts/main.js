@@ -14,7 +14,7 @@ function checkRules(row, col, color) {
     });
 }
 
-function startGame(p1, p2) {
+function startGameAjax(p1, p2) {
     return $.ajax({
         url:'/game/' + p1 + '/' + p2,
         type: 'GET'
@@ -43,10 +43,11 @@ let putTileOnly = async function(ev) {
     let row = ev.target.parentNode.getAttribute("data-row");
     let col = ev.target.parentNode.getAttribute("data-column");
     let color = ev.target.getAttribute("data-color");
+    console.log(row, col, color);
     let result = await putOnly(row, col, color);
     document.getElementById("tile" + row + col).firstChild.src = "@routes.Assets.versioned(\"images/" + color + "Button.png\")";
-
 }
+
 let drop = async function(ev) {
     console.log(ev.target.getAttribute("data-row"));
     let row = ev.target.getAttribute("data-row");
@@ -101,7 +102,7 @@ async function startGame()  {
         player2 = elements.item(1).value;
     }
     let content = document.getElementById("page-content");
-    content.innerHTML = await startGame(player1, player2);
+    content.innerHTML = await startGameAjax(player1, player2);
 }
 
 $(document).ready(function(){

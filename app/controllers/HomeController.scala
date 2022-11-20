@@ -126,8 +126,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   }
 
   def putOnly( row: Int, col: Int, color: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    controller.putCell(row + 2 , col + 2, color)
-    val fieldColor: String = controller.getCellColor(row +2, col + 2)
+    controller.putCell(row , col, color)
+    val fieldColor: String = controller.getCellColor(row, col)
     val statusmessage: String = controller.getBoardStatus
     Ok(Json.obj(
       "color" -> fieldColor,

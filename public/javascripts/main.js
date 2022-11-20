@@ -39,13 +39,27 @@ let load = async function(ev) {
     content.innerHTML = await ayowhaddap(ev.target.getAttribute("data-viewname"));
 }
 
-let putTileOnly = async function(ev) {
-    let row = ev.target.parentNode.getAttribute("data-row");
-    let col = ev.target.parentNode.getAttribute("data-column");
-    let color = ev.target.getAttribute("data-color");
-    console.log(row, col, color);
-    let result = await putOnly(row, col, color);
-    document.getElementById("tile" + row + col).firstChild.src = "@routes.Assets.versioned(\"images/" + color + "Button.png\")";
+let putTileOnly = async function(color) {
+    let tile = document.getElementById("tile");
+    let row = tile.getAttribute("data-row");
+    console.log(row);
+    let col = tile.getAttribute("data-col");
+    console.log(col);
+    let finalColor = color;
+    console.log(color);
+    let result = await putOnly(row, col, finalColor);
+    const id = row + col;
+    console.log(id);
+
+    if (result) {
+        const tileToReplace = document.getElementById(id);
+        if (tileToReplace) {
+            console.log("not undifinded");
+            document.getElementById(id).firstChild.src = "@routes.Assets.versioned(\"images/" + color + "Button.png\")";
+        } else {
+            console.log("undifinded");
+        }
+    }
 }
 
 let drop = async function(ev) {

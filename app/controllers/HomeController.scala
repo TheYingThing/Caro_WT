@@ -132,16 +132,23 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   def putOnly( row: Int, col: Int, color: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     controller.putCell(row , col, color)
     val fieldColor: String = controller.getCellColor(row, col)
-    val statusmessage: String = controller.getBoardStatus
+    val statusMessage: String = controller.getBoardStatus
     var tiles: Int = 0;
+    var player: String = "";
+
     if(controller.getBoard().getMoves % 2 == 0) {
-      tiles = controller.getBoard().getPlayerOne.getTiles(fieldColor)
-    } else {
       tiles = controller.getBoard().getPlayerTwo.getTiles(fieldColor)
+      player = "p2"
+    } else {
+      tiles = controller.getBoard().getPlayerOne.getTiles(fieldColor)
+      player = "p1"
     }
+
     Ok(Json.obj(
       "color" -> fieldColor,
-      "status" -> statusmessage
+      "status" -> statusMessage,
+      "tiles" -> tiles,
+      "player" -> player
     ))
   }
 }

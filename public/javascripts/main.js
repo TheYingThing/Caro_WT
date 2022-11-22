@@ -15,17 +15,19 @@ let load = async function(ev) {
 }
 
 let putTileOnly = async function(ev) {
-    console.log("hey, yes");
     let menu = ev.target.closest(".dropdown-menu");
     let row = menu.getAttribute("data-row");
     let col = menu.getAttribute("data-col");
     let color = ev.target.parentElement.getAttribute("data-color");
     let path = "putOnly/" + row + "/" + col + "/" + color;
     let result = await executeAjax(path);
-    console.log(result);
-    console.log(document)
+    let resColor = result['color']
+    let resPlayer = result['player']
+    console.log(resPlayer)
+    console.log(resColor)
+    let tiles = document.getElementById(resColor + "-tiles-" + resPlayer)
+    tiles.removeChild(tiles.lastElementChild)
     document.getElementById("tile" + row + col).firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
-
 }
 
 
@@ -64,8 +66,6 @@ async function startGame()  {
 
 $(document).ready(function(){
     let url = window.location.href;
-    console.log(url);
-    console.log(this.href);
     $('#navbar-buttons .nav-link').each(function(){
         if (url === this.href) {
             $('#navbar-buttons .nav-link').removeClass("active");

@@ -66,7 +66,7 @@
                         @if(controller.controller.getBoard.allRules(row, col, "red") || controller.controller.getBoard.allRules(row, col, "black") ||
                                 controller.controller.getBoard.allRules(row, col, "grey") || controller.controller.getBoard.allRules(row, col, "white")) {
                             <div class="board-tile-padding" id="board-tiles">
-                                <span type="button" class="btn btn-secondary dropdown-toggle opacity-allRules shadow-none empty-tile"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="{@row}{@col}">
+                                <span type="button" class="btn btn-secondary dropdown-toggle opacity-allRules shadow-none empty-tile"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="tile@row@col">
                                     <img class="tile-img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
                                 </span>
                                 <div class="dropdown-menu" data-row="@row" data-col="@col">

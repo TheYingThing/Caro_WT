@@ -2,6 +2,7 @@ const droppabletiles = document.getElementsByClassName("drop-spot");
 const tiles = document.getElementsByClassName("player-tile");
 const navLink = document.querySelectorAll(".nav-link");
 const menuButtons = document.getElementsByClassName("menu-button");
+const dropdownTiles = document.getElementsByClassName("dropdown-tile");
 
 let allowDrop = function(ev) {
     ev.preventDefault();
@@ -14,7 +15,7 @@ function checkRules(row, col, color) {
     });
 }
 
-function startGame(p1, p2) {
+function newGame(p1, p2) {
     return $.ajax({
         url:'/game/' + p1 + '/' + p2,
         type: 'GET'
@@ -40,11 +41,14 @@ let load = async function(ev) {
 }
 
 let putTileOnly = async function(ev) {
-    let row = ev.target.parentNode.getAttribute("data-row");
-    let col = ev.target.parentNode.getAttribute("data-column");
-    let color = ev.target.getAttribute("data-color");
+    console.log("hey, yes");
+    let menu = ev.target.closest(".dropdown-menu");
+    let row = menu.getAttribute("data-row");
+    let col = menu.getAttribute("data-col");
+    let color = ev.target.parentElement.getAttribute("data-color");
     let result = await putOnly(row, col, color);
-    document.getElementById("tile" + row + col).firstChild.src = "@routes.Assets.versioned(\"images/" + color + "Button.png\")";
+    console.log(result);
+    document.getElementById("tile" + row + col).firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
 
 }
 let drop = async function(ev) {
@@ -64,6 +68,10 @@ let drag = function(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
 }
 
+for (let i = 0; i < dropdownTiles.length ; i++) {
+    dropdownTiles[i].addEventListener('click', putTileOnly, false);
+}
+
 for (let i = 0; i < droppabletiles.length ; i++) {
     droppabletiles[i].addEventListener('click', putTileOnly, false)
     droppabletiles[i].addEventListener('drop', drop, false)
@@ -77,6 +85,7 @@ for (let i = 0; i < menuButtons.length ; i++) {
 for (let i = 0; i < tiles.length ; i++) {
     tiles[i].addEventListener('dragstart', drag, false)
 }
+
 $(document).ready(function(){
     $('#navbar-buttons .nav-link').click(function(){
         $('#navbar-buttons .nav-link').removeClass("active");
@@ -84,7 +93,7 @@ $(document).ready(function(){
     });
 });
 
-async function startGame()  {
+async function startGame() {
     const elements = document.getElementById("nameForm").elements;
     let player1;
     let player2;
@@ -101,7 +110,7 @@ async function startGame()  {
         player2 = elements.item(1).value;
     }
     let content = document.getElementById("page-content");
-    content.innerHTML = await startGame(player1, player2);
+    content.innerHTML = await newGame(player1, player2);
 }
 
 $(document).ready(function(){

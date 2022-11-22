@@ -18,7 +18,8 @@ GET     /game/:player1/:player2     controllers.HomeController.startGame(player1
 
 GET     /rules                      controllers.HomeController.rules()
 GET     /allRules/:row/:col/:color  controllers.HomeController.allRules(row: Int, col: Int, color: String)
-GET     /board                      controllers.HomeController.board()
+GET     /boardOnly                  controllers.HomeController.board()
+GET     /board                      controllers.HomeController.boardThroughMain()
 GET     /score                      controllers.HomeController.score()
 GET     /hoho                       controllers.HomeController.helloWhaddup()
 GET     /putOnly/:row/:col/:color   controllers.HomeController.putOnly(row: Int, col: Int, color: String)

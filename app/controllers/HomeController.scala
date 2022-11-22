@@ -103,6 +103,10 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     Ok(views.html.caro.board(this))
   }
 
+  def boardThroughMain(): Action[AnyContent] = Action {
+    Ok(views.html.main("hey")(views.html.caro.board(this)))
+  }
+
   def score(): Action[AnyContent] = Action {
     Ok(views.html.caro.score(this))
   }
@@ -126,9 +130,15 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   }
 
   def putOnly( row: Int, col: Int, color: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    controller.putCell(row + 2 , col + 2, color)
-    val fieldColor: String = controller.getCellColor(row +2, col + 2)
+    controller.putCell(row , col, color)
+    val fieldColor: String = controller.getCellColor(row, col)
     val statusmessage: String = controller.getBoardStatus
+    var tiles: Int = 0;
+    if(controller.getBoard().getMoves % 2 == 0) {
+      tiles = controller.getBoard().getPlayerOne.getTiles(fieldColor)
+    } else {
+      tiles = controller.getBoard().getPlayerTwo.getTiles(fieldColor)
+    }
     Ok(Json.obj(
       "color" -> fieldColor,
       "status" -> statusmessage

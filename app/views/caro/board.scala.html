@@ -64,31 +64,31 @@
                         @if(controller.controller.getBoard.allRules(row, col, "red") || controller.controller.getBoard.allRules(row, col, "black") ||
                                 controller.controller.getBoard.allRules(row, col, "grey") || controller.controller.getBoard.allRules(row, col, "white")) {
                             <div class="board-tile-padding">
-                                <span type="button" class="btn btn-secondary dropdown-toggle opacity-allRules shadow-none empty-tile"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span type="button" class="btn btn-secondary dropdown-toggle opacity-allRules shadow-none empty-tile" id="tile@row@col" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img class="tile-img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
                                 </span>
                                 <div class="dropdown-menu" data-row="@row" data-col="@col">
-                                        <span class="dropdown-item shadow-none " data-color="red">
-                                            <img class="tile-img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
-                                        </span>
-                                        <span class="dropdown-item shadow-none" data-color="black" >
-                                            <img class="tile-img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-                                        </span>
-                                        <span class="dropdown-item shadow-none" data-color="grey" >
-                                            <img class="tile-img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
-                                        </span>
-                                        <span class="dropdown-item shadow-none" data-color="white" >
-                                            <img class="tile-img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
-                                        </span>
+                                    <span class="dropdown-item shadow-none dropdown-tile" data-color="red">
+                                        <img class="tile-img" data-color="red" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                                    </span>
+                                    <span class="dropdown-item shadow-none dropdown-tile" data-color="black" >
+                                        <img class="tile-img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                                    </span>
+                                    <span class="dropdown-item shadow-none dropdown-tile" data-color="grey" >
+                                        <img class="tile-img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                                    </span>
+                                    <span class="dropdown-item shadow-none dropdown-tile" data-color="white" >
+                                        <img class="tile-img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                                    </span>
                                 </div>
                             </div>
                         } else {
                             <div class="board-tile-padding">
-                                <span type="button" class="btn btn-secondary dropdown-toggle opacity-noRules shadow-none empty-tile" id="tile{@row}{@col}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span type="button" class="btn btn-secondary dropdown-toggle opacity-noRules shadow-none empty-tile" id="tile@row@col" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <img class="tile-img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
                                 </span>
                                 <div class="dropdown-menu" data-row="@row" data-col="@col">
-                                    <a class="dropdown-item shadow-none" data-color="red" href="http://localhost:9000/put/@{row-2}/@{col-2}red/">
+                                    <a class="dropdown-item shadow-none" data-color="red" href="http://localhost:9000/put/@{row-2}/@{col-2}/red/">
                                         <span>
                                             <img class="tile-img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
                                         </span>

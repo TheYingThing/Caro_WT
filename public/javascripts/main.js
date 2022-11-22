@@ -23,11 +23,29 @@ let putTileOnly = async function(ev) {
     let result = await executeAjax(path);
     let resColor = result['color']
     let resPlayer = result['player']
+    let resStatus = result['statusMessage']
     console.log(resPlayer)
     console.log(resColor)
     let tiles = document.getElementById(resColor + "-tiles-" + resPlayer)
     tiles.removeChild(tiles.lastElementChild)
+    let points = document.getElementById(resPlayer + "-points")
+    points.innerHTML = result['points'].toLocaleString()
     document.getElementById("tile" + row + col).firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
+
+    if(resPlayer === 'p1') {
+        document.getElementById(resPlayer + "-name").classList.remove("highlight")
+        document.getElementById("p2-name").classList.add("highlight")
+    } else if (resPlayer === 'p2') {
+        document.getElementById(resPlayer + "-name").classList.remove("highlight")
+        document.getElementById("p1-name").classList.add("highlight")
+    }
+
+    if (resStatus === "") {
+        $("status-alert").hide()
+    } else {
+        $("status-alert").textContent = resStatus
+        $("status-alert").show()
+    }
 }
 
 

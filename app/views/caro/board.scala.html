@@ -5,11 +5,7 @@
 <div class="content-body">
     <div class="row">
         <div class="player col-lg-3 col-6">
-            @if(controller.controller.getMoves % 2 == 0) {
-                <h3 class="highlight">@controller.controller.getPlayerOneName</h3>
-            }else{
-                <h3>@controller.controller.getPlayerOneName</h3>
-            }
+            <h3 class="highlight" id="p1-name">@controller.controller.getPlayerOneName</h3>
             <nav class="top-padding">
                 <div class="nav nav-pills nav-justified" id="nav-tab" role="tablist">
                     <button class="nav-link grey-link active" id="nav-tiles-tab-p1" data-bs-toggle="tab" data-bs-target="#nav-tiles-p1" type="button" role="tab" aria-controls="nav-tiles-p1" aria-selected="true">Tiles</button>
@@ -18,7 +14,7 @@
             </nav>
             <div class="tab-content" id="nav-tabContent-p1">
                 <div class="tab-pane fade show active top-padding" id="nav-tiles-p1" role="tabpanel" aria-labelledby="nav-tiles-tab-p1">
-                    <h4>@controller.controller.getBoard.getPlayerOne.getPoints</h4>
+                    <h4 id="p1-points">@controller.controller.getBoard.getPlayerOne.getPoints</h4>
                     <div class="tile-padding" id="red-tiles-p1">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("red")) {
                         <span class="tile-padding">
@@ -105,11 +101,7 @@
             </div>
         </div>
         <div class="player col-lg-3 col-6">
-            @if(controller.controller.getMoves % 2 != 0) {
-                <h3 class="highlight">@controller.controller.getPlayerTwoName</h3>
-            }else{
-                <h3>@controller.controller.getPlayerTwoName</h3>
-            }
+            <h3 id="p2-name">@controller.controller.getPlayerTwoName</h3>
             <nav class="top-padding">
                 <div class="nav nav-pills nav-justified" id="nav-tab-p2" role="tablist">
                     <button class="nav-link grey-link active" id="nav-tiles-tab-p2" data-bs-toggle="tab" data-bs-target="#nav-tiles-p2" type="button" role="tab" aria-controls="nav-tiles-p2" aria-selected="true">Tiles</button>
@@ -118,7 +110,7 @@
             </nav>
             <div class="tab-content" id="nav-tabContent-p2">
                 <div class="tab-pane fade show active top-padding" id="nav-tiles-p2" role="tabpanel" aria-labelledby="nav-tiles-tab-p2">
-                    <h4>@controller.controller.getBoard.getPlayerTwo.getPoints</h4>
+                    <h4 id="p2-points">@controller.controller.getBoard.getPlayerTwo.getPoints</h4>
                     <div class="tile-padding">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("red")) {
                         <span class="tile-padding tile-img" id="red-tiles-p2">
@@ -154,14 +146,12 @@
         </div>
     </div>
     <div class="row">
-        @if(controller.controller.getBoardStatus != "") {
-        <div class="alert alert-dark alert-dismissible" role="alert">
+        <div class="alert alert-dark alert-dismissible" role="alert" id="status-alert">
             @controller.controller.getBoardStatus
             <a style="text-decoration:none" type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
-                <span class="alert-icon" aria-hidden="true">&times;</span></span>
+                <span class="alert-icon" aria-hidden="true">&times;</span>
             </a>
         </div>
-        }
     </div>
 </div>
 }

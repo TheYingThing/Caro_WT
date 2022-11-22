@@ -114,7 +114,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
 
   def startGame(player1: String, player2: String): Action[AnyContent] = Action {
     controller.newBoard(player1, player2)
-    Ok(views.html.caro.board(this))
+    Ok("new board")
   }
 
   def allRules(row: Int, col: Int, color: String): Action[AnyContent] = Action {

@@ -3,31 +3,7 @@ const tiles = document.getElementsByClassName("player-tile");
 const navLink = document.querySelectorAll(".nav-link");
 const menuButtons = document.getElementsByClassName("menu-button");
 
-let allowDrop = function(ev) {
-    ev.preventDefault();
-};
-
-function checkRules(row, col, color) {
-    return $.ajax({
-        url:'/allRules/' + row + '/' + col + '/' + color,
-        type: 'GET'
-    });
-}
-
-function startGameAjax(p1, p2) {
-    return $.ajax({
-        url:'/game/' + p1 + '/' + p2,
-        type: 'GET'
-    });
-}
-
-function putOnly(row, col, color) {
-    return $.ajax({
-        url:'/putOnly/' + row + '/' + col + '/' + color,
-        type: 'GET'
-    })
-}
-function ayowhaddap(path) {
+function executeAjax(path) {
     return $.ajax({
         url: "/" + path,
         type: 'GET'
@@ -35,8 +11,8 @@ function ayowhaddap(path) {
 }
 
 let load = async function(ev) {
-    let content = document.getElementById("page-content");
-    content.innerHTML = await ayowhaddap(ev.target.getAttribute("data-viewname"));
+    await executeAjax(ev.target.getAttribute("data-viewname"));
+    window.location.href = "http://localhost:9000/board";
 }
 
 let putTileOnly = async function(color) {
@@ -45,9 +21,9 @@ let putTileOnly = async function(color) {
     console.log(row);
     let col = tile.getAttribute("data-col");
     console.log(col);
-    let finalColor = color;
     console.log(color);
-    let result = await putOnly(row, col, finalColor);
+    const path = '/putOnly/' + row + '/' + col + '/' + color;
+    let result = await executeAjax(path);
     const id = row + col;
     console.log(id);
 
@@ -62,42 +38,13 @@ let putTileOnly = async function(color) {
     }
 }
 
-let drop = async function(ev) {
-    console.log(ev.target.getAttribute("data-row"));
-    let row = ev.target.getAttribute("data-row");
-    let col = ev.target.getAttribute("data-column");
-    let tileID = ev.dataTransfer.getData("text");
-    let color = document.getElementById(tileID).getAttribute("data-color");
-    let valid = await checkRules(row, col, color)
-    $.ajax({
-        url:'/put/' + row + '/' + col + '/' + color,
-        type: 'GET'
-    });
-};
-
-let drag = function(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-}
-
 for (let i = 0; i < droppabletiles.length ; i++) {
     droppabletiles[i].addEventListener('click', putTileOnly, false)
-    droppabletiles[i].addEventListener('drop', drop, false)
-    droppabletiles[i].addEventListener('dragover', allowDrop, false)
 }
 
 for (let i = 0; i < menuButtons.length ; i++) {
     menuButtons[i].addEventListener('click', load, false)
 }
-
-for (let i = 0; i < tiles.length ; i++) {
-    tiles[i].addEventListener('dragstart', drag, false)
-}
-$(document).ready(function(){
-    $('#navbar-buttons .nav-link').click(function(){
-        $('#navbar-buttons .nav-link').removeClass("active");
-        $(this).addClass("active");
-    });
-});
 
 async function startGame()  {
     const elements = document.getElementById("nameForm").elements;
@@ -115,13 +62,19 @@ async function startGame()  {
     } else {
         player2 = elements.item(1).value;
     }
-    let content = document.getElementById("page-content");
-    content.innerHTML = await startGameAjax(player1, player2);
+    const path = '/game/' + p1 + '/' + p2;
+    await executeAjax(path);
+    window.location.href = "http://localhost:9000/board";
 }
 
 $(document).ready(function(){
-    $('#navbar-buttons .nav-link').click(function(){
-        $('#navbar-buttons .nav-link').removeClass("active");
-        $(this).addClass("active");
+    let url = window.location.href;
+    console.log(url);
+    console.log(this.href);
+    $('#navbar-buttons .nav-link').each(function(){
+        if (url === this.href) {
+            $('#navbar-buttons .nav-link').removeClass("active");
+            $(this).addClass("active");
+        }
     });
 });

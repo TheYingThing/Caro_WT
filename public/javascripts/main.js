@@ -4,31 +4,7 @@ const navLink = document.querySelectorAll(".nav-link");
 const menuButtons = document.getElementsByClassName("menu-button");
 const dropdownTiles = document.getElementsByClassName("dropdown-tile");
 
-let allowDrop = function(ev) {
-    ev.preventDefault();
-};
-
-function checkRules(row, col, color) {
-    return $.ajax({
-        url:'/allRules/' + row + '/' + col + '/' + color,
-        type: 'GET'
-    });
-}
-
-function newGame(p1, p2) {
-    return $.ajax({
-        url:'/game/' + p1 + '/' + p2,
-        type: 'GET'
-    });
-}
-
-function putOnly(row, col, color) {
-    return $.ajax({
-        url:'/putOnly/' + row + '/' + col + '/' + color,
-        type: 'GET'
-    })
-}
-function ayowhaddap(path) {
+function executeAjax(path) {
     return $.ajax({
         url: "/" + path,
         type: 'GET'
@@ -36,8 +12,8 @@ function ayowhaddap(path) {
 }
 
 let load = async function(ev) {
-    let content = document.getElementById("page-content");
-    content.innerHTML = await ayowhaddap(ev.target.getAttribute("data-viewname"));
+    await executeAjax(ev.target.getAttribute("data-viewname"));
+    window.location.href = "http://localhost:9000/board";
 }
 
 let putTileOnly = async function(ev) {
@@ -74,26 +50,13 @@ for (let i = 0; i < dropdownTiles.length ; i++) {
 
 for (let i = 0; i < droppabletiles.length ; i++) {
     droppabletiles[i].addEventListener('click', putTileOnly, false)
-    droppabletiles[i].addEventListener('drop', drop, false)
-    droppabletiles[i].addEventListener('dragover', allowDrop, false)
 }
 
 for (let i = 0; i < menuButtons.length ; i++) {
     menuButtons[i].addEventListener('click', load, false)
 }
 
-for (let i = 0; i < tiles.length ; i++) {
-    tiles[i].addEventListener('dragstart', drag, false)
-}
-
-$(document).ready(function(){
-    $('#navbar-buttons .nav-link').click(function(){
-        $('#navbar-buttons .nav-link').removeClass("active");
-        $(this).addClass("active");
-    });
-});
-
-async function startGame() {
+async function startGame()  {
     const elements = document.getElementById("nameForm").elements;
     let player1;
     let player2;
@@ -109,13 +72,19 @@ async function startGame() {
     } else {
         player2 = elements.item(1).value;
     }
-    let content = document.getElementById("page-content");
-    content.innerHTML = await newGame(player1, player2);
+    const path = '/game/' + p1 + '/' + p2;
+    await executeAjax(path);
+    window.location.href = "http://localhost:9000/board";
 }
 
 $(document).ready(function(){
-    $('#navbar-buttons .nav-link').click(function(){
-        $('#navbar-buttons .nav-link').removeClass("active");
-        $(this).addClass("active");
+    let url = window.location.href;
+    console.log(url);
+    console.log(this.href);
+    $('#navbar-buttons .nav-link').each(function(){
+        if (url === this.href) {
+            $('#navbar-buttons .nav-link').removeClass("active");
+            $(this).addClass("active");
+        }
     });
 });

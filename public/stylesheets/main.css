@@ -44,9 +44,7 @@
 }
 
 .game-status {
-    padding: 20px;
-    font-size: 20px;
-    color: #f44337;
+    display: none;
 }
 
 .highlight {
@@ -111,12 +109,8 @@
     height: 30px;
 }
 
-.opacity-allRules {
-    opacity: 0.9;
-}
-
-.opacity-noRules {
-    opacity: 0.2;
+.opacity-noTiles {
+    opacity: 0.4;
 }
 
 #caro-nav .navbar-brand {

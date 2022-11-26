@@ -8,10 +8,30 @@ function executeAjax(path) {
         type: 'GET'
     })
 }
+function executeAjaxForJson(path) {
+    return $.ajax({
+        url: "/" + path,
+        type: 'GET',
+        dataType: "json",
+        success: function (data) {
+            console.log(data);
+        },
+        error: function () {
+            console.log("something went wrong");
+        }
+    })
+}
 
 let load = async function(ev) {
-    await executeAjax(ev.target.getAttribute("data-viewname"));
-    window.location.href = "http://localhost:9000/board";
+    let path = ev.target.getAttribute("data-viewname");
+
+    if (path === "newGame") {
+        let content = document.getElementById("page-content");
+        content.innerHTML = await executeAjax(path);
+    } else {
+        await executeAjax(path);
+        window.location.href = "http://localhost:9000/board";
+    }
 }
 
 let putTileOnly = async function(ev) {
@@ -20,34 +40,51 @@ let putTileOnly = async function(ev) {
     let col = menu.getAttribute("data-col");
     let color = ev.target.parentElement.getAttribute("data-color");
     let path = "putOnly/" + row + "/" + col + "/" + color;
-    let result = await executeAjax(path);
+    let result = await executeAjaxForJson(path);
     let resColor = result['color']
     let resPlayer = result['player']
-    let resStatus = result['statusMessage']
+    let resStatus = result['status']
     console.log(resPlayer)
     console.log(resColor)
-    let tiles = document.getElementById(resColor + "-tiles-" + resPlayer)
-    tiles.removeChild(tiles.lastElementChild)
-    let points = document.getElementById(resPlayer + "-points")
-    points.innerHTML = result['points'].toLocaleString()
-    document.getElementById("tile" + row + col).firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
+    let alert = document.getElementById("status-alert")
+    if (resColor === "none") {
+        alert.textContent = resStatus
+        console.log(resStatus)
+        alert.style.display = "block"
 
-    if(resPlayer === 'p1') {
-        document.getElementById(resPlayer + "-name").classList.remove("highlight")
-        document.getElementById("p2-name").classList.add("highlight")
-    } else if (resPlayer === 'p2') {
-        document.getElementById(resPlayer + "-name").classList.remove("highlight")
-        document.getElementById("p1-name").classList.add("highlight")
-    }
-
-    if (resStatus === "") {
-        $("status-alert").hide()
+        if(resPlayer === 'p1') {
+            let points = document.getElementById("p2-points")
+            points.innerHTML = result['pointsP2'].toLocaleString()
+        } else if (resPlayer === 'p2') {
+            let points = document.getElementById("p1-points")
+            points.innerHTML = result['pointsP1'].toLocaleString()
+        }
     } else {
-        $("status-alert").textContent = resStatus
-        $("status-alert").show()
-    }
-}
+        alert.style.display = "none"
+        let tiles = document.getElementById(resColor + "-tiles-" + resPlayer)
+        tiles.firstElementChild.remove()
+        let colorTile = document.getElementById("tile" + row + col)
+        colorTile.classList.remove("opacity-noTiles")
+        colorTile.firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
 
+        if(resPlayer === 'p1') {
+            document.getElementById(resPlayer + "-name").classList.remove("highlight")
+            document.getElementById("p2-name").classList.add("highlight")
+        } else if (resPlayer === 'p2') {
+            document.getElementById(resPlayer + "-name").classList.remove("highlight")
+            document.getElementById("p1-name").classList.add("highlight")
+        }
+
+        let points = document.getElementById(resPlayer + "-points")
+
+        if(resPlayer === 'p1') {
+            points.innerHTML = result['pointsP1'].toLocaleString()
+        } else if (resPlayer === 'p2') {
+            points.innerHTML = result['pointsP2'].toLocaleString()
+        }
+    }
+
+}
 
 for (let i = 0; i < dropdownTiles.length ; i++) {
     dropdownTiles[i].addEventListener('click', putTileOnly, false);

@@ -60,7 +60,7 @@
                 @for(col <- 3 to 15) {
                     @if(controller.controller.getCellColor(row, col) == "none") {
                         <div class="board-tile-padding" id="board-tiles">
-                            <span type="button" class="btn btn-secondary dropdown-toggle opacity-allRules shadow-none empty-tile"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="tile@row@col">
+                            <span type="button" class="btn btn-secondary dropdown-toggle opacity-noTiles shadow-none empty-tile"  data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="tile@row@col">
                                 <img class="tile-img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
                             </span>
                             <div class="dropdown-menu" data-row="@row" data-col="@col">
@@ -146,9 +146,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="alert alert-dark alert-dismissible" role="alert" id="status-alert">
+        <div class="alert alert-dark alert-dismissible game-status" role="alert" id="status-alert">
             @controller.controller.getBoardStatus
-            <a style="text-decoration:none" type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+            <a style="text-decoration:none" type="button" class="close" data-bs-dismiss="alert" aria-label="Close" id="close-icon">
                 <span class="alert-icon" aria-hidden="true">&times;</span>
             </a>
         </div>

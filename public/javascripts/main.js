@@ -3,6 +3,7 @@ const menuButtons = document.getElementsByClassName("menu-button");
 const dropdownTiles = document.getElementsByClassName("dropdown-tile");
 
 function executeAjax(path) {
+    console.log("executing Ajax");
     return $.ajax({
         url: "/" + path,
         type: 'GET'
@@ -21,16 +22,18 @@ let putTileOnly = async function(ev) {
     let color = ev.target.parentElement.getAttribute("data-color");
     let path = "putOnly/" + row + "/" + col + "/" + color;
     let result = await executeAjax(path);
+    console.log(result)
     let resColor = result['color']
     let resPlayer = result['player']
     let resStatus = result['statusMessage']
-    console.log(resPlayer)
-    console.log(resColor)
-    let tiles = document.getElementById(resColor + "-tiles-" + resPlayer)
-    tiles.removeChild(tiles.lastElementChild)
+    if(result['tiles'] !== 0) {
+        let tiles = document.getElementById(resColor + "-tiles-" + resPlayer)
+        tiles.removeChild(tiles.lastElementChild)
+        document.getElementById("tile" + row + col).firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
+    }
+
     let points = document.getElementById(resPlayer + "-points")
     points.innerHTML = result['points'].toLocaleString()
-    document.getElementById("tile" + row + col).firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
 
     if(resPlayer === 'p1') {
         document.getElementById(resPlayer + "-name").classList.remove("highlight")
@@ -41,10 +44,12 @@ let putTileOnly = async function(ev) {
     }
 
     if (resStatus === "") {
-        $("status-alert").hide()
+        console.log("nope")
+        $("#status-alert").hide()
     } else {
-        $("status-alert").textContent = resStatus
-        $("status-alert").show()
+        console.log("yep")
+        $("#status-alert").textContent = resStatus
+        $("#status-alert").show()
     }
 }
 

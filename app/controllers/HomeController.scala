@@ -2,6 +2,8 @@ package controllers
 
 import caro.Caro
 import caro.controller.controllerComponent.ControllerInterface
+import caro.model.gridComponent.PlayerInterface
+import caro.model.gridComponent.boardFullImpl.Player
 import com.google.inject.Inject
 import play.api.mvc._
 import play.api.libs.json._
@@ -130,28 +132,26 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
   }
 
   def putOnly( row: Int, col: Int, color: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    var player: PlayerInterface = controller.getBoard().getPlayerOne
+    var p: String = "p1"
+    if (controller.getBoard().getMoves % 2 == 1) {
+      player =  controller.getBoard().getPlayerTwo
+      p = "p2"
+    }
     controller.putCell(row , col, color)
     val fieldColor: String = controller.getCellColor(row, col)
     val statusMessage: String = controller.getBoardStatus
     var tiles: Int = 0;
     var points: Int = 0;
-    var player: String = "";
 
-    if(controller.getBoard().getMoves % 2 == 0) {
-      tiles = controller.getBoard().getPlayerTwo.getTiles(fieldColor)
-      player = "p2"
-      points = controller.getBoard().getPlayerTwo.getPoints
-    } else {
-      tiles = controller.getBoard().getPlayerOne.getTiles(fieldColor)
-      player = "p1"
-      points = controller.getBoard().getPlayerOne.getPoints
-    }
+    tiles = if (fieldColor != "none") player.getTiles(fieldColor) else 0
+    points = player.getPoints
 
     Ok(Json.obj(
       "color" -> fieldColor,
       "status" -> statusMessage,
       "tiles" -> tiles,
-      "player" -> player,
+      "player" -> p,
       "points" -> points
     ))
   }

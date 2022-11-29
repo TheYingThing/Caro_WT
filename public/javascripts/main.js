@@ -8,6 +8,7 @@ function executeAjax(path) {
         type: 'GET'
     })
 }
+
 function executeAjaxForJson(path) {
     return $.ajax({
         url: "/" + path,
@@ -52,13 +53,6 @@ let putTileOnly = async function(ev) {
         console.log(resStatus)
         alert.style.display = "block"
 
-        if(resPlayer === 'p1') {
-            let points = document.getElementById("p2-points")
-            points.innerHTML = result['pointsP2'].toLocaleString()
-        } else if (resPlayer === 'p2') {
-            let points = document.getElementById("p1-points")
-            points.innerHTML = result['pointsP1'].toLocaleString()
-        }
     } else {
         alert.style.display = "none"
         let tiles = document.getElementById(resColor + "-tiles-" + resPlayer)
@@ -74,16 +68,9 @@ let putTileOnly = async function(ev) {
             document.getElementById(resPlayer + "-name").classList.remove("highlight")
             document.getElementById("p1-name").classList.add("highlight")
         }
-
-        let points = document.getElementById(resPlayer + "-points")
-
-        if(resPlayer === 'p1') {
-            points.innerHTML = result['pointsP1'].toLocaleString()
-        } else if (resPlayer === 'p2') {
-            points.innerHTML = result['pointsP2'].toLocaleString()
-        }
     }
-
+    document.getElementById("p2-points").innerHTML = result['pointsP2'].toLocaleString()
+    document.getElementById("p1-points").innerHTML = result['pointsP1'].toLocaleString()
 }
 
 for (let i = 0; i < dropdownTiles.length ; i++) {
@@ -114,7 +101,7 @@ async function startGame()  {
     } else {
         player2 = elements.item(1).value;
     }
-    const path = '/game/' + player1 + '/' + player2;
+    const path = 'game/' + player1 + '/' + player2;
     await executeAjax(path);
     window.location.href = "http://localhost:9000/board";
 }

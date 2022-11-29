@@ -45,16 +45,12 @@ let putTileOnly = async function(ev) {
     let resColor = result['color']
     let resPlayer = result['player']
     let resStatus = result['status']
-    console.log(resPlayer)
-    console.log(resColor)
-    let alert = document.getElementById("status-alert")
-    if (resColor === "none") {
-        alert.textContent = resStatus
-        console.log(resStatus)
-        alert.style.display = "block"
 
+    let alert = $("#status-alert")
+    if (resColor === "none") {
+        alert.text(resStatus).css("display", "block")
     } else {
-        alert.style.display = "none"
+        alert.css("display", "none")
         let tiles = document.getElementById(resColor + "-tiles-" + resPlayer)
         tiles.firstElementChild.remove()
         let colorTile = document.getElementById("tile" + row + col)
@@ -62,15 +58,15 @@ let putTileOnly = async function(ev) {
         colorTile.firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
 
         if(resPlayer === 'p1') {
-            document.getElementById(resPlayer + "-name").classList.remove("highlight")
-            document.getElementById("p2-name").classList.add("highlight")
+            $("#p1-name").removeClass("highlight")
+            $("#p2-name").addClass("highlight")
         } else if (resPlayer === 'p2') {
-            document.getElementById(resPlayer + "-name").classList.remove("highlight")
-            document.getElementById("p1-name").classList.add("highlight")
+            $("#p2-name").removeClass("highlight")
+            $("#p1-name").addClass("highlight")
         }
     }
-    document.getElementById("p2-points").innerHTML = result['pointsP2'].toLocaleString()
-    document.getElementById("p1-points").innerHTML = result['pointsP1'].toLocaleString()
+    $("#p2-points").html(result['pointsP2'].toLocaleString());
+    $("#p1-points").html(result['pointsP1'].toLocaleString());
 }
 
 for (let i = 0; i < dropdownTiles.length ; i++) {

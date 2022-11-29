@@ -45,14 +45,14 @@ let putTileOnly = async function(ev) {
     let resColor = result['color']
     let resPlayer = result['player']
     let resStatus = result['status']
+    console.log(resPlayer)
 
     let alert = $("#status-alert")
     if (resColor === "none") {
         alert.text(resStatus).css("display", "block")
     } else {
         alert.css("display", "none")
-        let tiles = document.getElementById(resColor + "-tiles-" + resPlayer)
-        tiles.firstElementChild.remove()
+        $('#' + resColor + '-tiles-' + resPlayer + ':first-child').remove()
         let colorTile = document.getElementById("tile" + row + col)
         colorTile.classList.remove("opacity-noTiles")
         colorTile.firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";

@@ -8,6 +8,7 @@ function executeAjax(path) {
         type: 'GET'
     })
 }
+
 function executeAjaxForJson(path) {
     return $.ajax({
         url: "/" + path,
@@ -40,21 +41,18 @@ let putTileOnly = async function(ev) {
     let col = menu.getAttribute("data-col");
     let color = ev.target.parentElement.getAttribute("data-color");
     let path = "putOnly/" + row + "/" + col + "/" + color;
-    let result = await executeAjax(path);
-    console.log(result)
+    let result = await executeAjaxForJson(path);
     let resColor = result['color']
-    let resPlayer1 = result['player']
-    let resPlayer2 = result['otherPlayer']
-    let resStatus = result['statusMessage']
-    let points1 = document.getElementById(resPlayer1 + "-points")
-    points1.innerHTML = result['points1'].toLocaleString()
-    let points2 = document.getElementById(resPlayer2 + "-points")
-    points2.innerHTML = result['points2'].toLocaleString()
+    let resPlayer = result['player']
+    let resStatus = result['status']
+    console.log(resPlayer)
+    console.log(resColor)
     let alert = document.getElementById("status-alert")
     if (resColor === "none") {
         alert.textContent = resStatus
         console.log(resStatus)
         alert.style.display = "block"
+
     } else {
         alert.style.display = "none"
         let tiles = document.getElementById(resColor + "-tiles-" + resPlayer)
@@ -63,9 +61,16 @@ let putTileOnly = async function(ev) {
         colorTile.classList.remove("opacity-noTiles")
         colorTile.firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
 
-        document.getElementById(resPlayer + "-name").classList.remove("highlight")
-        document.getElementById(resOtherPlayer + "-name").classList.add("highlight")
+        if(resPlayer === 'p1') {
+            document.getElementById(resPlayer + "-name").classList.remove("highlight")
+            document.getElementById("p2-name").classList.add("highlight")
+        } else if (resPlayer === 'p2') {
+            document.getElementById(resPlayer + "-name").classList.remove("highlight")
+            document.getElementById("p1-name").classList.add("highlight")
+        }
     }
+    document.getElementById("p2-points").innerHTML = result['pointsP2'].toLocaleString()
+    document.getElementById("p1-points").innerHTML = result['pointsP1'].toLocaleString()
 }
 
 for (let i = 0; i < dropdownTiles.length ; i++) {
@@ -79,7 +84,8 @@ for (let i = 0; i < droppabletiles.length ; i++) {
 for (let i = 0; i < menuButtons.length ; i++) {
     menuButtons[i].addEventListener('click', load, false)
 }
-function startGame()  {
+
+async function startGame()  {
     const elements = document.getElementById("nameForm").elements;
     let player1;
     let player2;
@@ -95,9 +101,9 @@ function startGame()  {
     } else {
         player2 = elements.item(1).value;
     }
-    const path = '/game/' + player1 + '/' + player2;
-    executeAjax(path).then(
-        window.location.href = "http://localhost:9000/board");
+    const path = 'game/' + player1 + '/' + player2;
+    await executeAjax(path);
+    window.location.href = "http://localhost:9000/board";
 }
 
 $(document).ready(function(){

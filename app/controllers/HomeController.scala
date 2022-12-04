@@ -1,20 +1,27 @@
 package controllers
 
+import akka.actor._
+import akka.stream.Materializer
 import caro.Caro
 import caro.controller.controllerComponent.ControllerInterface
-import caro.model.gridComponent.PlayerInterface
+import caro.model.gridComponent.{BoardInterface, PlayerInterface}
 import caro.model.gridComponent.boardFullImpl.Player
+import caro.util.Observer
 import com.google.inject.Inject
 import play.api.mvc._
 import play.api.libs.json._
+import play.api.libs.streams.ActorFlow
 
 import javax.inject._
+import scala.Array.ofDim
+import scala.util.parsing.json.JSONObject
+
 /**
  * This controller creates an `Action` to handle HTTP requests to the
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
+class HomeController @Inject()(val controllerComponents: ControllerComponents)(implicit system: ActorSystem, mat: Materializer) extends BaseController {
 
   val controller: ControllerInterface = Caro.controller
 
@@ -31,18 +38,20 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
 
   /**
    * Puts tile of given color in specified slot
+   *
    * @param color color as String
-   * @param row row index as Int
-   * @param col col index as Int
+   * @param row   row index as Int
+   * @param col   col index as Int
    * @return
    */
-  def put( row: Int, col: Int, color: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    controller.putCell(row + 2 , col + 2, color)
+  def put(row: Int, col: Int, color: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    controller.putCell(row + 2, col + 2, color)
     Ok(views.html.caro.board(this))
   }
 
   /**
    * Undo last move
+   *
    * @return
    */
   def undo(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
@@ -52,6 +61,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
 
   /**
    * Redo last undone move
+   *
    * @return
    */
   def redo(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
@@ -61,6 +71,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
 
   /**
    * Save board
+   *
    * @return
    */
   def save(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
@@ -70,6 +81,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
 
   /**
    * Load saved board
+   *
    * @return
    */
   def load(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
@@ -79,6 +91,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
 
   /**
    * Change player1 name
+   *
    * @param name Player name as String
    * @return
    */
@@ -89,6 +102,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
 
   /**
    * Change player2 name
+   *
    * @param name Player name as String
    * @return
    */
@@ -131,14 +145,14 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
     Ok(views.html.caro.partials.hoho())
   }
 
-  def putOnly( row: Int, col: Int, color: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+  def putOnly(row: Int, col: Int, color: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     var player: String = "p1"
 
-    controller.putCell(row , col, color)
+    controller.putCell(row, col, color)
     val fieldColor: String = controller.getCellColor(row, col)
     val statusMessage: String = controller.getBoardStatus
 
-    if(controller.getBoard().getMoves % 2 == 0) {
+    if (controller.getBoard().getMoves % 2 == 0) {
       player = "p2"
     }
 
@@ -151,5 +165,66 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents) e
       "pointsP1" -> points1,
       "pointsP2" -> points2
     ))
+  }
+
+  def socket = WebSocket.accept[String, String] { request =>
+    ActorFlow.actorRef { out =>
+      println("Connect received")
+      CaroWebSocketActorFactory.create(out)
+    }
+  }
+
+  object CaroWebSocketActorFactory {
+    def create(out: ActorRef) = {
+      Props(new CaroWebSocketActor(out))
+    }
+  }
+
+  class CaroWebSocketActor(out: ActorRef) extends Actor with Observer {
+    controller.add(this)
+
+    override def receive: Receive = {
+      case msg: String =>
+        out ! (boardToJson(controller.getBoard()).toString())
+        println("String--- Send something to Client " + msg)
+      case msg: Array[Any] =>
+        out ! (msg)
+        println("Array--- Send something to Client " + msg.mkString("Array(", ", ", ")"))
+    }
+
+    override def update: Boolean = {
+      Ok(views.html.caro.board(HomeController.this))
+      true
+    }
+  }
+
+  def boardToJson(board: BoardInterface): JsObject = {
+
+    val cells = ofDim[String](19, 19)
+    for (i <- 0 until 19) {
+      for (j <- 0 until 19) {
+        cells(i)(j) = controller.getCellColor(i, j)
+      }
+    }
+
+    Json.obj(
+      "cells" -> Json.toJson(cells),
+      "player1" -> playerToJson(board.getPlayerOne),
+      "player2" -> playerToJson(board.getPlayerTwo),
+      "moves" -> board.getMoves,
+    )
+  }
+
+  def playerToJson(player: PlayerInterface): JsObject = {
+    Json.obj(
+      "name" -> player.getName,
+      "points" -> player.getPoints,
+      "tiles" -> Json.obj(
+        "red" -> player.getTiles.get("red"),
+        "black" -> player.getTiles.get("black"),
+        "grey" -> player.getTiles.get("grey"),
+        "white" -> player.getTiles.get("white")
+      )
+    )
   }
 }

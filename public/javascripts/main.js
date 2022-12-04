@@ -1,6 +1,7 @@
 const droppabletiles = document.getElementsByClassName("drop-spot");
 const menuButtons = document.getElementsByClassName("menu-button");
 const dropdownTiles = document.getElementsByClassName("dropdown-tile");
+let websocket;
 
 function executeAjax(path) {
     return $.ajax({
@@ -50,6 +51,7 @@ let putTileOnly = async function(ev) {
     let alert = $("#status-alert")
     if (resColor === "none") {
         alert.text(resStatus).css("display", "block")
+        websocket.send(resStatus)
     } else {
         alert.css("display", "none")
         $('#' + resColor + '-tiles-' + resPlayer + ':first-child').remove()
@@ -64,21 +66,24 @@ let putTileOnly = async function(ev) {
             $("#p2-name").removeClass("highlight")
             $("#p1-name").addClass("highlight")
         }
+        websocket.send({row, col, resColor, resPlayer})
     }
     $("#p2-points").html(result['pointsP2'].toLocaleString());
     $("#p1-points").html(result['pointsP1'].toLocaleString());
 }
 
-for (let i = 0; i < dropdownTiles.length ; i++) {
-    dropdownTiles[i].addEventListener('click', putTileOnly, false);
-}
+function addListeners() {
+    for (let i = 0; i < dropdownTiles.length ; i++) {
+        dropdownTiles[i].addEventListener('click', putTileOnly, false);
+    }
 
-for (let i = 0; i < droppabletiles.length ; i++) {
-    droppabletiles[i].addEventListener('click', putTileOnly, false)
-}
+    for (let i = 0; i < droppabletiles.length ; i++) {
+        droppabletiles[i].addEventListener('click', putTileOnly, false)
+    }
 
-for (let i = 0; i < menuButtons.length ; i++) {
-    menuButtons[i].addEventListener('click', load, false)
+    for (let i = 0; i < menuButtons.length ; i++) {
+        menuButtons[i].addEventListener('click', load, false)
+    }
 }
 
 async function startGame()  {
@@ -111,3 +116,35 @@ $(document).ready(function(){
         }
     });
 });
+
+function connectWebSocket() {
+    console.log("Connecting Websocket...")
+     websocket = new WebSocket("ws://localhost:9000/websocket")
+    console.log("Connected!")
+
+    websocket.onopen = function(event) {
+        console.log("opening connection to Websocket")
+        websocket.send("opening connection")
+    }
+
+    websocket.onclose = function () {
+        console.log("Closed connection to Websocket")
+    }
+
+    websocket.onerror = function (error) {
+        console.log("Websocket caused error: " + error)
+    }
+
+    websocket.onmessage = function (e) {
+        if (typeof e.data === "string") {
+            let json = JSON.parse(e.data)
+            console.log(json)
+            addListeners()
+        }
+    }
+}
+
+$(document).ready(function () {
+    console.log("document ready, should show websocket json??")
+    connectWebSocket()
+})

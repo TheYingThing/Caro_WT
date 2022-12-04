@@ -185,11 +185,14 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
 
     override def receive: Receive = {
       case msg: String =>
-        out ! (boardToJson(controller.getBoard()).toString())
-        println("String--- Send something to Client " + msg)
-      case msg: Array[Any] =>
-        out ! (msg)
-        println("Array--- Send something to Client " + msg.mkString("Array(", ", ", ")"))
+        if (msg.isEmpty) {
+          println("empty message")
+        } else if (msg == "opening connection") {
+          println("opening message")
+        } else {
+          out ! (msg)
+        println("String--- Send something to Client " + msg.toString)
+        }
     }
 
     override def update: Boolean = {

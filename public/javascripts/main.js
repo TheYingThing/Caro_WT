@@ -3,6 +3,9 @@ const menuButtons = document.getElementsByClassName("menu-button");
 const dropdownTiles = document.getElementsByClassName("dropdown-tile");
 let websocket;
 
+websocket = new WebSocket("ws://localhost:9000/websocket")
+
+
 function executeAjax(path) {
     return $.ajax({
         url: "/" + path,
@@ -66,10 +69,67 @@ let putTileOnly = async function(ev) {
             $("#p2-name").removeClass("highlight")
             $("#p1-name").addClass("highlight")
         }
-        websocket.send({row, col, resColor, resPlayer})
+        let data = '{"row":' + row + ','
+            +'"col":' + col + ','
+            +'"color":' + '"' + resColor + '"' + ','
+            +'"player":' + '"' + resPlayer + '"' + ','
+            +'"p1":' + result['pointsP1'] + ','
+            +'"p2":' +  result['pointsP2']  +'}'
+
+
+        if ( websocket.readyState === 3 || websocket.readyState === 2) {
+            websocket.close();
+            websocket = new WebSocket("ws://localhost:9000/websocket");
+
+            // wait until new connection is open
+            while (websocket.readyState !== 1) {
+                await new Promise(r => setTimeout(r, 250));
+            }
+        }
+        websocket.send(data)
+
+        /**
+         *         if (isOpen(websocket)) {
+         *             websocket.send(data)
+         *         } else {
+         *             console.log("socket closed")
+         *         }
+         */
+
+
     }
     $("#p2-points").html(result['pointsP2'].toLocaleString());
     $("#p1-points").html(result['pointsP1'].toLocaleString());
+
+}
+
+function isOpen(ws) { return ws.readyState === ws.OPEN }
+
+
+function updateTile(data) {
+    console.log("update")
+    console.log(data)
+    console.log(data.color)
+    let alert = $("#status-alert")
+    if (data.color === "none") {
+        alert.text(resStatus).css("display", "block")
+    } else {
+        alert.css("display", "none")
+        $('#' + data.color + '-tiles-' + data.player + ':first-child').remove()
+        let colorTile = document.getElementById("tile" + data.row + data.col)
+        colorTile.classList.remove("opacity-noTiles")
+        colorTile.firstElementChild.src = "/assets/images/" + data.color + "Button.png";
+
+        if(data.player === 'p1') {
+            $("#p1-name").removeClass("highlight")
+            $("#p2-name").addClass("highlight")
+        } else if (data.player === 'p2') {
+            $("#p2-name").removeClass("highlight")
+            $("#p1-name").addClass("highlight")
+        }
+    }
+    $("#p2-points").html(data.p2);
+    $("#p1-points").html(data.p1);
 }
 
 function addListeners() {
@@ -118,9 +178,6 @@ $(document).ready(function(){
 });
 
 function connectWebSocket() {
-    console.log("Connecting Websocket...")
-     websocket = new WebSocket("ws://localhost:9000/websocket")
-    console.log("Connected!")
 
     websocket.onopen = function(event) {
         console.log("opening connection to Websocket")
@@ -136,9 +193,12 @@ function connectWebSocket() {
     }
 
     websocket.onmessage = function (e) {
+        console.log("message recieved")
         if (typeof e.data === "string") {
+            console.log(e.data)
             let json = JSON.parse(e.data)
             console.log(json)
+            updateTile(json)
             addListeners()
         }
     }
@@ -147,4 +207,5 @@ function connectWebSocket() {
 $(document).ready(function () {
     console.log("document ready, should show websocket json??")
     connectWebSocket()
+    addListeners()
 })

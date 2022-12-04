@@ -191,12 +191,14 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
           println("opening message")
         } else {
           out ! (msg)
-        println("String--- Send something to Client " + msg.toString)
+        println("Send something to Client " + msg.toString)
         }
     }
 
     override def update: Boolean = {
-      Ok(views.html.caro.board(HomeController.this))
+      println("update")
+      HomeController.this.controller.getBoard()
+      //Ok(views.html.caro.board(HomeController.this))
       true
     }
   }

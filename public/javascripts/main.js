@@ -76,7 +76,6 @@ let putTileOnly = async function(ev) {
             +'"p1":' + result['pointsP1'] + ','
             +'"p2":' +  result['pointsP2']  +'}'
 
-
         if ( websocket.readyState === 3 || websocket.readyState === 2) {
             websocket.close();
             websocket = new WebSocket("ws://localhost:9000/websocket");

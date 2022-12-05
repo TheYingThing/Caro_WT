@@ -87,17 +87,6 @@ let putTileOnly = async function(ev) {
                 await new Promise(r => setTimeout(r, 250));
             }
         }
-        //websocket.send(data)
-
-        /**
-         *         if (isOpen(websocket)) {
-         *             websocket.send(data)
-         *         } else {
-         *             console.log("socket closed")
-         *         }
-         */
-
-
     }
     $("#p2-points").html(result['pointsP2'].toLocaleString());
     $("#p1-points").html(result['pointsP1'].toLocaleString());
@@ -182,20 +171,36 @@ function updatePlayers(json) {
     let p2 = json['player2']
     $("#p2-points").html(p2['points']);
     $("#p1-points").html(p1['points']);
+
+
+    let moves = json['moves']
+    if(moves % 2 === 0) {
+        $("#p2-name").removeClass("highlight")
+        $("#p1-name").addClass("highlight")
+    } else {
+        $("#p1-name").removeClass("highlight")
+        $("#p2-name").addClass("highlight")
+    }
 }
 
 function updateBoard(json) {
-    let pipi = json['cells'];
+    let cells = json['cells'];
     for(let r = 2 ; r < 14 ; r++) {
         for(let c = 2 ; c < 14 ; c++ ) {
-            let cell = pipi[r][c]
+            let cell = cells[r][c]
+            let colorTile = document.getElementById("tile" + r + c)
             if(cell !== "none") {
                 console.log("id : tile" + r + c)
-                let colorTile = document.getElementById("tile" + r + c)
-                colorTile.classList.remove("opacity-noTiles")
-                colorTile.firstElementChild.src = "/assets/images/" + cell + "Button.png";
+                if (colorTile !== null && colorTile.classList !== null) {
+                    colorTile.classList.remove("opacity-noTiles")
+                    colorTile.firstElementChild.src = "/assets/images/" + cell + "Button.png";
+                }
+            } else {
+                if (colorTile !== null && colorTile.classList !== null) {
+                    colorTile.classList.add("opacity-noTiles")
+                    colorTile.firstElementChild.src = "/assets/images/noTile.png";
+                }
             }
-
         }
     }
 }
@@ -204,6 +209,10 @@ function updateGame(json) {
     console.log("updating game")
     updatePlayers(json)
     updateBoard(json)
+}
+
+function loadBoard() {
+    websocket.send("{\"action\": \"load\"}")
 }
 
 function connectWebSocket() {

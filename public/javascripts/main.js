@@ -69,7 +69,9 @@ let putTileOnly = async function(ev) {
             $("#p2-name").removeClass("highlight")
             $("#p1-name").addClass("highlight")
         }
-        let data = '{"row":' + row + ','
+        let data =
+            '{"action": "put",' +
+            '"row":' + row + ','
             +'"col":' + col + ','
             +'"color":' + '"' + resColor + '"' + ','
             +'"player":' + '"' + resPlayer + '"' + ','
@@ -176,6 +178,11 @@ $(document).ready(function(){
     });
 });
 
+function updatePlayers(json) {
+    $("#p2-points").html(json.p2);
+    $("#p1-points").html(json.p1);
+}
+
 function connectWebSocket() {
 
     websocket.onopen = function(event) {
@@ -197,7 +204,11 @@ function connectWebSocket() {
             console.log(e.data)
             let json = JSON.parse(e.data)
             console.log(json)
-            updateTile(json)
+            if (json.action === "put") {
+                updateTile(json)
+            } else if (json.action === "update") {
+                updatePlayers(json)
+            }
             addListeners()
         }
     }
@@ -207,4 +218,5 @@ $(document).ready(function () {
     console.log("document ready, should show websocket json??")
     connectWebSocket()
     addListeners()
+
 })

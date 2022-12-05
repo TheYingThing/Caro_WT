@@ -197,8 +197,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
 
     override def update: Boolean = {
       println("update")
-      HomeController.this.controller.getBoard()
-      //Ok(views.html.caro.board(HomeController.this))
+      val json: String = "{\"action\": \"update\", \"p1\": " + controller.getBoard().getPlayerOne.getPoints + ", \"p2\": " + controller.getBoard().getPlayerTwo.getPoints + "}"
+      out ! json
       true
     }
   }

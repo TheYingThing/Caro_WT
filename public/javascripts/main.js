@@ -19,7 +19,7 @@ function executeAjaxForJson(path) {
         type: 'GET',
         dataType: "json",
         success: function (data) {
-            console.log(data);
+            //console.log(data);
         },
         error: function () {
             console.log("something went wrong");
@@ -87,7 +87,7 @@ let putTileOnly = async function(ev) {
                 await new Promise(r => setTimeout(r, 250));
             }
         }
-        websocket.send(data)
+        //websocket.send(data)
 
         /**
          *         if (isOpen(websocket)) {
@@ -109,8 +109,6 @@ function isOpen(ws) { return ws.readyState === ws.OPEN }
 
 function updateTile(data) {
     console.log("update")
-    console.log(data)
-    console.log(data.color)
     let alert = $("#status-alert")
     if (data.color === "none") {
         alert.text(resStatus).css("display", "block")
@@ -179,8 +177,33 @@ $(document).ready(function(){
 });
 
 function updatePlayers(json) {
-    $("#p2-points").html(json.p2);
-    $("#p1-points").html(json.p1);
+    console.log("updating player")
+    let p1 = json['player1']
+    let p2 = json['player2']
+    $("#p2-points").html(p2['points']);
+    $("#p1-points").html(p1['points']);
+}
+
+function updateBoard(json) {
+    let pipi = json['cells'];
+    for(let r = 2 ; r < 14 ; r++) {
+        for(let c = 2 ; c < 14 ; c++ ) {
+            let cell = pipi[r][c]
+            if(cell !== "none") {
+                console.log("id : tile" + r + c)
+                let colorTile = document.getElementById("tile" + r + c)
+                colorTile.classList.remove("opacity-noTiles")
+                colorTile.firstElementChild.src = "/assets/images/" + cell + "Button.png";
+            }
+
+        }
+    }
+}
+
+function updateGame(json) {
+    console.log("updating game")
+    updatePlayers(json)
+    updateBoard(json)
 }
 
 function connectWebSocket() {
@@ -201,14 +224,13 @@ function connectWebSocket() {
     websocket.onmessage = function (e) {
         console.log("message recieved")
         if (typeof e.data === "string") {
-            console.log(e.data)
             let json = JSON.parse(e.data)
-            console.log(json)
-            if (json.action === "put") {
+            updateGame(json)
+            /*if (json.action === "put") {
                 updateTile(json)
             } else if (json.action === "update") {
-                updatePlayers(json)
-            }
+                updateBoard(json)
+            }*/
             addListeners()
         }
     }

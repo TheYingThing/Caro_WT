@@ -197,8 +197,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
 
     override def update: Boolean = {
       println("update")
-      val json: String = "{\"action\": \"update\", \"p1\": " + controller.getBoard().getPlayerOne.getPoints + ", \"p2\": " + controller.getBoard().getPlayerTwo.getPoints + "}"
-      out ! json
+      //val json: String = "{\"action\": \"update\", \"p1\": " + controller.getBoard().getPlayerOne.getPoints + ", \"p2\": " + controller.getBoard().getPlayerTwo.getPoints + "}"
+      out ! boardToJson(controller.getBoard()).toString()
       true
     }
   }

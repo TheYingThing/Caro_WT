@@ -49,6 +49,8 @@ let putTileOnly = async function(ev) {
     let resColor = result['color']
     let resPlayer = result['player']
     let resStatus = result['status']
+    let resTiles = result['tiles']
+    let placedTile  = 3 - resTiles - 1
     console.log(resPlayer)
 
     let alert = $("#status-alert")
@@ -57,7 +59,8 @@ let putTileOnly = async function(ev) {
         websocket.send(resStatus)
     } else {
         alert.css("display", "none")
-        $('#' + resColor + '-tiles-' + resPlayer + ':first-child').remove()
+        $('#' + resPlayer + '-' + resColor + 'tile' + placedTile).addClass("opacity-noTiles")
+
         let colorTile = document.getElementById("tile" + row + col)
         colorTile.classList.remove("opacity-noTiles")
         colorTile.firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
@@ -152,6 +155,7 @@ async function startGame()  {
     }
     const path = 'game/' + player1 + '/' + player2;
     await executeAjax(path);
+    websocket.send("{\"action\": \"new\"}")
     window.location.href = "http://localhost:9000/board";
 }
 
@@ -234,6 +238,7 @@ function connectWebSocket() {
         console.log("message recieved")
         if (typeof e.data === "string") {
             let json = JSON.parse(e.data)
+            let action = json.action
             updateGame(json)
             /*if (json.action === "put") {
                 updateTile(json)

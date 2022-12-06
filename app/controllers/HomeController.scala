@@ -149,11 +149,13 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
     var player: String = "p1"
 
     controller.putCell(row, col, color)
+    var tiles: Int = controller.getBoard().getPlayerOne.getTiles(color)
     val fieldColor: String = controller.getCellColor(row, col)
     val statusMessage: String = controller.getBoardStatus
 
     if (controller.getBoard().getMoves % 2 == 0) {
       player = "p2"
+      tiles = controller.getBoard().getPlayerTwo.getTiles(color)
     }
 
     val points1: Int = controller.getBoard().getPlayerOne.getPoints
@@ -163,7 +165,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
       "status" -> statusMessage,
       "player" -> player,
       "pointsP1" -> points1,
-      "pointsP2" -> points2
+      "pointsP2" -> points2,
+      "tiles" -> tiles
     ))
   }
 
@@ -191,6 +194,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
           println("empty message")
         } else if (msg == "opening connection") {
           println("opening message")
+        } else if (action == "new"){
+            board()
         } else {
           out ! (msg)
           println("Send something to Client " + msg.toString)

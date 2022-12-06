@@ -95,33 +95,6 @@ let putTileOnly = async function(ev) {
     $("#p1-points").html(result['pointsP1'].toLocaleString());
 }
 
-function isOpen(ws) { return ws.readyState === ws.OPEN }
-
-
-function updateTile(data) {
-    console.log("update")
-    let alert = $("#status-alert")
-    if (data.color === "none") {
-        alert.text(resStatus).css("display", "block")
-    } else {
-        alert.css("display", "none")
-        $('#' + data.color + '-tiles-' + data.player + ':first-child').remove()
-        let colorTile = document.getElementById("tile" + data.row + data.col)
-        colorTile.classList.remove("opacity-noTiles")
-        colorTile.firstElementChild.src = "/assets/images/" + data.color + "Button.png";
-
-        if(data.player === 'p1') {
-            $("#p1-name").removeClass("highlight")
-            $("#p2-name").addClass("highlight")
-        } else if (data.player === 'p2') {
-            $("#p2-name").removeClass("highlight")
-            $("#p1-name").addClass("highlight")
-        }
-    }
-    $("#p2-points").html(data.p2);
-    $("#p1-points").html(data.p1);
-}
-
 function addListeners() {
     for (let i = 0; i < dropdownTiles.length ; i++) {
         dropdownTiles[i].addEventListener('click', putTileOnly, false);
@@ -251,10 +224,6 @@ function updateGame(json) {
     console.log("updating game")
     updatePlayers(json)
     updateBoard(json)
-}
-
-function loadBoard() {
-    websocket.send("{\"action\": \"load\"}")
 }
 
 function connectWebSocket() {

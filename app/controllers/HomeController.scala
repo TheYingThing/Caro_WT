@@ -189,13 +189,10 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
     override def receive: Receive = {
       case msg: String =>
         val json = Json.toJson(msg)
-        val action = (json \ "action").get.toString()
         if (msg.isEmpty) {
           println("empty message")
         } else if (msg == "opening connection") {
           println("opening message")
-        } else if (action == "new"){
-            board()
         } else {
           out ! (msg)
           println("Send something to Client " + msg.toString)
@@ -222,7 +219,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
       "cells" -> Json.toJson(cells),
       "player1" -> playerToJson(board.getPlayerOne),
       "player2" -> playerToJson(board.getPlayerTwo),
-      "moves" -> board.getMoves
+      "moves" -> board.getMoves,
     )
   }
 

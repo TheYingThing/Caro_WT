@@ -59,8 +59,8 @@ let putTileOnly = async function(ev) {
         websocket.send(resStatus)
     } else {
         alert.css("display", "none")
-        $('#' + resPlayer + '-' + resColor + 'tile' + placedTile).addClass("opacity-noTiles")
-
+        console.log("number tiles: " + resTiles + "tile id: " + placedTile)
+        $('#' + resPlayer + '-' + resColor + 'tile' + placedTile).css("display", "none")
         let colorTile = document.getElementById("tile" + row + col)
         colorTile.classList.remove("opacity-noTiles")
         colorTile.firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
@@ -93,7 +93,6 @@ let putTileOnly = async function(ev) {
     }
     $("#p2-points").html(result['pointsP2'].toLocaleString());
     $("#p1-points").html(result['pointsP1'].toLocaleString());
-
 }
 
 function isOpen(ws) { return ws.readyState === ws.OPEN }
@@ -155,7 +154,6 @@ async function startGame()  {
     }
     const path = 'game/' + player1 + '/' + player2;
     await executeAjax(path);
-    websocket.send("{\"action\": \"new\"}")
     window.location.href = "http://localhost:9000/board";
 }
 
@@ -175,7 +173,12 @@ function updatePlayers(json) {
     let p2 = json['player2']
     $("#p2-points").html(p2['points']);
     $("#p1-points").html(p1['points']);
+    $("#p2-name").html(p2['name']);
+    $("#p1-name").html(p1['name']);
 
+    let lastColor = json['last']
+
+    console.log("last:" + lastColor)
 
     let moves = json['moves']
     if(moves % 2 === 0) {
@@ -184,6 +187,41 @@ function updatePlayers(json) {
     } else {
         $("#p1-name").removeClass("highlight")
         $("#p2-name").addClass("highlight")
+    }
+
+    updateTiles("p1", p1['tiles'])
+    updateTiles("p2", p2['tiles'])
+}
+
+function updateTiles(player, tiles) {
+    let redTiles = tiles ['red']
+    let blackTiles = tiles ['black']
+    let greyTiles = tiles ['grey']
+    let whiteTiles = tiles ['white']
+
+    setTileOpacity(player, "red", redTiles)
+    setTileOpacity(player, "black", blackTiles)
+    setTileOpacity(player, "grey", greyTiles)
+    setTileOpacity(player, "white", whiteTiles)
+}
+
+function setTileOpacity(player, color, tiles) {
+    if (tiles === 3) {
+        $('#' + player + '-' + color + 'tile0').css("display", "inline")
+        $('#' + player + '-' + color + 'tile1').css("display", "inline")
+        $('#' + player + '-' + color + 'tile2').css("display", "inline")
+    } else if (tiles === 2) {
+        $('#' + player + '-' + color + 'tile0').css("display", "none")
+        $('#' + player + '-' + color + 'tile1').css("display", "inline")
+        $('#' + player + '-' + color + 'tile2').css("display", "inline")
+    } else if (tiles === 1) {
+        $('#' + player + '-' + color + 'tile0').css("display", "none")
+        $('#' + player + '-' + color + 'tile1').css("display", "none")
+        $('#' + player + '-' + color + 'tile2').css("display", "inline")
+    } else if (tiles === 0) {
+        $('#' + player + '-' + color + 'tile0').css("display", "none")
+        $('#' + player + '-' + color + 'tile1').css("display", "none")
+        $('#' + player + '-' + color + 'tile2').css("display", "none")
     }
 }
 
@@ -238,13 +276,7 @@ function connectWebSocket() {
         console.log("message recieved")
         if (typeof e.data === "string") {
             let json = JSON.parse(e.data)
-            let action = json.action
             updateGame(json)
-            /*if (json.action === "put") {
-                updateTile(json)
-            } else if (json.action === "update") {
-                updateBoard(json)
-            }*/
             addListeners()
         }
     }
@@ -254,5 +286,4 @@ $(document).ready(function () {
     console.log("document ready, should show websocket json??")
     connectWebSocket()
     addListeners()
-
 })

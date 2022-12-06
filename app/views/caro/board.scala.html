@@ -17,29 +17,29 @@
                     <h4 id="p1-points">@controller.controller.getBoard.getPlayerOne.getPoints</h4>
                     <div class="tile-padding">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("red")) {
-                        <span class="tile-padding" id="red-tiles-p1">
-                            <img src="@routes.Assets.versioned("images/redButton.png")" class="player-tile" id="p1-redtile@tiles" alt="red tile">
+                        <span class="tile-padding" d="p1-redtile@tiles">
+                            <img src="@routes.Assets.versioned("images/redButton.png")" class="player-tile" alt="red tile">
                          </span>
                         }
                     </div>
                     <div class="tile-padding">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("black")) {
-                        <span class="tile-padding" id="black-tiles-p1">
-                            <img src="@routes.Assets.versioned("images/blackButton.png")" class="player-tile" id="p1-blacktile@tiles" alt="black tile">
+                        <span class="tile-padding" id="p1-blacktile@tiles">
+                            <img src="@routes.Assets.versioned("images/blackButton.png")" class="player-tile" alt="black tile">
                         </span>
                         }
                     </div>
                     <div class="tile-padding">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("grey")) {
-                        <span class="tile-padding" id="grey-tiles-p1">
-                            <img src="@routes.Assets.versioned("images/greyButton.png")" class="player-tile" id="p1-greytile@tiles" alt="grey tile">
+                        <span class="tile-padding" id="p1-greytile@tiles">
+                            <img src="@routes.Assets.versioned("images/greyButton.png")" class="player-tile"  alt="grey tile">
                         </span>
                         }
                     </div>
                     <div class="tile-padding">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerOne.getTiles("white")) {
-                        <span class="tile-padding" id="white-tiles-p1">
-                            <img src="@routes.Assets.versioned("images/whiteButton.png")" class="player-tile" id="p1-whitetile@tiles" alt="white tile">
+                        <span class="tile-padding" id="p1-whitetile@tiles">
+                            <img src="@routes.Assets.versioned("images/whiteButton.png")" class="player-tile" alt="white tile">
                         </span>
                         }
                     </div>
@@ -113,29 +113,29 @@
                     <h4 id="p2-points">@controller.controller.getBoard.getPlayerTwo.getPoints</h4>
                     <div class="tile-padding">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("red")) {
-                        <span class="tile-padding tile-img" id="red-tiles-p2">
-                            <img src="@routes.Assets.versioned("images/redButton.png")" class="player-tile" id="p2-redtile@tiles" alt="red tile">
+                        <span class="tile-padding tile-img" id="p2-redtile@tiles">
+                            <img src="@routes.Assets.versioned("images/redButton.png")" class="player-tile" alt="red tile">
                         </span>
                         }
                     </div>
                     <div class="tile-padding">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("black")) {
-                        <span class="tile-padding tile-img" id="black-tiles-p2">
-                            <img src="@routes.Assets.versioned("images/blackButton.png")" class="player-tile" id="p2-blacktile@tiles" alt="black tile">
+                        <span class="tile-padding tile-img" id="p2-blacktile@tiles">
+                            <img src="@routes.Assets.versioned("images/blackButton.png")" class="player-tile" alt="black tile">
                         </span>
                         }
                     </div>
                     <div class="tile-padding"class="tile-padding">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("grey")) {
-                        <span class="tile-padding tile-img" id="grey-tiles-p2">
-                            <img src="@routes.Assets.versioned("images/greyButton.png")" class="player-tile" id="p2-greytile@tiles"alt="grey tile">
+                        <span class="tile-padding tile-img" id="p2-greytile@tiles">
+                            <img src="@routes.Assets.versioned("images/greyButton.png")" class="player-tile" alt="grey tile">
                         </span>
                         }
                     </div>
                     <div class="tile-padding">
                         @for(tiles <- 0 until controller.controller.getBoard.getPlayerTwo.getTiles("white")) {
-                        <span class="tile-padding tile-img" id="white-tiles-p2">
-                            <img src="@routes.Assets.versioned("images/whiteButton.png")" class="player-tile" id="p2-whitetile@tiles" alt="white tile">
+                        <span class="tile-padding tile-img" id="p2-whitetile@tiles">
+                            <img src="@routes.Assets.versioned("images/whiteButton.png")" class="player-tile" alt="white tile">
                         </span>
                         }
                     </div>

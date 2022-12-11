@@ -109,7 +109,7 @@ function addListeners() {
     }
 }
 
-/*async function startGame()  {
+async function startGame()  {
     const elements = document.getElementById("nameForm").elements;
     let player1;
     let player2;
@@ -128,7 +128,7 @@ function addListeners() {
     const path = 'game/' + player1 + '/' + player2;
     await executeAjax(path);
     window.location.href = "http://localhost:9000/board";
-}*/
+}
 
 $(document).ready(function(){
     let url = window.location.href;

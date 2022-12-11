@@ -5,7 +5,6 @@ import akka.stream.Materializer
 import caro.Caro
 import caro.controller.controllerComponent.ControllerInterface
 import caro.model.gridComponent.{BoardInterface, PlayerInterface}
-import caro.model.gridComponent.boardFullImpl.Player
 import caro.util.Observer
 import com.google.inject.Inject
 import play.api.mvc._
@@ -14,7 +13,6 @@ import play.api.libs.streams.ActorFlow
 
 import javax.inject._
 import scala.Array.ofDim
-import scala.util.parsing.json.JSONObject
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -46,7 +44,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
    */
   def put(row: Int, col: Int, color: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     controller.putCell(row + 2, col + 2, color)
-    Ok(views.html.caro.board(this))
+    Ok(this.boardToJson(controller.getBoard()))
   }
 
   /**

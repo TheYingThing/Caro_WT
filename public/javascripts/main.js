@@ -5,6 +5,12 @@ let websocket;
 
 websocket = new WebSocket("ws://localhost:9000/websocket")
 
+/*
+needed Vue Components:
+
+Board: Tile, (row?), button row above board, Message below board
+Player: Tile
+ */
 
 function executeAjax(path) {
     return $.ajax({
@@ -44,8 +50,10 @@ let putTileOnly = async function(ev) {
     let row = menu.getAttribute("data-row");
     let col = menu.getAttribute("data-col");
     let color = ev.target.parentElement.getAttribute("data-color");
-    let path = "putOnly/" + row + "/" + col + "/" + color;
-    let result = await executeAjaxForJson(path);
+    let path = "put/" + row + "/" + col + "/" + color;
+    let result = await executeAjax(path);
+    console.log(result)
+
     let resColor = result['color']
     let resPlayer = result['player']
     let resStatus = result['status']

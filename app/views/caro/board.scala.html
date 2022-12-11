@@ -42,40 +42,22 @@
                     <div class="btn-group" id="board-grid-row">
                     @for(col <- 3 to 15) {
                         @if(controller.controller.getCellColor(row, col) == "none") {
-                            <div class="board-tile-padding" id="board-tiles">
-                                <span type="button" class="btn btn-secondary dropdown-toggle opacity-noTiles shadow-none empty-tile" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="tile@row@col">
-                                    <img class="tile-img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
-                                </span>
-                                <div class="dropdown-menu" data-row="@row" data-col="@col">
-                                    <span class="dropdown-item shadow-none dropdown-tile" data-color="red">
-                                        <img class="tile-img" data-color="red" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
-                                    </span>
-                                    <span class="dropdown-item shadow-none dropdown-tile" data-color="black" >
-                                        <img class="tile-img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-                                    </span>
-                                    <span class="dropdown-item shadow-none dropdown-tile" data-color="grey" >
-                                        <img class="tile-img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
-                                    </span>
-                                    <span class="dropdown-item shadow-none dropdown-tile" data-color="white" >
-                                        <img class="tile-img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
-                                    </span>
-                                </div>
-                            </div>
+                            <empty-board-tile :row=@row :col=@col></empty-board-tile>
                         } else if(controller.controller.getCellColor(row, col) == "red") {
                         <span class="board-tile-padding">
-                            <img class="tile-img" src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
+                            <board-tile :color="1"></board-tile>
                         </span>
                         } else if(controller.controller.getCellColor(row, col) == "black") {
                         <span class="board-tile-padding">
-                            <img class="tile-img" src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
+                            <board-tile :color="2"></board-tile>
                         </span>
                         } else if(controller.controller.getCellColor(row, col) == "grey") {
                         <span class="board-tile-padding">
-                            <img class="tile-img" src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+                            <board-tile :color="3"></board-tile>
                         </span>
                         } else if(controller.controller.getCellColor(row, col) == "white") {
                         <span class="board-tile-padding">
-                            <img class="tile-img" src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+                            <board-tile :color="4"></board-tile>
                         </span>
                         }
                     }

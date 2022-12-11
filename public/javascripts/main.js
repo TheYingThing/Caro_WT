@@ -13,20 +13,6 @@ function executeAjax(path) {
     })
 }
 
-function executeAjaxForJson(path) {
-    return $.ajax({
-        url: "/" + path,
-        type: 'GET',
-        dataType: "json",
-        success: function (data) {
-            //console.log(data);
-        },
-        error: function () {
-            console.log("something went wrong");
-        }
-    })
-}
-
 let load = async function(ev) {
     let path = ev.target.getAttribute("data-viewname");
 
@@ -39,84 +25,7 @@ let load = async function(ev) {
     }
 }
 
-let putTileOnly = async function(ev) {
-    let menu = ev.target.closest(".dropdown-menu");
-    let row = menu.getAttribute("data-row");
-    let col = menu.getAttribute("data-col");
-    let color = ev.target.parentElement.getAttribute("data-color");
-    let path = "putOnly/" + row + "/" + col + "/" + color;
-    let result = await executeAjaxForJson(path);
-    let resColor = result['color']
-    let resPlayer = result['player']
-    let resStatus = result['status']
-    let resTiles = result['tiles']
-    let placedTile  = 3 - resTiles - 1
-    console.log(resPlayer)
-
-    let p;
-    if (resTiles === 'p1') {
-        p = 1;
-    } else {
-        p = 2;
-    }
-
-    let finalColor;
-    if (resColor === 'red') {
-        finalColor = 1;
-    } else if (resColor === 'black') {
-        finalColor = 2;
-    } else if (resColor === 'grey') {
-        finalColor = 3;
-    } else if (resColor === 'white') {
-        finalColor = 4;
-    }
-
-    let alert = $("#status-alert")
-    if (resColor === "none") {
-        alert.text(resStatus).css("display", "block")
-        websocket.send(resStatus)
-    } else {
-        alert.css("display", "none")
-        console.log("number tiles: " + resTiles + "tile id: " + placedTile)
-        $('#' + p + '-' + finalColor + '-tile-' + placedTile).css("display", "none")
-        let colorTile = document.getElementById("tile" + row + col)
-        colorTile.classList.remove("opacity-noTiles")
-        colorTile.firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
-
-        if(resPlayer === 'p1') {
-            $("#p1-name").removeClass("highlight")
-            $("#p2-name").addClass("highlight")
-        } else if (resPlayer === 'p2') {
-            $("#p2-name").removeClass("highlight")
-            $("#p1-name").addClass("highlight")
-        }
-        let data =
-            '{"action": "put",' +
-            '"row":' + row + ','
-            +'"col":' + col + ','
-            +'"color":' + '"' + resColor + '"' + ','
-            +'"player":' + '"' + resPlayer + '"' + ','
-            +'"p1":' + result['pointsP1'] + ','
-            +'"p2":' +  result['pointsP2']  +'}'
-
-        if ( websocket.readyState === 3 || websocket.readyState === 2) {
-            websocket.close();
-            websocket = new WebSocket("ws://localhost:9000/websocket");
-
-            // wait until new connection is open
-            while (websocket.readyState !== 1) {
-                await new Promise(r => setTimeout(r, 250));
-            }
-        }
-    }
-    $("#p2-points").html(result['pointsP2'].toLocaleString());
-    $("#p1-points").html(result['pointsP1'].toLocaleString());
-}
-
 function addListeners() {
-    for (let i = 0; i < dropdownTiles.length ; i++) {
-        dropdownTiles[i].addEventListener('click', putTileOnly, false);
-    }
 
     for (let i = 0; i < droppabletiles.length ; i++) {
         droppabletiles[i].addEventListener('click', putTileOnly, false)

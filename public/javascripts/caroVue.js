@@ -24,7 +24,7 @@ app.component('tile-list', {
     props: ['count', 'color', 'player'],
     template: `
         <div class="tile-padding">
-            <span v-for="n in count" class="tile-padding" :id="player + '-' + color + '-Tile-' + n">
+            <span v-for="n in count" class="tile-padding" :id="player + '-' + color + '-tile-' + n">
                 <tile :color=color></tile>
              </span>
         </div>

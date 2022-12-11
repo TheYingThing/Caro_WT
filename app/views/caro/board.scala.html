@@ -43,7 +43,7 @@
                     @for(col <- 3 to 15) {
                         @if(controller.controller.getCellColor(row, col) == "none") {
                             <div class="board-tile-padding" id="board-tiles">
-                                <span type="button" class="btn btn-secondary dropdown-toggle opacity-noTiles shadow-none empty-tile" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="tile@row @col">
+                                <span type="button" class="btn btn-secondary dropdown-toggle opacity-noTiles shadow-none empty-tile" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="tile@row@col">
                                     <img class="tile-img" src="@routes.Assets.versioned("images/noTile.png")" alt="no tile">
                                 </span>
                                 <div class="dropdown-menu" data-row="@row" data-col="@col">

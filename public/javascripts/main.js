@@ -53,6 +53,24 @@ let putTileOnly = async function(ev) {
     let placedTile  = 3 - resTiles - 1
     console.log(resPlayer)
 
+    let p;
+    if (resTiles === 'p1') {
+        p = 1;
+    } else {
+        p = 2;
+    }
+
+    let finalColor;
+    if (resColor === 'red') {
+        finalColor = 1;
+    } else if (resColor === 'black') {
+        finalColor = 2;
+    } else if (resColor === 'grey') {
+        finalColor = 3;
+    } else if (resColor === 'white') {
+        finalColor = 4;
+    }
+
     let alert = $("#status-alert")
     if (resColor === "none") {
         alert.text(resStatus).css("display", "block")
@@ -60,7 +78,7 @@ let putTileOnly = async function(ev) {
     } else {
         alert.css("display", "none")
         console.log("number tiles: " + resTiles + "tile id: " + placedTile)
-        $('#' + resPlayer + '-' + resColor + 'tile' + placedTile).css("display", "none")
+        $('#' + p + '-' + finalColor + '-tile-' + placedTile).css("display", "none")
         let colorTile = document.getElementById("tile" + row + col)
         colorTile.classList.remove("opacity-noTiles")
         colorTile.firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
@@ -162,8 +180,8 @@ function updatePlayers(json) {
         $("#p2-name").addClass("highlight")
     }
 
-    updateTiles("p1", p1['tiles'])
-    updateTiles("p2", p2['tiles'])
+    updateTiles("1", p1['tiles'])
+    updateTiles("2", p2['tiles'])
 }
 
 function updateTiles(player, tiles) {
@@ -172,10 +190,10 @@ function updateTiles(player, tiles) {
     let greyTiles = tiles ['grey']
     let whiteTiles = tiles ['white']
 
-    setTileOpacity(player, "red", redTiles)
-    setTileOpacity(player, "black", blackTiles)
-    setTileOpacity(player, "grey", greyTiles)
-    setTileOpacity(player, "white", whiteTiles)
+    setTileOpacity(player, 1, redTiles)
+    setTileOpacity(player, 2, blackTiles)
+    setTileOpacity(player, 3, greyTiles)
+    setTileOpacity(player, 4, whiteTiles)
 }
 
 function setTileOpacity(player, color, tiles) {

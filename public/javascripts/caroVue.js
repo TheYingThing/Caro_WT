@@ -22,7 +22,7 @@ app.component('action-button-group', {
                 console.log("Websocket caused error: " + error)
             }
 
-            this.ws.onmessage =  (e) => {
+            this.ws.onmessage = (e) => {
                 console.log("message recieved")
                 if (typeof e.data === "string") {
                     let json = JSON.parse(e.data)
@@ -37,11 +37,11 @@ app.component('action-button-group', {
         },
         updateBoard(json) {
             let cells = json['cells'];
-            for(let r = 2 ; r < 14 ; r++) {
-                for(let c = 2 ; c < 14 ; c++ ) {
+            for (let r = 2; r < 14; r++) {
+                for (let c = 2; c < 14; c++) {
                     let cell = cells[r][c]
                     let colorTile = document.getElementById("tile" + r + c)
-                    if(cell !== "none") {
+                    if (cell !== "none") {
                         console.log("id : tile" + r + c)
                         if (colorTile !== null && colorTile.classList !== null) {
                             colorTile.classList.remove("opacity-noTiles")
@@ -70,7 +70,7 @@ app.component('action-button-group', {
             console.log("last:" + lastColor)
 
             let moves = json['moves']
-            if(moves % 2 === 0) {
+            if (moves % 2 === 0) {
                 $("#p2-name").removeClass("highlight")
                 $("#p1-name").addClass("highlight")
             } else {
@@ -159,14 +159,14 @@ app.component('tile-list', {
 app.component('empty-board-tile', {
     props: ['row', 'col'],
     methods: {
-         async putTileOnly(row, col, color, colorId) {
+        async putTileOnly(row, col, color, colorId) {
             let path = "putOnly/" + row + "/" + col + "/" + color;
             let result = await this.executeAjaxForJson(path);
             let resColor = result['color']
             let resPlayer = result['player']
             let resStatus = result['status']
             let resTiles = result['tiles']
-            let placedTile  = 3 - resTiles
+            let placedTile = 3 - resTiles
             console.log(resPlayer)
 
             let p;
@@ -188,7 +188,7 @@ app.component('empty-board-tile', {
                 colorTile.classList.remove("opacity-noTiles")
                 colorTile.firstElementChild.src = "/assets/images/" + result['color'] + "Button.png";
 
-                if(resPlayer === 'p1') {
+                if (resPlayer === 'p1') {
                     $("#p1-name").removeClass("highlight")
                     $("#p2-name").addClass("highlight")
                 } else if (resPlayer === 'p2') {
@@ -211,7 +211,7 @@ app.component('empty-board-tile', {
                     console.log("something went wrong");
                 }
             })
-}
+        }
     },
     template: `
         <div class="board-tile-padding" id="board-tiles">
@@ -236,7 +236,7 @@ app.component('empty-board-tile', {
     `
 })
 
-app.component('caro-nav' , {
+app.component('caro-nav', {
     template: `
         <div>
             <nav class="navbar navbar-dark bg-dark navbar-expand-lg ps-5" id="caro-nav">
@@ -258,6 +258,86 @@ app.component('caro-nav' , {
                     </ul>
                 </div>
             </nav>
+        </div>
+    `
+})
+
+app.component('home-page', {
+    data() {
+        return {
+            home: true,
+            players: false,
+            player1: '',
+            player2: ''
+        }
+    },
+    methods: {
+        async load(path) {
+            console.log("doing something???")
+            if (path === "newGame") {
+                let content = document.getElementById("page-content");
+                content.innerHTML = await executeAjax(path);
+            } else {
+                await this.executeAjax(path);
+                window.location.href = "http://localhost:9000/board";
+            }
+        },
+        executeAjax(path) {
+            return $.ajax({
+                url: "/" + path,
+                type: 'GET'
+            })
+        },
+        changeView() {
+            this.home = !this.home
+            this.players = !this.players
+        },
+        async startGame()  {
+            if (this.player1 === "") {
+                this.player1 = "Player 1";
+            }
+
+            if (this.player2 === "") {
+                this.player2 = "Player 2";
+            }
+
+            const path = 'game/' + this.player1 + '/' + this.player2;
+            await this.executeAjax(path);
+            window.location.href = "http://localhost:9000/board";
+        }
+    },
+    template: `
+        <div class="content-body">
+            <div v-show="home">
+                <h1 class="top-padding">Welcome to Caro!</h1>
+                <h2>Choose your game:</h2>
+                <div class="padding-30">
+                <div class="btn-group-vertical" role="group">
+                    <button class="btn btn-secondary grey-button menu-button" @click="changeView">New Game</button>
+                    <a class="btn btn-secondary grey-button menu-button" href="http://localhost:9000/board" >Continue Game</a>
+                    <button class="btn btn-secondary grey-button menu-button" v-on:click="load('load')">Load Game</button>
+                </div>
+                <div class="padding-30">
+                    <h3>If you want to have a look at the rules, click <a class="in-text-link" href="http://localhost:9000/rules">here!</a></h3>
+                </div>
+                </div>
+            </div>
+            <div v-show="players" class="col-4 mx-auto">
+                <form id="nameForm" @submit.prevent="startGame">
+                    <div class="padding-30">
+                        <div class="form-group bottom-padding-30">
+                            <label for="playerOneName">Player 1 Name</label>
+                            <input type="text" class="form-control" id="playerOneName" placeholder="Player 1" v-model="player1">
+                        </div>
+                        <div class="form-group bottom-padding-30">
+                            <label for="playerTwoName">Player 2 Name</label>
+                            <input type="text" class="form-control" id="playerTwoName" placeholder="Player 2" v-model="player2">
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary">Start Game</button>
+                    <button class="btn btn-secondary" @click="changeView">Back to Menu</button>
+                </form>
+            </div>
         </div>
     `
 })

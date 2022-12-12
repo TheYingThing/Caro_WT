@@ -3,9 +3,6 @@ const menuButtons = document.getElementsByClassName("menu-button");
 const dropdownTiles = document.getElementsByClassName("dropdown-tile");
 let websocket;
 
-websocket = new WebSocket("ws://localhost:9000/websocket")
-
-
 function executeAjax(path) {
     return $.ajax({
         url: "/" + path,
@@ -67,120 +64,8 @@ $(document).ready(function(){
     });
 });
 
-function updatePlayers(json) {
-    console.log("updating player")
-    let p1 = json['player1']
-    let p2 = json['player2']
-    $("#p2-points").html(p2['points']);
-    $("#p1-points").html(p1['points']);
-    $("#p2-name").html(p2['name']);
-    $("#p1-name").html(p1['name']);
-
-    let lastColor = json['last']
-
-    console.log("last:" + lastColor)
-
-    let moves = json['moves']
-    if(moves % 2 === 0) {
-        $("#p2-name").removeClass("highlight")
-        $("#p1-name").addClass("highlight")
-    } else {
-        $("#p1-name").removeClass("highlight")
-        $("#p2-name").addClass("highlight")
-    }
-
-    updateTiles("1", p1['tiles'])
-    updateTiles("2", p2['tiles'])
-}
-
-function updateTiles(player, tiles) {
-    let redTiles = tiles ['red']
-    let blackTiles = tiles ['black']
-    let greyTiles = tiles ['grey']
-    let whiteTiles = tiles ['white']
-
-    setTileOpacity(player, 1, redTiles)
-    setTileOpacity(player, 2, blackTiles)
-    setTileOpacity(player, 3, greyTiles)
-    setTileOpacity(player, 4, whiteTiles)
-}
-
-function setTileOpacity(player, color, tiles) {
-    if (tiles === 3) {
-        $('#' + player + '-' + color + 'tile0').css("display", "inline")
-        $('#' + player + '-' + color + 'tile1').css("display", "inline")
-        $('#' + player + '-' + color + 'tile2').css("display", "inline")
-    } else if (tiles === 2) {
-        $('#' + player + '-' + color + 'tile0').css("display", "none")
-        $('#' + player + '-' + color + 'tile1').css("display", "inline")
-        $('#' + player + '-' + color + 'tile2').css("display", "inline")
-    } else if (tiles === 1) {
-        $('#' + player + '-' + color + 'tile0').css("display", "none")
-        $('#' + player + '-' + color + 'tile1').css("display", "none")
-        $('#' + player + '-' + color + 'tile2').css("display", "inline")
-    } else if (tiles === 0) {
-        $('#' + player + '-' + color + 'tile0').css("display", "none")
-        $('#' + player + '-' + color + 'tile1').css("display", "none")
-        $('#' + player + '-' + color + 'tile2').css("display", "none")
-    }
-}
-
-function updateBoard(json) {
-    let cells = json['cells'];
-    for(let r = 2 ; r < 14 ; r++) {
-        for(let c = 2 ; c < 14 ; c++ ) {
-            let cell = cells[r][c]
-            let colorTile = document.getElementById("tile" + r + c)
-            if(cell !== "none") {
-                console.log("id : tile" + r + c)
-                if (colorTile !== null && colorTile.classList !== null) {
-                    colorTile.classList.remove("opacity-noTiles")
-                    colorTile.firstElementChild.src = "/assets/images/" + cell + "Button.png";
-                }
-            } else {
-                if (colorTile !== null && colorTile.classList !== null) {
-                    colorTile.classList.add("opacity-noTiles")
-                    colorTile.firstElementChild.src = "/assets/images/noTile.png";
-                }
-            }
-        }
-    }
-}
-
-function updateGame(json) {
-    console.log("updating game")
-    updatePlayers(json)
-    updateBoard(json)
-}
-
-function connectWebSocket() {
-
-    websocket.onopen = function(event) {
-        console.log("opening connection to Websocket")
-        websocket.send("opening connection")
-    }
-
-    websocket.onclose = function () {
-        console.log("Closed connection to Websocket")
-    }
-
-    websocket.onerror = function (error) {
-        console.log("Websocket caused error: " + error)
-    }
-
-    websocket.onmessage = function (e) {
-        console.log("message recieved")
-        if (typeof e.data === "string") {
-            let json = JSON.parse(e.data)
-            updateGame(json)
-            addListeners()
-        }
-    }
-}
-
 $(document).ready(function () {
     console.log("document ready, should show websocket json??")
-    connectWebSocket()
     addListeners()
 })
 

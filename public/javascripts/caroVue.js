@@ -1,6 +1,120 @@
 const app = Vue.createApp({})
 
 app.component('action-button-group', {
+    data() {
+        return {
+            ws: new WebSocket("ws://localhost:9000/websocket")
+        }
+    },
+    methods: {
+        connectWebSocket() {
+
+            this.ws.onopen = (event) => {
+                console.log("opening connection to Websocket")
+                this.ws.send("opening connection")
+            }
+
+            this.ws.onclose = () => {
+                console.log("Closed connection to Websocket")
+            }
+
+            this.ws.onerror = (error) => {
+                console.log("Websocket caused error: " + error)
+            }
+
+            this.ws.onmessage =  (e) => {
+                console.log("message recieved")
+                if (typeof e.data === "string") {
+                    let json = JSON.parse(e.data)
+                    this.updateGame(json)
+                }
+            }
+        },
+        updateGame(json) {
+            console.log("updating game")
+            this.updatePlayers(json)
+            this.updateBoard(json)
+        },
+        updateBoard(json) {
+            let cells = json['cells'];
+            for(let r = 2 ; r < 14 ; r++) {
+                for(let c = 2 ; c < 14 ; c++ ) {
+                    let cell = cells[r][c]
+                    let colorTile = document.getElementById("tile" + r + c)
+                    if(cell !== "none") {
+                        console.log("id : tile" + r + c)
+                        if (colorTile !== null && colorTile.classList !== null) {
+                            colorTile.classList.remove("opacity-noTiles")
+                            colorTile.firstElementChild.src = "/assets/images/" + cell + "Button.png";
+                        }
+                    } else {
+                        if (colorTile !== null && colorTile.classList !== null) {
+                            colorTile.classList.add("opacity-noTiles")
+                            colorTile.firstElementChild.src = "/assets/images/noTile.png";
+                        }
+                    }
+                }
+            }
+        },
+        updatePlayers(json) {
+            console.log("updating player")
+            let p1 = json['player1']
+            let p2 = json['player2']
+            $("#p2-points").html(p2['points']);
+            $("#p1-points").html(p1['points']);
+            $("#p2-name").html(p2['name']);
+            $("#p1-name").html(p1['name']);
+
+            let lastColor = json['last']
+
+            console.log("last:" + lastColor)
+
+            let moves = json['moves']
+            if(moves % 2 === 0) {
+                $("#p2-name").removeClass("highlight")
+                $("#p1-name").addClass("highlight")
+            } else {
+                $("#p1-name").removeClass("highlight")
+                $("#p2-name").addClass("highlight")
+            }
+
+            this.updateTiles("1", p1['tiles'])
+            this.updateTiles("2", p2['tiles'])
+        },
+        updateTiles(player, tiles) {
+            let redTiles = tiles ['red']
+            let blackTiles = tiles ['black']
+            let greyTiles = tiles ['grey']
+            let whiteTiles = tiles ['white']
+
+            this.setTileOpacity(player, 1, redTiles)
+            this.setTileOpacity(player, 2, blackTiles)
+            this.setTileOpacity(player, 3, greyTiles)
+            this.setTileOpacity(player, 4, whiteTiles)
+        },
+        setTileOpacity(player, color, tiles) {
+            if (tiles === 3) {
+                $('#' + player + '-' + color + 'tile0').css("display", "inline")
+                $('#' + player + '-' + color + 'tile1').css("display", "inline")
+                $('#' + player + '-' + color + 'tile2').css("display", "inline")
+            } else if (tiles === 2) {
+                $('#' + player + '-' + color + 'tile0').css("display", "none")
+                $('#' + player + '-' + color + 'tile1').css("display", "inline")
+                $('#' + player + '-' + color + 'tile2').css("display", "inline")
+            } else if (tiles === 1) {
+                $('#' + player + '-' + color + 'tile0').css("display", "none")
+                $('#' + player + '-' + color + 'tile1').css("display", "none")
+                $('#' + player + '-' + color + 'tile2').css("display", "inline")
+            } else if (tiles === 0) {
+                $('#' + player + '-' + color + 'tile0').css("display", "none")
+                $('#' + player + '-' + color + 'tile1').css("display", "none")
+                $('#' + player + '-' + color + 'tile2').css("display", "none")
+            }
+        }
+    },
+    beforeMount() {
+        this.connectWebSocket()
+    },
     template: `
         <a class="btn btn-secondary grey-button" type="button" href="http://localhost:9000/save">Save</a>
         <a class="btn btn-secondary grey-button" type="button" href="http://localhost:9000/undo">Undo</a>
@@ -118,6 +232,32 @@ app.component('empty-board-tile', {
                     <board-tile :color=4></board-tile>
                 </span>
             </div>
+        </div>
+    `
+})
+
+app.component('caro-nav' , {
+    template: `
+        <div>
+            <nav class="navbar navbar-dark bg-dark navbar-expand-lg ps-5" id="caro-nav">
+                <a class="navbar-brand navBrandFont" href="#">Caro</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-buttons" aria-controls="navbar-buttons" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div id= "navbar-buttons" class="collapse navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="http://localhost:9000/">Menu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://localhost:9000/board">Game</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://localhost:9000/rules">Rules</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
         </div>
     `
 })

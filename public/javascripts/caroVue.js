@@ -170,7 +170,7 @@ app.component('empty-board-tile', {
             console.log(resPlayer)
 
             let p;
-            if (resTiles === 'p1') {
+            if (resPlayer === 'p1') {
                 p = 1;
             } else {
                 p = 2;
@@ -313,7 +313,7 @@ app.component('home-page', {
                 <h2>Choose your game:</h2>
                 <div class="padding-30">
                 <div class="btn-group-vertical" role="group">
-                    <button class="btn btn-secondary grey-button menu-button" @click="changeView">New Game</button>
+                    <button class="btn btn-secondary grey-button menu-button" v-on:click="changeView">New Game</button>
                     <a class="btn btn-secondary grey-button menu-button" href="http://localhost:9000/board" >Continue Game</a>
                     <button class="btn btn-secondary grey-button menu-button" v-on:click="load('load')">Load Game</button>
                 </div>
@@ -335,7 +335,7 @@ app.component('home-page', {
                         </div>
                     </div>
                     <button class="btn btn-secondary">Start Game</button>
-                    <button class="btn btn-secondary" @click="changeView">Back to Menu</button>
+                    <button class="btn btn-secondary" v-on:click.prevent="changeView">Back to Menu</button>
                 </form>
             </div>
         </div>

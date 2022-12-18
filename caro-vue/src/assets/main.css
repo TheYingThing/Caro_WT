@@ -1,0 +1,319 @@
+@import './base.css';
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+}
+
+* {
+  background-color: #708090;
+  color: white;
+  font-family: Tahoma, Arial, sans-serif;;
+}
+
+.content-body{
+  padding: 20px;
+  text-align: center;
+}
+
+.rule-body {
+  padding: 20px;
+  text-align: left;
+
+}
+
+.score-result {
+  padding: 50px;
+  text-align: center;
+  font-size: 40px;
+}
+
+.padding-30 {
+  padding: 30px;
+}
+
+.bottom-padding-30 {
+  padding-bottom: 30px;
+}
+
+.tile-padding {
+  padding: 5px;
+}
+
+.board-tile-padding {
+  padding: 2px;
+}
+
+.player {
+  align-content: end;
+  box-sizing: border-box;
+  width: 50px
+}
+
+.game-status {
+  display: none;
+}
+
+.highlight {
+  text-shadow: 3px 3px 5px #A0A0A0;
+}
+
+.div-button{
+  margin-left: 20px;
+}
+
+.row {
+  padding-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.col-board {
+  flex: 0 0 40%;
+  padding: 1em;
+}
+
+.col {
+  flex: 0 0 10%;
+  padding: 1em;
+}
+
+.button {
+  background-color: #e7e7e7;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-family: Tahoma, Arial, sans-serif;
+  border-radius: 8px;
+}
+
+.drop-spot {
+  background-color: #A0A0A0;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  margin: auto;
+}
+
+.set-tile {
+  vertical-align: inherit;
+}
+
+.big-font {
+  font-size: 40ex;
+}
+
+.credits {
+  font-size: 1ex;
+}
+
+.tile-img {
+  width: 30px;
+  height: 30px;
+}
+
+.opacity-noTiles {
+  opacity: 0.4;
+}
+
+#caro-nav .navbar-brand {
+  font-size: 30px;
+  font-family: Tahoma, Arial, sans-serif;
+  background: rgba(0,0,0,0);
+}
+
+#caro-nav .navbar-collapse,
+#caro-nav .nav-item,
+#caro-nav .navbar-nav,
+#caro-nav .collapse,
+#caro-nav .close,
+#caro-nav .alert-icon,
+#caro-nav .a,
+#caro-nav .container-fluid{
+  background: rgba(0,0,0,0);
+  color: #4e5965;
+}
+
+#caro-nav .navbar-toggler-icon{
+  background-color: transparent;
+}
+
+.grey-link.nav-link {
+  background: rgba(0,0,0,0);
+  color: #4e5965;
+}
+
+.grey-link.nav-link:hover {
+  color: whitesmoke;
+}
+
+#navbar-buttons .nav-link {
+  background: none;
+  color: #4e5965;
+  position: relative;
+  padding: 0 10px;
+}
+
+#navbar-buttons .nav-link:hover {
+  color: #A0A0A0;
+}
+
+#navbar-buttons .nav-link:after {
+  content: '';
+  width: 70%;
+  position: absolute;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 10px;
+  background-color: #A0A0A0;
+  transform-origin: bottom left;
+  transition: transform 0.25s ease-in-out;
+}
+
+#navbar-buttons .nav-link:hover:after {
+  color: #A0A0A0;
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.active {
+  color: whitesmoke;
+}
+
+#board-grid-row .dropdown-item,
+#board-grid-row .dropdown-menu {
+  background-color: #21262b;
+  color: #4e5965;
+  min-width: 0;
+}
+
+.top-padding {
+  padding-top: 50px;
+}
+
+.alert {
+  width: 30% !important;
+  align: center;
+}
+
+.a {
+  color: rgba(0,0,0,0) !important;
+}
+
+#board-grid-row .dropdown-toggle::after {
+  content: none !important;
+}
+
+.empty-tile {
+  border: none !important;
+  padding: 0px !important;
+}
+
+.list {
+  text-align: left !important;
+}
+
+.rulesTab {
+  text-align: left !important;
+  padding-left: 140px;
+}
+
+.nav-pills {
+  background: #647382  !important;
+}
+
+.active {
+  color: white !important;
+  background: #21262b !important;
+}
+
+.tab-pane {
+  background: rgba(0,0,0,0) !important;
+}
+
+a.grey-button {
+  background-color: #21262b;
+}
+
+.medal-img {
+  height: 80px;
+  width: 80px;
+}
+
+.in-text-link {
+  color: #21262b;
+  text-decoration: none;
+  position: relative;
+}
+
+.in-text-link:hover {
+  color: #404347;
+}
+
+.in-text-link:after {
+  content: '';
+  width: 90%;
+  position: absolute;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #404347;
+  transform-origin: bottom left;
+  transition: transform 0.25s ease-in-out;
+}
+
+.in-text-link:hover:after {
+  color: #404347;
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.form-body {
+  padding-top: 10%;
+  width: 40%;
+  display: inline-block;
+}
+
+.form-input {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.label-padding {
+  padding-bottom: 5px;
+}

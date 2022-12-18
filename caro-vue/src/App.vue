@@ -2,23 +2,30 @@
 import HelloWorld from './components/HelloWorld.vue'
 import NavBar from './components/NavBar.vue'
 import Tile from "./components/Tile.vue";
+import Home from "./components/Home.vue";
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <NavBar/>
-    </div>
-  </header>
-
-  <main>
-    <Tile color="white" />
-  </main>
+  <body class="body-container">
+    <NavBar></NavBar>
+    <RouterView/>
+  </body>
 </template>
 
 <style scoped>
+
+#app {
+  margin: 0 !important;
+  background-color: #708090;
+
+}
+
+* {
+  background-color: #708090;
+  color: white;
+  font-family: Tahoma, Arial, sans-serif;;
+}
+
 header {
   line-height: 1.5;
 }
@@ -43,6 +50,15 @@ header {
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
+  }
+
+  .body-container {
+    position: fixed;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    min-height: auto;
   }
 }
 </style>

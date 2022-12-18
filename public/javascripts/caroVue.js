@@ -26,6 +26,7 @@ app.component('action-button-group', {
                 console.log("message recieved")
                 if (typeof e.data === "string") {
                     let json = JSON.parse(e.data)
+                    console.log(json)
                     this.updateGame(json)
                 }
             }

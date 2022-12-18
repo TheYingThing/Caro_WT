@@ -165,6 +165,10 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
     ))
   }
 
+  def getBoardJson(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    Ok(boardToJson(controller.getBoard()))
+  }
+
   def socket = WebSocket.accept[String, String] { request =>
     ActorFlow.actorRef { out =>
       println("Connect received")

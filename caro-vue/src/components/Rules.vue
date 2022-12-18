@@ -27,28 +27,28 @@
             <span>:     10 points</span>
           </div>
           <div class="tile-padding">
-            <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
-            <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+            <img src="@/assets/images/redButton.png" alt="red tile">
+            <img src="@/assets/images/greyButton.png" alt="grey tile">
             <span>:     8 points</span>
           </div>
           <div class="tile-padding">
-            <img src="@routes.Assets.versioned("images/redButton.png")" alt="red tile">
-            <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+            <img src="@/assets/images/redButton.png" alt="red tile">
+            <img src="@/assets/images/whiteButton.png" alt="white tile">
             <span>:     6 points</span>
           </div>
           <div class="tile-padding">
-            <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-            <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
+            <img src="@/assets/images/blackButton.png" alt="black tile">
+            <img src="@/assets/images/greyButton.png" alt="grey tile">
             <span>:     4 points</span>
           </div>
           <div class="tile-padding">
-            <img src="@routes.Assets.versioned("images/blackButton.png")" alt="black tile">
-            <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+            <img src="@/assets/images/blackButton.png" alt="black tile">
+            <img src="@/assets/images/whiteButton.png" alt="white tile">
             <span>:     2 points</span>
           </div>
           <div class="tile-padding">
-            <img src="@routes.Assets.versioned("images/greyButton.png")" alt="grey tile">
-            <img src="@routes.Assets.versioned("images/whiteButton.png")" alt="white tile">
+            <img src="@/assets/images/greyButton.png" alt="grey tile">
+            <img src="@/assets/images/whiteButton.png" alt="white tile">
             <span>:     1 points</span>
           </div>
           <p>Furthermore, the following circumstances grant special points: </p>

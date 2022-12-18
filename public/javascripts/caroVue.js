@@ -137,7 +137,7 @@ app.component('player-tile', {
 app.component('board-tile', {
     props: ['color'],
     template: `
-      <img v-if="color === 0" class="tile-img" src="/assets/images/noTile.png" alt="red tile">
+      <img v-if="color === 0" class="tile-img" src="/assets/images/noTile.png" alt="red tile"> 
       <img v-else-if="color === 1" class="tile-img" src="/assets/images/redButton.png" alt="red tile">
       <img v-else-if="color === 2" class="tile-img" src="/assets/images/blackButton.png" alt="red tile">
       <img v-else-if="color === 3" class="tile-img" src="/assets/images/greyButton.png" alt="red tile">

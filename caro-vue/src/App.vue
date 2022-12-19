@@ -1,7 +1,5 @@
 <script setup>
 import NavBar from './components/NavBar.vue'
-import Tile from "./components/Tile.vue";
-import Home from "./components/Home.vue";
 </script>
 
 <template>

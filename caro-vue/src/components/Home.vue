@@ -6,8 +6,12 @@
       <div class="padding-30">
         <div class="btn-group-vertical" role="group">
           <button class="btn btn-secondary grey-button menu-button" v-on:click="changeView">New Game</button>
-          <a class="btn btn-secondary grey-button menu-button" href="http://localhost:9000/board" >Continue Game</a>
-          <button class="btn btn-secondary grey-button menu-button" v-on:click="load('load')">Load Game</button>
+          <a class="btn btn-secondary grey-button menu-button">
+            <RouterLink to="/game">Continue Game</RouterLink>
+            </a>
+          <button class="btn btn-secondary grey-button menu-button" v-on:click="load()">
+            Load Game
+          </button>
         </div>
         <div class="padding-30">
           <h3>If you want to have a look at the rules, click <a class="in-text-link" href="http://localhost:9000/rules">here!</a></h3>
@@ -34,6 +38,8 @@
 </template>
 
 <script>
+import axios from "axios";
+import router from "../router";
 export default {
   name: "Home",
   data() {
@@ -45,15 +51,12 @@ export default {
     }
   },
   methods: {
-    async load(path) {
-      console.log("doing something???")
-      if (path === "newGame") {
-        let content = document.getElementById("page-content");
-        content.innerHTML = await executeAjax(path);
-      } else {
-        await this.executeAjax(path);
-        window.location.href = "http://localhost:9000/board";
-      }
+    load() {
+      axios.get('http://localhost:9000/load').then(
+          function () {
+            router.push('/game')
+          }
+      )
     },
     executeAjax(path) {
       return $.ajax({

@@ -1,6 +1,6 @@
 <template>
-  <div class="board-tile-padding" id="board-tiles">
-            <span type="button" class="btn btn-secondary dropdown-toggle opacity-noTiles shadow-none empty-tile"
+  <div id="board-tiles">
+            <span type="button" class="btn btn-secondary dropdown-toggle opacity-noTiles shadow-none empty-tile board-tile-padding"
                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" :id="'tile' + row + col">
                 <Tile :color="none"></Tile>
             </span>
@@ -104,6 +104,10 @@ export default {
 .empty-tile {
   border: none !important;
   padding: 0px !important;
+}
+
+.board-tile-padding {
+  padding: 2px;
 }
 </style>
 

@@ -1,15 +1,20 @@
 <template>
-  <div class="row">
-    <BoardGrid :cells="cells"></BoardGrid>
+  <div class="content-body">
+    <div class="row">
+      <Player :moves="moves" :name="player1Name" :points="player1Points" :tiles="player1Tiles" :player-id="p1" :turn="turn"></Player>
+      <BoardGrid :cells="cells"></BoardGrid>
+      <Player :moves="moves" :name="player2Name" :points="player2Points" :tiles="player2Tiles" :player-id="p2" :turn="turn"></Player>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import BoardGrid from "./BoardGrid.vue";
+import Player from "./Player.vue";
 
 export default {
-  components: {BoardGrid},
+  components: {Player, BoardGrid},
   data() {
     return {
       cells: [],
@@ -19,7 +24,10 @@ export default {
       player2Points: "",
       player1Tiles: [],
       player2Tiles: [],
-      moves:""
+      moves:"",
+      p1: "p1",
+      p2: "p2",
+      turn: ""
     }
   },
   name: "Board",
@@ -38,6 +46,12 @@ export default {
             this.player2Points = player2["points"]
             this.player2Tiles = player2["tiles"]
             this.moves = board["moves"]
+
+            if (this.moves % 2 === 0) {
+              this.turn = this.p1;
+            } else {
+              this.turn = this.p2;
+            }
           }.bind(this));
     }
   },
@@ -56,4 +70,6 @@ export default {
   display: flex;
   justify-content: center;
 }
+
+
 </style>

@@ -11,8 +11,10 @@
     "axios": "^1.2.1",
     "bootstrap": "^5.2.3",
     "bootstrap-vue": "^2.23.1",
+    "quasar": "^2.11.1",
     "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vuetify": "^3.0.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.0.0",

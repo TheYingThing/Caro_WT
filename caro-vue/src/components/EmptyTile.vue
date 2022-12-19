@@ -25,8 +25,11 @@
   </div>
 </template>
 
+<!--TODO: maybe replace this with vuetify which has menus since bootstrap is not working-->
+
 <script>
-import Tile from "../App";
+import Tile from "./Tile.vue";
+
 export default {
   name: 'Empty-Tile',
   components: {Tile},
@@ -92,6 +95,15 @@ export default {
 .tile-img {
   width: 30px;
   height: 30px;
+}
+
+.opacity-noTiles {
+  opacity: 0.4;
+}
+
+.empty-tile {
+  border: none !important;
+  padding: 0px !important;
 }
 </style>
 

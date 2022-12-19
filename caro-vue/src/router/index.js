@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import Home from "../components/Home.vue";
 import Rules from "../components/Rules.vue";
+import Board from "../components/Board.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -13,7 +14,7 @@ const router = createRouter({
         {
             path: "/game",
             name: "Game",
-            component: Home
+            component: Board
         },
         {
             path: "/rules",

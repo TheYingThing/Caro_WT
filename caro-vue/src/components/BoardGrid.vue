@@ -1,37 +1,40 @@
 <template>
   <div class="col-board" id="board-grid">
-    <div v-for="(row, col) in board.cells" class="btn-group" id="board-grid-row">
-      <EmptyTile v-if="board.cells[row][col] === 'none'"></EmptyTile>
-      <Tile v-else :tileColor="board.cells[row][col]"></Tile>
+    <div v-for="row in getNumbers(3, 16)" class="btn-group" id="board-grid-row">
+      <div v-for="col in getNumbers(3, 16)">
+        <EmptyTile v-if="cells[row][col] === 'none'"></EmptyTile>
+        <Tile v-else :tileColor="cells[row][col]"></Tile>
+      </div>
+      </div>
     </div>
-  </div>
 </template>
 
 <script>
-import EmptyTile from "./EmptyTile";
-import Tile from "../App";
+import EmptyTile from "./EmptyTile.vue";
+import Tile from "./Tile.vue";
 import axios from 'axios';
 export default {
   name: 'BoardGrid',
-  data() {
-    return {
-      board: ""
-    }
+  props: {
+    cells: Array
   },
   components: {Tile, EmptyTile},
-  methods: {
-    getBoard() {
-      axios.get('http://localhost:9000/board/json')
-          .then(function (response) {
-        this.board = response.data;
-      }.bind(this));
+  methods:{
+    getNumbers:function(start,stop){
+      return new Array(stop-start).fill(start).map((n,i)=>n+i);
     }
   },
   created() {
-    this.getBoard();
-  },
-  updated() {
-    this.getBoard();
+    console.log(this.cells);
   }
 }
 </script>
+
+<style>
+
+.col-board {
+  flex: 0 0 40%;
+  padding: 1em;
+}
+
+</style>

@@ -67,6 +67,7 @@ export default {
 
 .player {
   align-content: center;
+  position: relative;
 }
 
 </style>

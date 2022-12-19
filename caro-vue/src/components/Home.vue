@@ -58,17 +58,11 @@ export default {
           }
       )
     },
-    executeAjax(path) {
-      return $.ajax({
-        url: "/" + path,
-        type: 'GET'
-      })
-    },
     changeView() {
       this.home = !this.home
       this.players = !this.players
     },
-    async startGame()  {
+     startGame()  {
       if (this.player1 === "") {
         this.player1 = "Player 1";
       }
@@ -76,10 +70,13 @@ export default {
       if (this.player2 === "") {
         this.player2 = "Player 2";
       }
-
       const path = 'game/' + this.player1 + '/' + this.player2;
-      await this.executeAjax(path);
-      window.location.href = "http://localhost:9000/board";
+
+      axios.get('http://localhost:9000/' + path).then(
+          function () {
+            router.push('/game')
+          }
+      )
     }
   }
 }

@@ -1,9 +1,13 @@
 <template>
-    <v-btn v-on:click="callPlayServer(path)">{{ title }}</v-btn>
+    <v-btn v-if="path === 'score'">
+      <RouterLink to="/score">Score</RouterLink>
+    </v-btn>
+    <v-btn v-else v-on:click="callPlayServer(path)">{{ title }}</v-btn>
 </template>
 
 <script>
 import axios from "axios";
+import router from "../router";
 export default {
   name: 'ActionButton',
   props: ['path', 'title'],

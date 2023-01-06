@@ -22,4 +22,14 @@ export default {
 
 <style>
 
+router-link {
+  color: inherit;
+  text-underline: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 </style>

@@ -1,7 +1,9 @@
 <template>
   <div class="col-lg-6 col-12 order-first order-lg-0 col-board" id="board-grid">
     <div class="actions-padding">
-      <ActionButton v-for="(title, path) in paths" :path="path" :title="title"></ActionButton>
+      <q-btn-group>
+        <ActionButton v-for="(title, path) in paths" :path="path" :title="title"></ActionButton>
+      </q-btn-group>
     </div>
     <div v-for="row in getNumbers(3, 16)" id="board-grid-row" class="board-row-padding">
       <span v-for="col in getNumbers(3, 16)" class="q-btn-group board-tile-padding shadow-none">

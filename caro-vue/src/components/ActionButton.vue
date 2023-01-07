@@ -1,8 +1,8 @@
 <template>
-    <v-btn v-if="path === 'score'">
+    <q-btn v-if="path === 'score'" :size="xl">
       <RouterLink to="/score">Score</RouterLink>
-    </v-btn>
-    <v-btn v-else v-on:click="callPlayServer(path)">{{ title }}</v-btn>
+    </q-btn>
+    <q-btn v-else v-on:click="callPlayServer(path)">{{ title }}</q-btn>
 </template>
 
 <script>
@@ -30,6 +30,14 @@ router-link {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.row {
+  padding-top: 2px;
+}
+
+.col {
+  padding-bottom: 2px;
 }
 
 </style>

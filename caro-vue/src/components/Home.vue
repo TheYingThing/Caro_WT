@@ -107,4 +107,15 @@ export default {
 .bottom-padding-30 {
   padding-bottom: 30px;
 }
+
+router-link {
+  color: inherit;
+  text-underline: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 </style>

@@ -57,6 +57,7 @@ header {
     bottom: 0;
     left: 0;
     min-height: auto;
+    overflow-y: scroll;
   }
 }
 </style>

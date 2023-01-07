@@ -1,21 +1,20 @@
 <script setup>
 import NavBar from './components/NavBar.vue'
 import ButtonGroup from "@/components/ButtonGroup.vue";
+import HeaderTest from "@/components/HeaderTest.vue";
 </script>
 
 <template>
-  <body class="body-container">
-    <NavBar></NavBar>
+  <q-layout view="lHh lpr lFf" class="body-container">
+    <HeaderTest></HeaderTest>
     <RouterView/>
-  </body>
+  </q-layout>
 </template>
 
 <style scoped>
 
 #app {
   margin: 0 !important;
-  background-color: #708090;
-
 }
 
 * {

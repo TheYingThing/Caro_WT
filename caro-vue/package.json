@@ -10,10 +10,11 @@
   "dependencies": {
     "@quasar/extras": "^1.15.9",
     "axios": "^1.2.1",
-    "bootstrap": "^5.2.3",
+    "bootstrap": "^4.6.1",
     "bootstrap-vue": "^2.23.1",
-    "quasar": "^2.11.3",
+    "quasar": "^2.11.4",
     "vue": "^3.2.45",
+    "vue-axios": "^3.5.2",
     "vue-router": "^4.1.6",
     "vuetify": "^3.0.5"
   },

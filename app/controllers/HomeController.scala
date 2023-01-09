@@ -5,7 +5,6 @@ import akka.stream.Materializer
 import caro.Caro
 import caro.controller.controllerComponent.ControllerInterface
 import caro.model.gridComponent.{BoardInterface, PlayerInterface}
-import caro.model.gridComponent.boardFullImpl.Player
 import caro.util.Observer
 import com.google.inject.Inject
 import play.api.mvc._

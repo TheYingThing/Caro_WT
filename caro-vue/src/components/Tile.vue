@@ -16,8 +16,8 @@ export default {
 <style>
 
 .tile-img {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
 }
 
 .board-tile-padding {

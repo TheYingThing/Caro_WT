@@ -61,6 +61,8 @@ registerRoute(
 
 self.addEventListener('message', (event) => {
   console.log('sw root: message event listener hit.')
+    console.log('data:' + event.data)
+    console.log('data type:' + event.data.type)
   switch (event.data && event.data.type) {
     case 'SKIP_WAITING':
       self.skipWaiting()

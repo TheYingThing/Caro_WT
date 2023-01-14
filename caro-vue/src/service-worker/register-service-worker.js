@@ -8,8 +8,8 @@
  // Checks for updates every hour. When an update is found, the app-auto-update component and use-service-worker composable
  // handles the actual updating.
  const autoUpdate = async (registration) => {
-   const updateInterval = 1000 * 60 * 60 // 1 hour
-   // const updateInterval = 1000 * 60 // 1 min // for debugging
+   //const updateInterval = 1000 * 60 * 60 // 1 hour
+    const updateInterval = 1000 * 60 // 1 min // for debugging
    setInterval(async () => {
      try {
        /* eslint-disable-next-line no-unused-expressions */

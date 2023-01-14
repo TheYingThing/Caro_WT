@@ -10,6 +10,7 @@
 <script>
 import axios from "axios";
 import router from "../router";
+import $ from 'jquery'
 export default {
   name: 'ActionButton',
   props: ['path', 'title'],

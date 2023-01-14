@@ -14,7 +14,7 @@ import '@quasar/extras/material-icons/material-icons.css'
 import 'quasar/src/css/index.sass'
 import './registerServiceWorker'
 import register from './service-worker/register-service-worker'
-
+import $ from 'jquery'
 
 const vuetify = createVuetify({
     components,

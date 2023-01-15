@@ -218,6 +218,7 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)(i
       "player1" -> playerToJson(board.getPlayerOne),
       "player2" -> playerToJson(board.getPlayerTwo),
       "moves" -> board.getMoves,
+      "status" -> board.getStatusAsString
     )
   }
 

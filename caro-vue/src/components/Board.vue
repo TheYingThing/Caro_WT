@@ -2,7 +2,7 @@
   <div class="content-body">
     <div class="row">
       <Player :moves="moves" :name="player1Name" :points="player1Points" :tiles="player1Tiles" :player-id="p1" :turn="turn"></Player>
-      <BoardGrid :cells="cells"></BoardGrid>
+      <BoardGrid :cells="cells" :status="status"></BoardGrid>
       <Player :moves="moves" :name="player2Name" :points="player2Points" :tiles="player2Tiles" :player-id="p2" :turn="turn"></Player>
     </div>
   </div>
@@ -27,7 +27,8 @@ export default {
       moves:"",
       p1: "p1",
       p2: "p2",
-      turn: ""
+      turn: "",
+      status: ""
     }
   },
   name: "Board",
@@ -46,6 +47,7 @@ export default {
             this.player2Points = player2["points"]
             this.player2Tiles = player2["tiles"]
             this.moves = board["moves"]
+            this.status = board["status"]
 
             if (this.moves % 2 === 0) {
               this.turn = this.p1;

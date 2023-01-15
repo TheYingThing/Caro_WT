@@ -11,7 +11,7 @@
 import axios from "axios";
 import router from "../router";
 import $ from 'jquery';
-
+import {redBase64, whiteBase64, blackBase64, greyBase64, noneBase64} from "@/main";
 
 export default {
   name: 'ActionButton',
@@ -65,12 +65,20 @@ export default {
             console.log("id : tile" + r + c)
             if (colorTile !== null && colorTile.classList !== null) {
               colorTile.classList.remove("opacity-noTiles")
-              colorTile.firstElementChild.src = "src/assets/images/" + cell + "Button.png";
+              if (cell === 'red') {
+                colorTile.firstElementChild.src = redBase64;
+              } else if (cell === 'black') {
+                colorTile.firstElementChild.src = blackBase64;
+              } else if (cell === 'grey') {
+                colorTile.firstElementChild.src = greyBase64;
+              } else if (cell === 'white') {
+                colorTile.firstElementChild.src = whiteBase64;
+              }
             }
           } else {
             if (colorTile !== null && colorTile.classList !== null) {
               colorTile.classList.add("opacity-noTiles")
-              colorTile.firstElementChild.src = "src/assets/images/noTile.png";
+              colorTile.firstElementChild.src = noneBase64;
             }
           }
         }
@@ -133,7 +141,7 @@ export default {
     }
   },
   beforeMount() {
-    //this.connectWebSocket();
+    this.connectWebSocket();
   }
 }
 </script>

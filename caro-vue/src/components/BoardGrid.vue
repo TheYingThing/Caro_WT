@@ -11,6 +11,11 @@
         <Tile v-else :color="cells[row][col]" class="board-tile-padding"></Tile>
       </span>
     </div>
+    <div class="game-status top-padding" id="status-alert">
+      <div>
+          <div class="text-h4">{{ status }}</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -18,6 +23,7 @@
 import EmptyTile from "./EmptyTile.vue";
 import Tile from "./Tile.vue";
 import ActionButton from "./ActionButton.vue";
+import $ from "jquery";
 
 export default {
   data() {
@@ -32,12 +38,16 @@ export default {
   },
   name: 'BoardGrid',
   props: {
-    cells: Array
+    cells: Array,
+    status: String
   },
   components: {ActionButton, Tile, EmptyTile},
   methods: {
     getNumbers: function (start, stop) {
       return new Array(stop - start).fill(start).map((n, i) => n + i);
+    },
+    hideAlert() {
+      $("#status-alert").css("display", "none")
     }
   },
   created() {

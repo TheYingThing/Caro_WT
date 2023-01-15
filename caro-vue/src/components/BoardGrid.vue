@@ -45,9 +45,6 @@ export default {
   methods: {
     getNumbers: function (start, stop) {
       return new Array(stop - start).fill(start).map((n, i) => n + i);
-    },
-    hideAlert() {
-      $("#status-alert").css("display", "none")
     }
   },
   created() {

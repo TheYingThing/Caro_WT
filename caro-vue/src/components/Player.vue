@@ -2,43 +2,61 @@
   <div class="player col-lg-3 col-6">
     <h3 v-if="turn === playerId" class="highlight" :id="playerId + '-name'">{{ name }}</h3>
     <h3 v-else :id="playerId + '-name'">{{ name }}</h3>
-    <nav class="top-padding">
-      <div class="nav nav-pills nav-justified" id="nav-tab" role="tablist">
-        <button class="nav-link grey-link active" :id="'nav-tiles-tab-' + playerId" data-bs-toggle="tab"
-                :data-bs-target="'#nav-tiles-' + playerId" type="button" role="tab"
-                :aria-controls="'nav-tiles-' + playerId"
-                aria-selected="true">
-          Tiles
-        </button>
-        <button class="nav-link grey-link" :id="'nav-scoring-tab'+ playerId" data-bs-toggle="tab"
-                :data-bs-target="'#nav-scoring-' + playerId" type="button" role="tab"
-                :aria-controls="'nav-scoring-' + playerId"
-                aria-selected="false">
-          Scoring rules
-        </button>
-      </div>
-    </nav>
-    <div class="tab-content" :id="'nav-tabContent-' + playerId">
-      <div class="tab-pane fade show active top-padding" :id="'nav-tiles-' + playerId" role="tabpanel"
+    <q-btn-toggle
+        v-model="model"
+        spread
+        no-caps
+        text-color="black"
+        :options="[
+          {label: 'Tiles', value: 'one'},
+          {label: 'Scoring rules', value: 'two'}
+        ]"
+        @click="changeTab()"
+    />
+    <div class="tab-content tab-pane" :id="'nav-tabContent-' + playerId">
+      <div v-show="tile" class="top-padding tab-pane fade show active" :id="'nav-tiles-' + playerId"
            :aria-labelledby="'nav-tiles-tab-' + playerId">
         <h4 :id="playerId + '-points'">{{ points }}</h4>
         <div v-for="(count, color) in tiles" class="tile-padding">
           <TileList class="player" :color="color" :count="count" :player="playerId"></TileList>
         </div>
+        <QuickRules :player="playerId"></QuickRules>
       </div>
-      <Quickrules :player="playerId"></Quickrules>
+      <div v-show="rules" class="top-padding tab-pane fade show active tab">
+        what ??
+        <QuickRules :player="playerId"></QuickRules>
+        why???
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import TileList from "./TileList.vue";
-import Quickrules from "./Quickrules.vue";
+import QuickRules from "./QuickRules.vue";
+import {ref} from 'vue';
 
 export default {
+  data() {
+    return {
+      tile: true,
+      rules: false
+    }
+  },
+  methods: {
+    changeTab() {
+      this.tile = !this.tile;
+      this.rules = !this.rules;
+    }
+  },
   name: 'Player',
-  components: {Quickrules, TileList},
+  components: {QuickRules, TileList},
   props: ['name', 'points', 'tiles', 'moves', 'playerId', 'turn'],
+  setup() {
+    return {
+      tab: ref('mails')
+    }
+  }
 }
 </script>
 
@@ -68,6 +86,14 @@ export default {
 .player {
   align-content: center;
   position: relative;
+}
+
+.tab {
+  background: rgba(0, 0, 0, 0);
+}
+
+:deep(*) {
+  background-color: unset;
 }
 
 </style>

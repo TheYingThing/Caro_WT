@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: "Quickrules",
+  name: "QuickRules",
   props: ['player']
 }
 </script>
@@ -68,5 +68,6 @@ export default {
   text-align: left !important;
   padding-left: 140px;
 }
+
 
 </style>

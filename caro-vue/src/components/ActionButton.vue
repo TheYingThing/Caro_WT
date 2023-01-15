@@ -133,7 +133,7 @@ export default {
     }
   },
   beforeMount() {
-    this.connectWebSocket();
+    //this.connectWebSocket();
   }
 }
 </script>

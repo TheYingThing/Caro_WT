@@ -1,8 +1,8 @@
 <template>
-    <q-btn v-if="path === 'score'" :size="xl" rounded>
+    <q-btn v-if="path === 'score'" :size="xl" rounded color="button" align="center">
       <RouterLink to="/score">Score</RouterLink>
     </q-btn>
-    <q-btn v-else v-on:click="callPlayServer(path)">
+    <q-btn v-else v-on:click="callPlayServer(path)" color="button" align="center">
       <span>{{ title }}</span>
     </q-btn>
 </template>
@@ -148,6 +148,22 @@ export default {
 
 <style>
 
+.text-button {
+ color: white !important;
+}
+
+.bg-button {
+ background: #21262b !important;
+}
+
+.action-buttons .q-btn .q-btn__content {
+  background: #21262b !important;
+}
+
+.action-buttons .q-btn span {
+  background: #21262b !important;
+}
+
 router-link {
   color: inherit;
   text-underline: none;
@@ -158,8 +174,9 @@ a {
   text-decoration: none;
 }
 
-.row {
+.action-buttons .row {
   padding-top: 2px;
+  margin-left: 0 !important;
 }
 
 .col {

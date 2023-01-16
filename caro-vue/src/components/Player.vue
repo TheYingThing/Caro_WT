@@ -20,12 +20,9 @@
         <div v-for="(count, color) in tiles" class="tile-padding">
           <TileList class="player" :color="color" :count="count" :player="playerId"></TileList>
         </div>
-        <QuickRules :player="playerId"></QuickRules>
       </div>
       <div v-show="rules" class="top-padding tab-pane fade show active tab">
-        what ??
         <QuickRules :player="playerId"></QuickRules>
-        why???
       </div>
     </div>
   </div>
@@ -86,6 +83,10 @@ export default {
 .player {
   align-content: center;
   position: relative;
+}
+
+.player .q-btn-toggle {
+  padding-top: 0;
 }
 
 .tab {

@@ -1,6 +1,6 @@
 <template>
   <div class="col-lg-6 col-12 order-first order-lg-0 col-board" id="board-grid">
-    <div class="actions-padding">
+    <div class="actions-padding action-buttons">
       <q-btn-group>
         <ActionButton v-for="(title, path) in paths" :path="path" :title="title"></ActionButton>
       </q-btn-group>

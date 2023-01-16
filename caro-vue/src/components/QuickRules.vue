@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-pane fade top-padding" :id="'nav-scoring-' + player" role="tabpanel" :aria-labelledby="'nav-scoring-tab-' + player">
+  <div class="tab-pane top-padding" :id="'nav-scoring-' + player" role="tabpanel" :aria-labelledby="'nav-scoring-tab-' + player">
     <div class="tile-padding rulesTab">
       <img class="tile-img" src="@/assets/images/redButton.png" alt="red tile">
       <img class="tile-img" src="@/assets/images/blackButton.png" alt="black tile">

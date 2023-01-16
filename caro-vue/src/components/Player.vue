@@ -83,6 +83,8 @@ export default {
 .player {
   align-content: center;
   position: relative;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .player .q-btn-toggle {

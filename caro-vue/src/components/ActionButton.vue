@@ -181,6 +181,7 @@ a {
 
 .col {
   padding-bottom: 2px;
+  padding-top: 2px;
 }
 
 </style>

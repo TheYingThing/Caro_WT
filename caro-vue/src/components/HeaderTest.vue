@@ -3,7 +3,7 @@
         <q-header elevated class="header-background">
           <q-toolbar>
             <q-toolbar-title class="toolbar-title">Caro</q-toolbar-title>
-            <q-btn class="toolbar-button">
+            <q-btn class="toolbar-button no-shadow">
               <RouterLink class="nav-link" aria-current="page" to="/">Menu</RouterLink>
             </q-btn>
             <q-btn>
@@ -48,6 +48,15 @@ export default {
 
 .toolbar-button {
   align-items: revert;
+}
+
+:deep(.q-btn:before)
+{
+  box-shadow: none;
+}
+
+.no-shadow {
+  box-shadow: none !important;
 }
 
 </style>
